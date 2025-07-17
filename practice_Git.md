@@ -268,3 +268,75 @@ git revert --no-edit 7f6c24c
 이 옵션은 여러 commit을 revert할 때 하나의 commit으로 묶는 것이 가능
 
 git revert --no-commit 7f6c24c
+
+
+---
+
+## Git reset
+
+특정 commit으로 되돌아가는 작업
+
+git reset [옵션] commit id
+
+#### Git reset 작동 원리
+
+"되돌리기"
+
+시계를 마치 과거로 돌리는 듯한 행위
+
+특정 commit으로 되돌아 갔을 때, 되돌아간 commit 이후의 commit은 모두 삭제
+
+
+### reset의 3가지 옵션
+--soft, --mixed, --hard
+
+reset은 과거 commit으로 되돌아간 후 되돌아간 commit 이후 commit들이 삭제됨
+
+그런데 삭제되는 commit들의 기록을 어떤 영역에 남겨둘 것인지 옵션을 활용해 조정할 수 있음
+
+### 옵션 별 동작 원리
+--soft
+
+삭제된 commit의 기록을 staging area에 남김
+
+--mixed
+
+삭제된 commit의 기록을 working directory에 남김 (기본 옵션 값)
+
+working directory로 갔기 때문에 unreacked files 상태가 됨
+
+--hard
+
+삭제된 commit의 기록을 남기지 않음
+
+### 이미 삭제한 commit으로 다시 돌아가고 싶다면?
+
+**git reflog**
+
+HEAD가 이전에 가리켰던 모든 commit을 보여줌
+
+reset의 --hard 옵션을 통해 지워진 commit도 reflog로 조회하여 복구 가능
+
+---
+
+commit 3
+
+commit 2
+
+commit 1
+
+중에서 
+
+git reset --hard commit 1(해쉬번호)
+
+하면 commit 2, commit 3이 삭제됨
+
+되돌릴 때
+
+git reset --hard commit 3 하면
+
+commit 2, commit 3 까지 순서대로 복구됨
+
+commit 3만 복구되는 줄 알았는데 복구하려는 commit이 생성된 순서까지 복구되었음
+
+----
