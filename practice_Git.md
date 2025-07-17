@@ -195,6 +195,8 @@ first-repo랑 origin의 연결 끊기
 
 git remote remove origin
 
+git remote -v 로 사용자명/저장소명 확인가능
+
 gitignore : 어쨌든 파일임. git에서 특정 파일이나 디렉토리를 추적하지 않도록 설정하는데 사용되는 텍스트 파일
 
 ex : 비밀번호 
@@ -337,6 +339,7 @@ git reset --hard commit 3 하면
 
 commit 2, commit 3 까지 순서대로 복구됨
 
-commit 3만 복구되는 줄 알았는데 복구하려는 commit이 생성된 순서까지 복구되었음
+**commit 3만 복구되는 줄 알았는데 복구하려는 commit이 생성된 순서까지 복구되었음**
 
 ----
+
