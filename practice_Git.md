@@ -343,3 +343,16 @@ commit 2, commit 3 까지 순서대로 복구됨
 
 ----
 
+clone 받을 때
+
+git clone url
+받고
+
+git add . 
+git commit -m 'str'
+git push origin master 로 다시 푸쉬
+
+
+pull 받을 때
+
+git pull url
