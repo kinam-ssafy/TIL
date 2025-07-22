@@ -150,3 +150,119 @@ print(first_data)
 
 '''
 
+#이스케이프 시퀀스 실습
+'''
+
+다음은 이형기 시인의 "낙화"의 한 구절이다.
+- 1연
+	가야할 때 언제인가를
+	분명히 알고 가는 이의
+	뒷모습은 얼마나 아름다운가.
+
+나는 이 시를 보며 '나는 내가 가야할 때가 언제일까?' 를 생각해 보았다.
+
+
+print('다음은 이형기 시인의 \"낙화\"의 한 구절이다.\n- 1연\n\t가야할 때 언제인가를\n\t분명히 알고 가는 이의\n\t뒷모습은 얼마나 아름다운가.\n\n나는 이 시를 보며 \'나는 내가 가야할 때가 언제일까?\'를 생각해 보았다.')
+'''
+
+#list 슬라이싱
+'''
+books = ['광문자전', '유연전', '심청전', '홍길동전', '수성지']
+authors = ['작자 미상', '허균', '박지원', '이항복', '임제']
+
+
+# 아래의 순서대로 출력 하시오. 
+# 단, 리스트 인덱스 접근을 활용하여 출력한다. 
+# 허균 : 홍길동전 
+# 이항복 : 유연전 
+# 작자 미상 : 심청전 
+# 박지원 : 광문자전 
+# 임제 : 수성지
+
+
+my_dict = {}
+
+print(authors[1:2])
+print(books[3:4])
+# my_dict[authors[1:2]] = books[3:4] >> list를 값으로 가질 수 없어서 에러남
+
+#my_dict[str(authors[1:2])] = str(books[3:4])
+#{"['허균']": "['홍길동전']"}
+
+print(authors[1])
+print(type(authors[1]))
+
+print(authors[1:2])
+print(type(authors[1:2]))
+
+my_dict[authors[1]] = books[3]
+print(my_dict)
+
+my_dict[authors[3]] = books[1]
+print(my_dict)
+
+my_dict[authors[0]] = books[2]
+print(my_dict)
+
+my_dict[authors[2]] = books[0]
+print(my_dict)
+
+my_dict[authors[4]] = books[4]
+print(my_dict)
+
+my_list = [
+    authors[1] + ' : ' + books[3],
+    authors[3] + ' : ' + books[1],
+    authors[0] + ' : ' + books[2],
+    authors[2] + ' : ' + books[0],
+    authors[4] + ' : ' + books[4],
+]
+
+print(my_list)
+
+print(
+    authors[1] + ' : ' + books[3] + '\n' +
+    authors[3] + ' : ' + books[1] + '\n' +
+    authors[0] + ' : ' + books[2] + '\n' +
+    authors[2] + ' : ' + books[0] + '\n' +
+    authors[4] + ' : ' + books[4]
+)
+'''
+
+#리스트의 중복 없애기
+'''
+authors = [
+    '작자 미상',
+    '이항복',
+    '임제',
+    '임제',
+    '조성기',
+    '조성기',
+    '조성기',
+    '임제',
+    '허균',
+    '허균',
+    '허균',
+    '임제',
+    '임제',
+    '임제',
+    '임제',
+    '임제',
+    '임제',
+    '임제',
+    '임제',
+    '임제',
+    '임제',
+    '박지원',
+    '이항복',
+    '남영로',
+    '남영로',
+    '남영로',
+    '이항복',
+    '임제',
+    '임제',
+]
+
+#print(set(authors))
+print(list(set(authors)))
+'''
