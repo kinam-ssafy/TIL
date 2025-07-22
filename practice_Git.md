@@ -1,4 +1,21 @@
-	
+## 요약
+
+clone 받을 때
+
+git clone url
+받고
+
+git add .
+git commit -m ''
+git push origin master 로 다시 푸쉬
+
+
+pull 받을 때
+
+git pull url
+전에 받았던 파일들의 변경사항 없어야 pull 받을 수 있음
+
+
 # Git 연습하기
 ## Git Status, Log, Add, Commit 연습하기 
 
@@ -343,16 +360,4 @@ commit 2, commit 3 까지 순서대로 복구됨
 
 ----
 
-clone 받을 때
 
-git clone url
-받고
-
-git add . 
-git commit -m 'str'
-git push origin master 로 다시 푸쉬
-
-
-pull 받을 때
-
-git pull url
