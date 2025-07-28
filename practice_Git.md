@@ -15,6 +15,28 @@ pull 받을 때
 git pull url
 전에 받았던 파일들의 변경사항 없어야 pull 받을 수 있음
 
+## git hub에 공유 프로젝트가 아닌데 다른 사용자가 커밋했을 경우
+
+$ git config --global user.name
+$ git config --global user.email
+을 통해 사용자와 이메일 확인
+
+# "Your Name" 부분에 본인의 GitHub 사용자 이름을 입력하세요.
+$ git config --global user.name "Your Name"
+
+# "your_email@example.com" 부분에 본인의 GitHub 이메일을 입력하세요.
+$ git config --global user.email "your_email@example.com"
+
+을 통해 이름과 이메일 변경
+
+$ git commit --amend --reset-author
+
+마지막 커밋에 기록된 작성자 정보 리셋함. 수정 내용 없다면 :wq 입력 후 엔터
+
+$ git push --force origin master
+
+변경사항 강제 반영
+
 
 # Git 연습하기
 ## Git Status, Log, Add, Commit 연습하기 
