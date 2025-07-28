@@ -935,7 +935,12 @@ result = numbers.append(7).extend([8, 9])  # AttributeError
 외울 필요 x 
 
 ## 새로 알게 된 내용
-> sorted(tuple) 하면 list가 돼서 튜플 형식이 필요하면 tuple(sorted(tup))로 바꿔줘야 함
-> isdecimal()은 굳이 문자열을 int로 바꿔줄 필요가 없이 문자열 자체에 숫자가 있으면 판단해줌. 
-> pop(0) 하면 my_list 0번째 인덱스 제거하고 반환  
-> 
+> sorted(tuple) 하면 list가 돼서 튜플 형식이 필요하면 tuple(sorted(tup))로 바꿔줘야 함  
+> isdecimal()은 굳이 문자열을 int로 바꿔줄 필요가 없이 문자열 자체에 숫자가 있으면 판단해줌.   
+> pop(0) 하면 my_list 0번째 인덱스 제거하고 반환    
+
+```python
+for idx, each in elemensts:
+  idx -= 1
+  #idx를 -1 해줘도 다시 for문으로 돌아오면 idx 초기화 됨.
+```
