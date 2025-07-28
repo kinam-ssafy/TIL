@@ -163,6 +163,8 @@ print(string2.isupper()) # False
 print(string2.islower()) # False
 print(string1.islower()) # False
 ```
+> for문 활용해서 사용 시 isupper는 인덱스 값 0을 계속 반환함   
+
 
 ## 문자열 조작 메서드 (새로운 문자열 반환)
 
@@ -355,7 +357,6 @@ print(item2) # 1
 print(my_list) # [2, 3, 4]
 ```
 
->pop(0) 하면 my_list 0번째 인덱스 제거하고 반환  
 
 ## `.clear()`
 
@@ -933,5 +934,8 @@ result = numbers.append(7).extend([8, 9])  # AttributeError
 ----
 외울 필요 x 
 
-
-
+## 새로 알게 된 내용
+> sorted(tuple) 하면 list가 돼서 튜플 형식이 필요하면 tuple(sorted(tup))로 바꿔줘야 함
+> isdecimal()은 굳이 문자열을 int로 바꿔줄 필요가 없이 문자열 자체에 숫자가 있으면 판단해줌. 
+> pop(0) 하면 my_list 0번째 인덱스 제거하고 반환  
+> 
