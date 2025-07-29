@@ -18,11 +18,25 @@
 - 깊은 복사
 
 
+# 목차
+
+---
+## 비시퀀스 데이터 구조
+- 딕셔너리
+- 세트
+
+
+
 ---
 ## 참고
 - List Comprehension
 - 메서드 체이닝
 - 문자 유형 판별 메서드
+
+---
+## 참고
+- 해시 테이블
+- 파이썬 문법 규격
 
 
 * ✓ 데이터 구조의 개념과 필요성을 이해하고 설명할 수 있습니다.  
@@ -934,7 +948,551 @@ result = numbers.append(7).extend([8, 9])  # AttributeError
 ----
 외울 필요 x 
 
-## 새로 알게 된 내용
+
+
+
+# 비시퀀스 데이터 구조
+
+## 딕셔너리 Dictionary
+
+> **키(Key)’** 와 **‘값(Value)** > 을 짝지어 저장하는 자료구조
+
+---
+* 딕셔너리는 내부적으로 해시 테이블을 사용하여 **키-값** 쌍을 관리합니다.
+* 키를 통한 값의 **삽입, 삭제, 검색**이 데이터의 크기와 관계없이 **매우 빠릅니다.**
+* 키(Key)는 **hashable한 고유 값**이어야 하지만, 값(Value)은 중복이 가능하고 어떤 자료형도 저장할 수 있습니다.
+
+## 딕셔너리 메서드
+
+| 메서드 | 설명 |
+| :--- | :--- |
+| **`D.get(k)`** | **키 k에 연결된 값을 반환 (키가 없으면 None을 반환)** |
+| **`D.get(k, v)`** | **키 k에 연결된 값을 반환하거나 키가 없으면 기본값으로 v를 반환** |
+| **`D.keys()`** | **딕셔너리 D의 키를 모은 객체를 반환** |
+| **`D.values()`** | **딕셔너리 D의 값을 모은 객체를 반환** |
+| **`D.items()`** | **딕셔너리 D의 키/값 쌍을 모은 객체를 반환** |
+| **`D.pop(k)`** | **딕셔너리 D에서 키 k를 제거하고 연결됐던 값을 반환 (없으면 오류)** |
+| **`D.pop(k, v)`** | **딕셔너리 D에서 키 k를 제거하고 연결됐던 값을 반환 (없으면 v를 반환)** |
+| **`D.clear()`** | **딕셔너리 D의 모든 키/값 쌍을 제거** |
+| **`D.setdefault(k)`** | **딕셔너리 D에서 키 k와 연결된 값을 반환** |
+| **`D.setdefault(k, v)`** | **딕셔너리 D에서 키 k와 연결된 값을 반환\<br\>k가 D의 키가 아니면 v와 연결한 키 k를 D에 추가하고 v를 반환** |
+| **`D.update(other)`** | **other 내 각 키에 대해 D에 있는 키면 D에 있는 그 키의 값을 other에 있는 값으로 대체. other에 있는 각 키에 대해 D에 없는 키면 키/값 쌍을 D에 추가** |
+-----
+
+## `.get(key[, default])`
+
+-----
+
+키 연결된 값을 반환하거나 키가 없으면 `None` 혹은 기본 값을 반환
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+print(person.get('name'))              # Alice
+print(person.get('country'))           # None
+print(person.get('country', 'Unknown')) # Unknown
+print(person['country'])               # KeyError: 'country'
+```
+
+
+## `.keys()`
+
+-----
+
+딕셔너리 키를 모은 객체를 반환
+
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person.keys()) # dict_keys(['name', 'age'])
+
+for item in person.keys():
+    print(item)
+"""
+name
+age
+"""
+```
+## `.values()`
+
+-----
+
+딕셔너리 값을 모은 객체를 반환
+
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person.values()) # dict_values(['Alice', 25])
+
+for item in person.values():
+    print(item)
+"""
+Alice
+25
+"""
+```
+
+## `.items()`
+
+-----
+
+딕셔너리 키/값 쌍을 모은 객체를 반환
+
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person.items()) # dict_items([('name', 'Alice'), ('age', 25)])
+
+for key, value in person.items():
+    print(key, value)
+"""
+name Alice
+age 25
+"""
+```
+
+## `.clear()`
+
+-----
+
+딕셔너리의 모든 키/값 쌍을 제거
+
+```python
+person = {'name': 'Alice', 'age': 25}
+person.clear()
+print(person) # {}
+```
+
+## `.setdefault(key[, default])`
+
+-----
+
+키와 연결된 값을 반환  // .get(), .pop()처럼  
+키가 없다면 default와 연결한 키를 딕셔너리에 추가하고 default를 반환  
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+print(person.setdefault('country', 'KOREA')) # KOREA
+print(person)                                 # {'name': 'Alice', 'age': 25, 'country': 'KOREA'}
+```
+
+## `.update([other])`
+
+-----
+
+`other`가 제공하는 키/값 쌍으로 딕셔너리를 갱신하고 기존 키는 덮어씀
+
+```python
+person = {'name': 'Alice', 'age': 25}
+other_person = {'name': 'Jane', 'country': 'KOREA'}
+
+person.update(other_person)
+print(person) # {'name': 'Jane', 'age': 25, 'country': 'KOREA'}
+
+person.update(age=100, address='SEOUL')
+print(person) # {'name': 'Jane', 'age': 100, 'country': 'KOREA', 'address': 'SEOUL'}
+```
+
+### 딕셔너리 메서드 공식문서
+[딕셔너리 메서드](https://www.google.com/search?q=https://docs.python.org/3.11/library/stdtypes.html%23dict)
+
+
+
+## Set
+
+> **고유한** 항목들의 정렬되지 않은 컬렉션
+> 해시 테이블 때문에 dict와 유사한 특성.
+---
+* Set은 내부적으로 **해시 테이블**을 사용하여 데이터를 저장합니다.  
+* 이로 인해 항목의 **고유성**을 효율적으로 보장하며, 항목의 **추가, 삭제, 존재 여부 확인(in 연산)**이 데이터의 크기에 관계없이 **매우 빠릅니다.**  
+* 또한, 합집합(Union), 교집합(Intersection), 차집합(Difference) 등 수학적인 **집합 연산**을 간편하게 수행할 수 있는 것이 가장 큰 특징입니다.  
+---
+
+| 메서드 | 설명 |
+| :--- | :--- |
+| `s.add(x)` | **세트 s에 항목 x를 추가. 이미 x가 있다면 변화 없음** |
+| `s.update(iterable)` | 세트 s에 다른 iterable 요소를 추가 |
+| `s.clear()` | 세트 s의 모든 항목을 제거 |
+| `s.remove(x)` | **세트 s에서 항목 x를 제거. 항목 x가 없을 경우 Key error** |
+| `s.pop()` | 세트 s에서 임의의 항목을 반환하고, 해당 항목을 제거 |
+| `s.discard(x)` | 세트 s에서 항목 x를 제거 |
+---
+
+## `.add(x)`
+
+-----
+
+세트에 x를 추가
+
+```python
+my_set = {'a', 'b', 'd', 'c', 1, 2, 3, 4}
+
+my_set.add(4)
+print(my_set) # {1, 'b', 3, 2, 'c', 'd', 'a', 4} (순서는 다를 수 있음)
+
+my_set.add(4)
+print(my_set) # {1, 'b', 3, 2, 'c', 'd', 'a', 4} (변화 없음)
+```
+## `.update(iterable)`
+
+-----
+
+세트에 다른 iterable 요소를 추가
+
+```python
+my_set = {'a', 'b', 'c', 1, 2, 3}
+my_set.update([1, 4, 5])
+print(my_set) # {'c', 2, 3, 1, 'b', 4, 5, 'a'} (순서는 다를 수 있음)
+```
+
+## `.clear()`
+
+-----
+
+세트의 모든 항목을 제거
+
+```python
+my_set = {'a', 'b', 'c', 1, 2, 3}
+my_set.clear()
+print(my_set) # set()
+```
+
+## `.remove(x)`
+
+-----
+
+세트에서 항목 x를 **제거**, 항목 x가 없을 경우 **KeyError**
+
+```python
+my_set = {'a', 'b', 'c', 1, 2, 3}
+
+my_set.remove(2)
+print(my_set) # {'b', 1, 3, 'c', 'a'} (순서는 다를 수 있음)
+
+my_set.remove(10)
+print(my_set) # KeyError: 10
+```
+
+## `.pop()`
+
+-----
+
+세트에서 **임의의** 요소를 제거하고 **반환**
+
+```python
+my_set = {'a', 'b', 'c', 1, 2, 3}
+
+element = my_set.pop()
+print(element)  # 1 (제거되는 요소는 실행 시마다 다를 수 있음)
+print(my_set)   # {2, 3, 'b', 'a', 'c'} (순서 및 남은 요소는 다를 수 있음)
+```
+
+## 세트의 집합 메서드
+
+| 메서드 | 설명 | 연산자 |
+| :--- | :--- | :--- |
+| `set1.difference(set2)` | `set1`에는 들어있지만 `set2`에는 없는 항목으로 세트를 생성 후 반환 | `set1 - set2` |
+| `set1.intersection(set2)` | `set1`과 `set2` 모두 들어있는 항목으로 세트를 생성 후 반환 | `set1 & set2` |
+| `set1.issubset(set2)` | `set1`의 항목이 모두 `set2`에 들어있으면 `True`를 반환 | `set1 <= set2` |
+| `set1.issuperset(set2)` | `set1`가 `set2`의 항목을 모두 포함하면 `True`를 반환 | `set1 >= set2` |
+| `set1.union(set2)` | `set1` 또는 `set2`에(혹은 둘 다) 들어있는 항목으로 세트를 생성 후 반환 | `set1 | set2` |
+---
+
+
+# 참고
+
+## 해시 테이블(hash table)
+
+> 해시 테이블은 **‘키(Key)’**와 **‘값(Value)’**을 짝지어 저장하는 자료구조입니다.  
+
+---
+수백 권의 책이 있는 도서관에서 책을 찾는다고 상상해 보세요.  
+
+책 제목(키)을 색인(해시 함수)에서 찾아 몇 번째 책장(인덱스)에 있는지 알아내면, 해당 책장(배열)으로 바로 가서 책(값)을 꺼낼 수 있습니다. 책장 전체를 일일이 뒤지는 것보다 훨씬 빠르죠.  
+
+## 해시 테이블의 원리
+  
+1.  키를 해시 함수를 통해 해시 값으로 변환  
+2.  변환된 해시 값을 인덱스로 삼아 데이터를 저장하거나 찾음  
+3.  이로 인해 검색, 삽입, 삭제를 매우 빠르게 수행  
+
+## 해시 (Hash)
+
+> 임의의 크기를 가진 데이터를 고정된 크기  
+> 의 **고유한 값**으로 변환하는 것
+
+---
+* 생성된 해시 값(고유한 정수)은 해당 데이터를 식별하는 ‘지문’ 역할을 함
+* 파이썬에서는 이 해시 값을 이용해 해시 테이블에 데이터를 저장
+* 이 변환을 수행하는 것이 **해시 함수**
+---
+
+## 해시 함수란?
+
+### 해시 함수 (Hash function)
+
+> 임의의 길이 데이터를 입력 받아 고정 길이(**정수**)로  
+> 변환해 주는 함수. 이 **‘정수’가 바로 해시 값**
+
+---
+
+* 주로 해시 테이블을 구현할 때, 매우 빠른 검색 및 데이터 저장 위치 결정을 위해 활용
+* ‘해시 알고리즘’이라고도 부름
+
+---
+
+> **TIP**
+>
+> **해시 테이블이 매우 빠른 이유:**
+> * 해시 함수는 키(Key)를 입력받아 데이터를 저장하거나 찾을 배열의 **‘정확한 인덱스’를 즉시 계산**합니다.
+> * 마치 책의 제목(키)을 알면 색인(해시 함수)을 통해 페이지 번호(인덱스)를 바로 알아내고, 해당 페이지(배열 위치)로 바로 이동하여 내용을 찾는 것과 같습니다.  
+---
+
+
+
+## `set`의 요소 & `dict`의 키와 해시 테이블 관계
+
+### `set`
+* 각 요소를 해시 함수로 변환해 나온 해시 값에 맞춰 해시 테이블 내부 버킷(bucket)에 위치시킴  
+* 그래서 “순서” 라기보다 “버킷 위치(인덱스)”가 요소의 위치를 결정  
+* 따라서 `set`는 **순서를 보장하지 않음**  
+
+---
+
+### `dict`
+* 키(key) → 해시 함수 → 해시 값 → 해시 테이블에 저장  
+* 단 `set`와 달리 **“삽입 순서”**는 유지한다는 것이 언어 사양에 따라 보장 됨 (python 3.7 이상)  
+    * 즉, 키를 추가한 순서대로 반복문 순회할 때 나오게 됨  
+    * 사용자에게 보여지는 키 순서는 삽입 순서가 유지되도록 설계된 것  
+
+
+## `set`의 `pop` 메서드 예시 - 정수
+
+  * 정수(숫자) 값은 해시 값이 숫자 자기 자신과 동일하거나 단순 계산으로 고정됨
+
+-----
+
+### 코드
+
+```python
+my_set = {3, 2, 1, 9, 100, 4, 87, 39, 10, 52}
+
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set)
+```
+
+### 출력
+
+```
+1
+2
+3
+100
+4
+39
+9
+10
+52
+87
+set()
+```
+
+> 정수는 해시 함수 거쳐도 정수 그대로 저장
+> 따라서 출력이 똑같이 나옴
+
+## `set`의 `pop` 메서드 예시 - 문자열
+
+  * 문자열은 해시 계산 시 파이썬의 해시 난수화(`Hash Randomization`)가 적용되므로, 실행마다 순서가 달라질 수 있음
+
+-----
+
+### 코드
+
+```python
+my_str_set = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+
+print(my_str_set.pop())
+print(my_str_set.pop())
+print(my_str_set.pop())
+print(my_str_set.pop())
+print(my_str_set.pop())
+```
+
+### 출력 예시 (순서가 매번 다름)
+
+```
+a
+f
+h
+e
+d
+...
+```
+----
+
+## 파이썬에서의 해시 함수
+
+### 정수
+
+  * 같은 정수는 항상 같은 해시 값을 가짐
+  * 예) `hash(1)`은 여러 번 호출해도 결과가 동일
+
+### 문자열
+
+  * 문자열 해시 시, 파이썬 인터프리터 시작 때 설정되는 난수 시드(seed)가 달라질 수 있음  
+  * 보안상 이유로 해시 난수화 도입  
+  * 각 실행마다 달라질 수 있어 ‘a’의 해시 값도 매번 바뀔 수 있음  
+
+-----
+
+> 난수 시드(seed)가 해시 함수의 재료로 쓰임
+
+
+## 해시 난수화와 난수 시드
+
+* 파이썬 프로세스가 새로 시작될 때마다 해시를 계산할 때 사용하는 난수 시드가 달라짐  
+* 해시 함수가 매번 바뀌는 것이 아니라, 해시 계산에 쓰이는 시드 값이 실행마다 달라지는 것  
+* 이로 인해 동일한 데이터라도 매번 해시 값이 달라져 결과적으로 버킷 배치가 달라짐  
+
+## hashable
+
+  * `hash()` 함수에 넣어 해시 값을 구할 수 있는 객체를 의미
+  * 대부분의 **불변 타입**은 해시 가능
+      * 예) `int`, `float`, `str`, `tuple`(단, 내부에 불변만 있을 경우)
+  * 가변형 객체(예: `list`, `dict`, `set`)는 기본적으로 해시 불가능
+      * 이유: 값이 변하면 해시 값도 달라질 수 있어 해시 테이블 무결성이 깨짐
+
+-----
+
+```python
+print(hash(1)) #int
+print(hash(1.0)) #float
+print(hash('1')) #str
+print(hash((1, 2, 3))) #tuple
+
+# TypeError: unhashable type: 'list'
+print(hash((1, 2, [3, 4])))
+```
+
+
+
+
+
+
+```python
+print(hash(1)) # 1
+print(hash(1)) # 1
+print(hash('a')) # 실행시마다 다름
+print(hash('a')) # 실행시마다 다름
+```
+
+## hashable과 불변성 간의 관계
+
+* 해시 테이블(예: `set`, `dict`의 `KEY`)에는 **hashable**(해시가 가능한 객체)만 저장 가능
+* 불변 객체는 생성 후 값 변경이 불가능하므로, 항상 같은 해시 값을 유지
+    * → 해시 테이블이 안정적으로 동작
+* 다만, “`hash` 가능하다 `!=` 불변이다”가 절대적이지는 않지만  
+  일반적으로 내장 자료형 기준에서는 불변이어야 해시 가능
+
+---
+
+> **TIP**
+>
+> **가변 객체는 왜 hashable하지 않을까?**
+> * **해시 값의 불변성**: 해시 테이블은 객체의 해시 값을 이용해 데이터를 저장하고 검색할 위치(인덱스)를 결정합니다.  
+> * **문제 발생**: 만약 `list`와 같은 가변 객체를 키로 사용하고, 그 리스트의 내용을 변경하면 해시 값도 함께 변하게 됩니다.  
+> * **데이터 손실**: 이 경우, 데이터를 저장했던 인덱스와 변경 후 찾으려는 인덱스가 달라져 해당 데이터를 영원히 찾을 수 없게 됩니다.  
+> * **결론**: 따라서 해시 테이블의 안정적인 동작을 보장하기 위해, 파이썬은 가변 객체의 해시 값 계산을 허용하지 않습니다.  
+
+
+## 가변형 객체가 hashable 하지 않은 이유
+
+  * 값이 변경될 수 있으므로, 같은 객체라도 값이 바뀌면 해시 값도 달라질 수 있음
+  * 해시 테이블에서는 “동일 키 → 동일 위치”로 가정하고 빠른 검색을 수행하는데, 이 가정이 깨짐
+  * 예) 리스트, 집합, 딕셔너리 자체를 `set`이나 `dict`의 키로 쓸 수 없음
+
+-----
+
+```python
+# TypeError: unhashable type: 'list'
+print(hash([1, 2, 3]))
+
+# TypeError: unhashable type: 'list'
+my_set = {[1, 2, 3], 1, 2, 3, 4, 5}
+
+# TypeError: unhashable type: 'set'
+my_dict = {{3, 2}: 'a'}
+```
+
+## `hashable` 객체가 필요한 이유
+
+1.  **해시 테이블 기반 자료 구조 사용**
+    * `set`의 요소, `dict`의 키
+    * 중복 방지 & 빠른 검색, 조회
+
+2.  **불변성을 통한 일관된 해시 값**
+    * 한 번 해시 값이 정해지면 바뀌지 않아야 해시 테이블 무결성이 유지
+
+3.  **안정성과 예측 가능성 유지**
+    * 동일한 데이터는 항상 동일한 해시 값을 반환 → 로직을 단순화
+
+## 해시 테이블 정리
+
+* 해시 테이블은 해시 값을 인덱스로 삼아 데이터를 저장, 검색
+* 파이썬의 `set`은 순서가 없고, `pop()`시 어떤 요소가 반환될지 정해져 있지 않음
+* `dict`은 파이썬 3.7+ 버전에선 삽입 순서가 보장되지만, 내부 구현은 여전히 해시 테이블
+* 해시 함수는 정수/문자열 등 타입에 따라 다르게 동작하며, 문자열 해시 시 난수화로 실행마다 달라질 수 있음
+* `hashable`(해시가 가능한 객체) 객체만 `set`과 `dict`의 키로 사용 가능하며, 일반적으로 불변 타입이 이에 해당  
+
+
+# 파이썬 문법 규격
+
+## EBNF
+
+“Extended Backus-Naur Form”
+
+---
+
+- BNF를 확장한 표기법  
+메타 기호를 추가하여 더 간결하고 표현력이 강해진 형태
+- 서로 다른 프로그래밍 언어, 데이터 형식, 프로토콜 등의 문법을 통일하여 정의하기 위함  
+
+## 대표적인 EBNF 메타기호
+
+| 메타 기호 | 의미 |
+| :--- | :--- |
+| `[]` | 선택적 요소 |
+| `{}` | 0번 이상 반복 |
+| `()` | 그룹화 |
+---
+
+
+## EBNF 메타기호 `[]` 사용 예시
+
+  * 딕셔너리의 `pop` 메서드
+
+<!-- end list -->
+
+```python
+pop(key[, default])
+```
+
+
+
+
+
+
+
+
+
+# 새로 알게 된 내용
 > sorted(tuple) 하면 list가 돼서 튜플 형식이 필요하면 tuple(sorted(tup))로 바꿔줘야 함  
 > isdecimal()은 굳이 문자열을 int로 바꿔줄 필요가 없이 문자열 자체에 숫자가 있으면 판단해줌.   
 > pop(0) 하면 my_list 0번째 인덱스 제거하고 반환    
@@ -944,3 +1502,157 @@ for idx, each in elemensts:
   idx -= 1
   #idx를 -1 해줘도 다시 for문으로 돌아오면 idx 초기화 됨.
 ```
+### .get(key[,default])
+> 대괄호를 통해 키를 찾을 시, 키가 없으면 에러 발생  
+> 없다면 원하는 다른 값을 반환하도록 해야하면 get
+
+### .keys
+> dict_keys(['name', 'age']) 형태로 나옴  
+> 결과가 대괄호 형태? 리스트처럼 순회 가능한가? >> 가능함  
+> 실시간으로 동기화하여 확인 가능함  
+> .keys 쓰고 키값바꾸면 얘도 바뀜  
+
+```python
+person = {'name': 'Alice', 'age': 25}
+per_keys = person.keys()
+person['country'] = 'KOREA'
+print(person.keys()) 
+# dict_keys(['name', 'age', 'country'])
+```
+
+### .values()
+> 얘도 리스트 형식으로 값을 반환 >> 순회 가능   
+
+### .items()
+> dict_items([('name', 'Alice'), ('age', 25)])  형식으로 값을 반환  
+> 리스트 안에 튜플 반환
+
+```python
+for key, value in person.items():
+    print(key, value)
+
+# name Alice
+# age 25
+```
+
+### .pop(key[,default])
+> 제거 + 반환,
+> 없으면 에러, 또는 default 호출
+
+### .setdefault
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person.setdefault('name', 'hihi'))
+# 키가 이미 있으므로 연결된 Alice 반환
+```
+### .clear()
+```python
+#똑같은 딕셔너리 유지
+person = {'name': 'Alice', 'age': 25}
+person.clear()
+
+#재할당 (다른 딕셔너리가 된 것)
+person = {'name': 'Alice', 'age': 25}
+person = {}
+```
+
+### .update(other)
+- 'age' = 100 ?? 문자열에 정수할당은 불가  
+- update는 근본적으로 함수임.   
+- def 함수('문자열' = 정수) 불가  
+- 함수(매개변수(인자) = 값)  
+
+
+## set
+- 리스트의 중복제거를 위해 set() 사용?    
+- 리스트 -> 세트 -> 리스트 하면 순서 보장 x  
+- 따라서 순서 유지가 중요하면 못씀  
+---
+
+### .pop()
+> 임의의 요소를 제거하고 반환 한다는데 무언가의 규칙과 확률이 있는 듯 함  
+> 정수의 경우 해시 난수화가 되지 않아 버킷에 저장된 순서대로 나올 확률이 높음  set는 비시퀀스이기때문에 보장은 없음  
+```python
+for i in range(100):
+    my_set = {'a', 'b', 'c', 1, 2, 3}
+    element = my_set.pop()
+    print(element)
+
+# 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ...
+```
+
+## *arg
+> 여러 인자를 매개변수 *arg를 통해 받을 때 인자들을 튜플로 묶어서 받음  
+> 따라서 len(sets)는 세트 내부 원소 개수가 아니라, 전달된 세트 덩어리의 개수를 세게 됨  
+
+```python
+def union_multiple_sets(*sets):
+  #받아온 튜플이 두개 이상이면 합집합을 통해 합침
+    if len(sets) <= 1:
+        print("최소 두 개의 셋이 필요합니다.")
+    else:
+      return set.union(*sets)
+
+result = union_multiple_sets({1, 2}, {3, 4}, {5, 6})
+print(result)  # {1, 2, 3, 4, 5, 6}
+
+result = union_multiple_sets({2, 1})
+# 출력 : 최소 두 개의 셋이 필요합니다
+```
+---
+
+
+## 재귀 호출한 함수의 결과를 현재 리스트에 합치기
+결론: 재귀로 부르는 빈 리스트때문에 key_list가 계속 비어있지는 않음
+
+```python
+def get_all_keys_from_dict(dic):
+    key_list = []
+    for key, value in dic.items():
+        key_list.append(key)
+
+        if type(value) == dict:
+            small_key = get_all_keys_from_dict(value)
+            key_list.extend(small_key)
+
+    return key_list
+
+my_dict = {'person': {'name': 'Alice', 'age': 25}, 'location': 'NY'}
+result = get_all_keys_from_dict(my_dict)
+print(result)  # ['person', 'name', 'age', 'location']
+
+```
+
+간단한 예시 {'a': 1, 'b': {'c': 2}}로 따라가 보겠습니다.
+
+첫 번째 호출: get_all_keys_from_dict({'a': 1, 'b': {'c': 2}})
+
+이 호출을 (A)라고 부르겠습니다.
+
+A는 자신만의 key_list_A = []를 만듭니다.
+
+'a' 키를 발견하고 key_list_A는 ['a']가 됩니다.
+
+'b'의 값 {'c': 2}가 딕셔너리인 것을 발견하고, 새로운 재귀 호출을 시작합니다.
+
+두 번째 호출: get_all_keys_from_dict({'c': 2})
+
+이 호출을 (B)라고 부르겠습니다.
+
+B는 A와는 완전히 별개인 자신만의 key_list_B = []를 만듭니다.
+
+'c' 키를 발견하고 key_list_B는 ['c']가 됩니다.
+
+B는 더 이상 할 일이 없으므로 return key_list_B 즉, ['c']를 반환합니다.
+
+다시 첫 번째 호출 (A)로 복귀
+
+A는 B가 반환한 값 ['c']를 sub_keys라는 변수에 받습니다. (sub_keys는 ['c'])
+
+이제 key_list_A.extend(sub_keys)를 실행합니다.
+
+자신이 원래 가지고 있던 key_list_A(['a'])에 sub_keys(['c'])를 더합니다.
+
+그 결과 key_list_A는 ['a', 'c']가 됩니다.
+
+A는 모든 작업을 마치고 최종 결과 ['a', 'c']를 반환합니다.
