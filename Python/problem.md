@@ -6,6 +6,20 @@ https://g.co/gemini/share/dec8718f2e9d
 
 https://g.co/gemini/share/a45f491dbd87
 
+
+https://g.co/gemini/share/3b694c8fbbb4
+데이터 구조 5일차
+
+https://g.co/gemini/share/07251ab2a846
+data 구조 6일차 딕셔너리, 세트
+
+https://root-violet-d0a.notion.site/3d1c930d4dc041759bf41c6781e7f632
+data 구조 6일차 딕셔너리, 세트
+
+https://www.notion.so/1-23ebae8a4e69807f8e80f7403556c9fe
+100문제
+
+
 ### Python 개념 확인 객관식 문제
 
 -----
