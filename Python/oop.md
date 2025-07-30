@@ -683,3 +683,35 @@ my_function()
 데이터.메서드() 구조로 바뀜 데이터가 중심이 됨    
 리스트에 더한다 -> list.append()  
 class 'str' >> 클래스가 객체를 만든 것 
+
+## 클래스 변수
+클래스 변수는 클래스 함수에서 다뤄야함
+__init__ 이런거는 인스턴스 함수
+
+
+## 함수 호출
+```python
+class Myth:
+    type_of_myth = 0
+
+    def __init__(self, name):
+        self.name = name
+        print(f"{self.name}")
+        Myth.inc_type_of_myth()
+
+    @classmethod
+    def inc_type_of_myth(cls):
+        cls.type_of_myth += 1
+
+
+    @staticmethod
+    def description():# 신화설명
+        print(f"신화는 한 나라 혹은 한 민족으로부터 전승되어 오는 예로부터 섬기는 신을 둘러싼 이야기를 뜻한다.")
+
+
+Myth.type_of_myth # 변수 호출이라 ()없어도 상관없음
+Myth.description # def ~~로 기술된 함수 호출 시에는 반드시 () 붙여주기 () 빼먹음
+```
+
+@classmethod
+@staticmethod 꼭 써주기
