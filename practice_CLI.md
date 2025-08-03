@@ -1,5 +1,15 @@
 # CLI 연습하기
 
+pip list
+
+python -m venv venv
+venv 라는 이름으로 가상환경 만듦
+
+source venv/Scripts/activate
+가상환경 활성화
+
+
+
 ---
 
 홈 디렉토리로 이동하기
