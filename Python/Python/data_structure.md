@@ -1,0 +1,1707 @@
+교재에서 빨간 처리된 부분 매우 중요
+
+# 목차
+
+---
+## Data Structure
+- 메서드
+
+---
+## 시퀀스 데이터 구조
+- 문자열
+- 리스트
+
+---
+## 복사
+- 객체와 참조
+- 얕은 복사
+- 깊은 복사
+
+
+# 목차
+
+---
+## 비시퀀스 데이터 구조
+- 딕셔너리
+- 세트
+
+
+
+---
+## 참고
+- List Comprehension
+- 메서드 체이닝
+- 문자 유형 판별 메서드
+
+---
+## 참고
+- 해시 테이블
+- 파이썬 문법 규격
+
+
+* ✓ 데이터 구조의 개념과 필요성을 이해하고 설명할 수 있습니다.  
+* ✓ 문자열(String)의 다양한 메서드를 활용하여 텍스트 데이터를 처리할 수 있습니다.  
+* ✓ 리스트(List)의 주요 메서드를 사용하여 데이터를 추가, 삭제, 탐색, 정렬할 수 있습니다.  
+* ✓ 객체, 참조, 가변성의 개념을 이해하고 파이썬 변수 할당의 원리를 설명할 수 있습니다.  
+* ✓ 얕은 복사(Shallow Copy)와 깊은 복사(Deep Copy)의 차이를 이해하고 적절하게 활용할 수 있습니다.  
+* ✓ List Comprehension을 사용하여 간결하고 효율적인 리스트 생성을 할 수 있습니다.  
+* ✓ 메서드 체이닝(Method Chaining)의 원리를 이해하고 코드를 더 효율적으로 작성할 수 있습니다.  
+
+
+## 데이터 구조
+
+> 여러 데이터를 효과적으로 사용  
+> 관리하기 위한 구조  
+> **(`str`, `list`, `dict` 등)**  
+>
+
+## 자료구조
+
+* 컴퓨터 공학에서는 ‘자료 구조’ 라고 함  
+* 각 데이터의 **효율적인 저장, 관리**를 위한 구조를 나눠 놓은 것  
+* 단순히 데이터를 묶는 것을 넘어, **프로그램의 성능과 효율성, 유지보수성에 큰 영향을 미치는 핵심적인 개념**  
+
+## 데이터 구조의 활용
+
+### 메서드
+
+> 문자열, 리스트, 딕셔너리 등 각 데이터 구조의  
+> **메서드**를 호출하여 다양한 **기능**을 활용하기
+
+## 메서드 (method)
+
+-----
+
+객체에 속한 함수
+
+프로그래밍에서 메서드(`Method`)는 객체(`Object`)가 특정 작업을 수행하도록 정의된 함수
+
+-----
+
+> **💡 객체**
+>
+> 특정 데이터(정보)와 그 데이터를 처리하는  
+> 기능(메서드)을 하나로 묶은 것
+>
+
+## 메서드
+
+* 메서드는 클래스(`class`) 내부에 정의되는 함수
+* 클래스는 파이썬에서 ‘타입을 표현하는 방법’이며 이미 은연중에 사용해왔음
+* 예를 들어 `help` 함수를 통해 `str`을 호출해보면 `class` 였다는 것을 확인 가능
+
+## 메서드 호출 방법
+
+### **데이터 타입 객체.메서드()**
+
+-----
+
+```python
+'hello'.capitalize()
+```
+
+> 우리가 만든 객체(데이터)에게 원하는 명령(메서드)을 내리는 방법  
+
+```python
+# 문자열 메서드 예시
+print('hello'.capitalize()) # Hello
+
+# 리스트 메서드 예시
+numbers = [1, 2, 3]
+numbers.append(4)
+
+print(numbers) # [1, 2, 3, 4]
+```
+
+# 시퀀스 데이터 구조
+## 문자열
+
+## 문자열 조회/탐색 및 검증 메서드
+
+| 메서드 | 설명 |
+| :--- | :--- |
+| `s.find(x)` | x의 첫 번째 위치를 반환. 없으면, -1을 반환 |
+| `s.index(x)` | x의 첫 번째 위치를 반환. 없으면, 오류 발생 |
+| `s.isupper()` | 문자열 내의 모든 문자가 대문자인지 확인 |
+| `s.islower()` | 문자열 내의 모든 문자가 소문자인지 확인 |
+| `s.isalpha()` | 문자열 내의 모든 문자가 알파벳인지 확인  \*단순 알파벳이 아닌 유니코드 상 Letter (한국어도 포함) |
+
+## `.find(x)`
+
+-----
+
+x의 첫 번째 위치를 반환. 없으면, -1을 반환
+
+```python
+print('banana'.find('a')) # 1
+print('banana'.find('z')) # -1
+```
+
+## `.index(x)`
+
+-----
+
+x의 첫 번째 위치를 반환. 없으면, 오류 발생
+
+```python
+print('banana'.index('a')) # 1
+print('banana'.index('z')) # ValueError: substring not found
+```
+
+## `.isalpha()`
+
+-----
+
+문자열이 알파벳으로만 이루어져 있는지 확인
+
+```python
+string1 = 'Hello'
+string2 = '123heis98576ssh'
+print(string1.isalpha()) # True
+print(string2.isalpha()) # False
+```
+
+-----
+
+## `.isupper()`, `.islower()`
+
+-----
+
+문자열이 모두 대문자/소문자로 이루어져 있는지 확인
+
+```python
+string1 = 'HELLO'
+string2 = 'Hello'
+print(string1.isupper()) # True
+print(string2.isupper()) # False
+print(string2.islower()) # False
+print(string1.islower()) # False
+```
+> for문 활용해서 사용 시 isupper는 인덱스 값 0을 계속 반환함   
+
+
+## 문자열 조작 메서드 (새로운 문자열 반환)
+
+| 메서드 | 설명 |
+| :--- | :--- |
+| `s.replace(old, new[, count])` | 바꿀 대상 글자를 새로운 글자로 바꿔서 반환 |
+| `s.strip([chars])` | 공백이나 특정 문자를 제거 |
+| `s.split(sep=None, maxsplit=-1)` | sep를 구분자 문자열로 사용하여 문자열에 있는 단어들의 리스트를 반환 |
+| `'separator'.join(iterable)` | 구분자로 iterable의 문자열을 연결한 문자열을 반환 |
+| `s.capitalize()` | 가장 첫 번째 글자를 대문자로 변경 |
+| `s.title()` | 문자열 내 띄어쓰기 기준으로 각 단어의 첫 글자는 대문자로, 나머지는 소문자로 변환 |
+| `s.upper()` | 모두 대문자로 변경 |
+| `s.lower()` | 모두 소문자로 변경 |
+| `s.swapcase()` | 대 ↔ 소문자로 서로 변경 |
+
+-----
+
+> **💡 iterable**
+>
+> 순서대로 꺼내 쓸 수 있는 데이터들의 묶음
+
+위 4가지는 굉장히 자주 쓸 것
+
+문자열은 불변
+어떻게 조작? >> 새로운 문자열 반환  
+문자열 조작 메서드의 특징 : 원본 문자열을 바꾸지 않고 조작된 새로운 문자열을 반환함  
+
+## `.replace(old, new[, count])`
+
+-----
+
+바꿀 대상 글자를 새로운 글자로 바꿔서 **반환**
+
+```python
+text = 'Hello, world! world world'
+new_text1 = text.replace('world', 'Python')
+new_text2 = text.replace('world', 'Python', 1)
+
+print(new_text1) # Hello, Python! Python Python
+print(new_text2) # Hello, Python! world world
+```
+실제 코드 작성 시 대괄호는 사용 x
+
+문서나 도움말에서 메서드(함수)의 형식을 보여줄 때 대괄호 []는 '선택 사항(Optional)'이라는 의미로 사용되는 흔한 표기법   
+즉, count는 생략해도 되는 매개변수라는 뜻
+
+new[,count] >> 선택인자, 새로운 대상  
+old >> 바꿀 대상   
+
+## `.strip([chars])`
+
+-----
+
+문자열의 시작과 끝에 있는 공백 혹은 지정한 문자를 제거
+
+```python
+text = '    Hello, world!    '
+new_text = text.strip()
+print(new_text) # 'Hello, world!'
+```
+시작점 or 끝만 제거하는 메서드는 없는지?
+> .lstrip() : 시작(왼쪽) 공백 제거
+> .rstrip() : 끝(오른쪽) 공백 제거
+
+## `.split(sep=None, maxsplit=-1)`
+
+-----
+
+`sep`를 구분자 문자열로 사용하여  
+문자열에 있는 단어들의 **리스트를 반환**
+
+```python
+text = 'Hello, world!'
+words1 = text.split(',')
+words2 = text.split()
+print(words1) # ['Hello', ' world!']
+print(words2) # ['Hello,', 'world!']
+```
+.split('l') ?? >> 'He','','o, wor','d!'
+
+## `'separator'.join(iterable)`
+
+-----
+
+`iterable` 의 문자열을 연결한 **문자열을 반환**
+
+```python
+words = ['Hello', 'world!']
+text = '-'.join(words)
+print(text) # 'Hello-world!'
+```
+```python
+text = 'heLLo, woRld!'
+new_text1 = text.capitalize()
+new_text2 = text.title()
+new_text3 = text.upper()
+new_text4 = text.lower()
+new_text5 = text.swapcase()
+
+print(new_text1) # Hello, world!
+print(new_text2) # Hello, World!
+print(new_text3) # HELLO, WORLD!
+print(new_text4) # hello, world!
+print(new_text5) # HEllO, WOrLD!
+```
+
+# 리스트
+## 리스트 값 추가 및 삭제 메서드
+
+| 메서드 | 설명 |
+| :--- | :--- |
+| `L.append(x)` | **리스트 마지막에 항목 x를 추가** |
+| `L.extend(m)` | **iterable m의 모든 항목들을 리스트 끝에 추가 (+=과 같은 기능)** |
+| `L.insert(i, x)` | **리스트 인덱스 i에 항목 x를 삽입** |
+| `L.remove(x)` | **리스트 가장 왼쪽에 있는 항목(첫 번째) x를 제거\<br\>항목이 존재하지 않을 경우, ValueError** |
+| `L.pop()` | **리스트 가장 오른쪽에 있는 항목(마지막)을 반환 후 제거** |
+| `L.pop(i)` | **리스트의 인덱스 i에 있는 항목을 반환 후 제거** |
+| `L.clear()` | **리스트의 모든 항목 삭제** |
+
+> List 는 가변임  
+>'새로운' 값 추가 및 삭제가 아님  
+> 원본에 조작을 가함  
+> 반환값이 없음  
+> 일부는 반환을 해줌 ex) pop(), pop(i)  
+ 
+ ## `.append(x)`
+
+-----
+
+리스트 마지막에 항목 x를 추가
+
+```python
+my_list = [1, 2, 3]
+my_list.append(4)
+print(my_list) # [1, 2, 3, 4]
+print(my_list.append(5)) # None
+my_list.append(4, 5, 6)
+print(my_list) # TypeError: list.append() takes exactly one argument (3 given)
+```
+print()함수는 my_list.append(5) 의 값을 반환.    
+.append() 메서드는 항상 None을 반환  
+
+## `.extend(iterable)`
+
+-----
+
+리스트에 다른 반복 가능한 객체의 모든 항목을 추가
+
+```python
+my_list = [1, 2, 3]
+my_list.extend([4, 5, 6])
+print(my_list) # [1, 2, 3, 4, 5, 6]
+```
+
+## `.insert(i, x)`
+
+-----
+
+리스트의 지정한 인덱스 i 위치에 항목 x를 삽입
+
+```python
+my_list = [1, 2, 3]
+my_list.insert(1, 5)
+print(my_list) # [1, 5, 2, 3]
+```
+
+## `.remove(x)`
+
+-----
+
+리스트에서 첫 번째로 일치하는 항목을 삭제
+
+```python
+my_list = [1, 2, 3, 2, 2, 2]
+my_list.remove(2)
+print(my_list) # [1, 3, 2, 2, 2]
+```
+## `.pop(i)`
+
+-----
+
+리스트에서 지정한 인덱스의 항목을 제거하고 **반환** 작성하지 않을 경우 마지막 항목을 제거
+
+```python
+my_list = [1, 2, 3, 4, 5]
+item1 = my_list.pop()
+item2 = my_list.pop(0)
+print(item1) # 5
+print(item2) # 1
+print(my_list) # [2, 3, 4]
+```
+
+
+## `.clear()`
+
+-----
+
+리스트의 모든 항목을 삭제
+
+```python
+my_list = [1, 2, 3]
+my_list.clear()
+print(my_list) # []
+```
+
+| 문법 | 설명 |
+| :--- | :--- |
+| `L.index(x)` | 리스트에서 첫 번째로 일치하는 항목 x의 인덱스를 반환 |
+| `L.count(x)` | 리스트에서 항목 x의 개수를 반환 |
+| `L.reverse()` | **리스트의 순서를 역순으로 변경 (정렬 X)** |
+| `L.sort()` | **리스트를 정렬 (매개변수 이용가능)** |
+
+## `.index(x)`
+
+-----
+
+리스트에서 첫 번째로 일치하는 항목 x의 **인덱스를 반환**
+
+```python
+my_list = [1, 2, 3]
+index = my_list.index(2)
+print(index) # 1
+```
+
+## `.count(x)`
+
+-----
+
+리스트에서 항목 x의 **개수를 반환**
+
+```python
+my_list = [1, 2, 2, 3, 3, 3]
+count = my_list.count(3)
+print(count) # 3
+```
+
+## `.reverse()`
+
+-----
+
+리스트의 순서를 역순으로 변경(정렬 X)
+
+```python
+my_list = [1, 3, 2, 8, 1, 9]
+my_list.reverse()
+#print(my_list.reverse()) # None
+print(my_list) # [9, 1, 8, 2, 3, 1]
+#위 주석 제거 시 print안의 my_list.reverse() 호출되어 다시 [1, 3, 2, 8, 1, 9] 됨
+```
+
+## `.sort()`
+
+-----
+
+원본 리스트를 오름차순으로 정렬
+
+```python
+my_list = [3, 2, 100, 1]
+my_list.sort()
+print(my_list) # [1, 2, 3, 100]
+print(my_list.sort()) # None
+
+# 내림차순 정렬
+my_list.sort(reverse=True)
+print(my_list) # [100, 3, 2, 1]
+```
+
+### 다양한 리스트 메서드 공식문서
+> [https://docs.python.org/3.11/tutorial/datastructures.html\#data-structures](https://www.google.com/search?q=https://docs.python.org/3.11/tutorial/datastructures.html%23data-structures)
+
+
+# 복사
+## 객체와 참조
+
+## 가변/불변 객체의 개념
+
+* 객체 복사의 핵심을 파악하려면, 파이썬 자료구조의 가변과 불변 두 가지 종류를 살펴봐야 합니다.
+
+---
+
+### Mutable(가변) 객체
+
+* 생성 후 내용을 변경할 수 **있는** 객체
+    * 예: 리스트(`list`), 딕셔너리(`dict`), 집합(`set`)
+
+---
+
+### Immutable(불변) 객체
+
+* 생성 후 내용을 변경할 수 **없는** 객체
+    * 예: 정수(`int`), 실수(`float`), 문자열(`str`), 튜플(`tuple`)
+
+## 변수 할당의 의미
+
+  * 파이썬에서 변수 할당은 객체에 대한 참조를 생성하는 과정
+      * 변수는 객체의 메모리 주소를 가리키는 Label 역할을 함
+      * ‘=’ 연산자를 사용하여 변수에 값을 할당
+      * 할당 시 **새로운 객체**가 생성되거나 **기존 객체**에 대한 참조가 생성됨
+
+-----
+
+### ✓ 새로운 객체 생성 후 참조
+
+  * 할당되는 값이 새로운 객체일 경우, 파이썬은 먼저 해당 객체를 메모리에 만들고, 변수가 그 객체를 가리키도록 함
+
+### ✓ 기존 객체에 대한 참조
+
+  * 이미 메모리에 존재하는 객체를 변수에 할당하면, 새로운 객체를 만들지 않고 해당 객체에 대한 참조만 생성함
+
+-----
+
+> **💡 메모리 참조 방식**
+>
+> 변수는 객체의 ‘메모리 주소’를 저장  
+> 여러 변수가 동일한 객체를 참조할 수 있음
+>
+
+
+a = 3 의 의미 메모리에 3을 할당한 것이고 a는 메모리 주소를 가리킴  
+b = 3 도 동일한 메모리의 3을 똑같이 참조할 것  
+
+## 가변 객체 예시
+
+  * 생성 후 내용을 변경할 수 **있는** 객체
+
+-----
+
+```python
+a = [1, 2, 3, 4]
+b = a
+b[0] = 100
+
+print(a)      # [100, 2, 3, 4]
+print(b)      # [100, 2, 3, 4]
+print(a is b) # True
+```
+![파이썬 변수 참조 다이어그램](http://googleusercontent.com/file_content/0)
+
+## 불변 객체 예시
+
+  * 생성 후 내용을 변경할 수 **없는** 객체
+
+-----
+
+```python
+a = 20
+b = a
+b = 10
+
+print(a)      # 20
+print(b)      # 10
+print(a is b) # False
+#파이썬 튜터 참조할 것!
+```
+
+## `id()` 함수를 사용한 메모리 주소 확인
+
+  * `id()` 함수를 사용하여 객체의 메모리 주소를 확인 가능
+  * `is` 연산자를 통해 두 변수가 같은 객체를 참조하는지 확인 가능
+
+-----
+
+```python
+x = [1, 2, 3]
+y = x
+z = [1, 2, 3]
+
+print(f'x의 id: {id(x)}')
+print(f'y의 id: {id(y)}')
+print(f'z의 id: {id(z)}')
+
+print(f'x와 y는 같은 객체인가? {x is y}')
+print(f'x와 z는 같은 객체인가? {x is z}')
+
+# 출력 예시 (메모리 주소는 실행할 때마다 다름)
+"""
+x의 id: 2120301389888
+y의 id: 2120301389888
+z의 id: 2120301389632
+x와 y는 같은 객체인가? True
+x와 z는 같은 객체인가? False
+"""
+```
+
+## 가변/불변 메모리 관리 방식
+
+* **가변 객체**
+    * 생성 후에도 그 내용을 수정할 수 있음
+    * 객체의 내용이 변경되어도 같은 메모리 주소를 유지
+
+---
+
+* **불변 객체**
+    * 생성 후 그 값을 변경할 수 없음
+    * 새로운 값을 할당하면 새로운 객체가 생성되고, 변수는 새 객체를 참조하게 됨
+
+## 가변/불변 메모리 관리 방식의 이유
+
+* **성능 최적화**
+    * **불변 객체**: 변경이 불가능하므로, **여러 변수가 동일한 객체를 안전하게 공유**할 수 있음
+    * **가변 객체**: 내용 수정이 빈번할 때, 새로운 객체를 생성하는 대신 **기존 객체를 직접 수정**할 수 있음  
+      이로 인해 객체 생성 및 삭제에 드는 비용을 절감하여 성능을 향상시킴
+
+---
+
+* **메모리 효율성**
+    * **불변 객체**: 동일한 값을 가진 여러 변수가 같은 객체를 참조할 수 있어 **메모리 사용을 최소화**할 수 있음  
+    * **가변 객체**: 크기가 큰 데이터를 효율적으로 수정할 수 있음  
+
+> 가볍게 알아두기
+----
+
+## 얕은 복사 (Shallow Copy)
+
+---
+
+객체의 **최상위 요소**만 새로운 메모리에 복사하는 방법  
+내부에 **중첩된 객체**가 있다면 그 객체의 참조만 복사됨
+
+---
+> **TIP**
+>
+> * 얕은 복사의 함정, **‘가변 객체’**  
+> * 얕은 복사 후 중첩된 리스트나 딕셔너리 같은 **가변 객체**를 수정하면, 원본 객체와 복사본 객체가 함께 변경됩니다.  
+> * 이는 복사본의 중첩 객체가 여전히 원본 객체의 **중첩 객체를 참조**하고 있기 때문입니다. 이 점을 항상 주의하세요!  
+
+```python
+my_list = [10, 20, ['a', 'b']]
+```
+- 최상위 요소: 10, 20, 그리고 리스트 ['a', 'b'] 임. 이 세 항목은 my_list가 직접 담고 있음.
+
+- 최상위 요소가 아닌 것: 'a'와 'b'임. 이들은 my_list 안의 또 다른 리스트에 속해 있음
+
+## 얕은 복사 구현 방법
+
+1.  리스트 슬라이싱
+2.  `copy()` 메서드
+3.  `list()` 함수
+
+> 모두 같은 얕은 복사 결과가 나옴
+
+## 얕은 복사 예시
+
+  * **1차원 리스트에서의 얕은 복사**
+      * 리스트 슬라이싱
+    <!-- end list -->
+    ```python
+    a = [1, 2, 3]
+    b = a[:]
+
+    print(a) # [1, 2, 3]
+    print(b) # [1, 2, 3]
+    #파이썬 튜터로 메모리 주소 확인해볼 것
+    ```
+
+-----
+
+  * ❄️ 리스트 슬라이싱`[:]`은 원본 리스트와 동일한 내용의 **새로운 리스트**를 만듭니다.
+  * ❄️ 이때, 새로운 리스트에 복사되는 것은 요소 자체의 값이 아니라 해당 요소들이 참조하는 **주소**입니다.
+
+  * **1차원 리스트에서의 얕은 복사**
+      * `copy()` 메서드
+    <!-- end list -->
+    ```python
+    a = [1, 2, 3]
+    b = a.copy()
+
+    print(a) # [1, 2, 3]
+    print(b) # [1, 2, 3]
+    ```
+  * **1차원 리스트에서의 얕은 복사**
+      * `list()` 함수
+    <!-- end list -->
+    ```python
+    a = [1, 2, 3]
+    d = list(a) # list() 함수를 사용하여 a의 얕은 복사본 생성
+
+    # 원본 리스트 a의 첫 번째 요소 변경
+    a[0] = 100
+
+    print(a) # [100, 2, 3]
+    print(d) # [1, 2, 3]
+    ```
+
+
+## 얕은 복사의 한계 (1/2)
+
+  * 2차원 리스트와 같이 변경 가능한 객체 안에 변경 가능한 객체가 있는 경우  
+  * a와 b의 주소는 다르지만 내부 객체의 주소는 같기 때문에 함께 변경됨  
+
+-----
+
+```python
+a = [1, 2, [3, 4, 5]]
+b = a[:]
+
+b[0] = 999
+print(a) # [1, 2, [3, 4, 5]]
+print(b) # [999, 2, [3, 4, 5]]
+
+b[2][1] = 100
+print(a) # [1, 2, [3, 100, 5]]
+print(b) # [999, 2, [3, 100, 5]]
+
+print(f'a[2]와 b[2]가 같은 객체인가? {a[2] is b[2]}') # True
+```
+
+## 1차원 리스트와 다차원 리스트에서의 차이점
+
+* **1차원 리스트**
+    * 얕은 복사로 충분히 독립적인 복사본을 만들 수 있음
+
+---
+
+* **다차원 리스트**
+    * 최상위 리스트만 복사되고, 내부 리스트는 여전히 원본과 같은 객체를 참조
+
+## 깊은 복사 (Deep Copy)
+
+---
+
+객체의 모든 수준의 요소를 새로운 메모리에 복사하는 방법  
+**중첩된 객체까지** 모두 새로운 객체로 생성됨
+
+---
+
+> **TIP**
+>
+> **완전한 독립성 보장**
+> * 깊은 복사는 원본 객체와 복사본이 완전히 독립적임을 보장합니다.
+> * 복사본의 어떤 수준에 있는 중첩된 내용을 변경하더라도 **원본 객체**에는 절대 영향을 주지 않습니다.
+
+
+## 깊은 복사
+
+  * `copy` 모듈에서 제공하는 `deepcopy()` 함수를 사용
+
+-----
+
+```python
+import copy
+new_object = copy.deepcopy(original_object)
+```
+
+## 깊은 복사 예시 (1/3)
+
+```python
+import copy
+
+a = [1, 2, [3, 4, 5]]
+b = copy.deepcopy(a)
+
+b[2][1] = 100
+
+print(a) # [1, 2, [3, 4, 5]]
+print(b) # [1, 2, [3, 100, 5]]
+print(f'a[2]와 b[2]가 같은 객체인가? {a[2] is b[2]}') # False
+```
+
+## 깊은 복사 예시 (2/3)
+
+  * 중첩된 객체에서의 깊은 복사
+
+-----
+
+```python
+original = {'a': [1, 2, 3], 'b': {'c': 4, 'd': [5, 6]}}
+copied = copy.deepcopy(original)
+
+print(f'원본: {original}')      # {'a': [1, 2, 3], 'b': {'c': 4, 'd': [5, 6]}}
+print(f'복사본: {copied}')      # {'a': [1, 100, 3], 'b': {'c': 4, 'd': [500, 6]}}
+print(f"original['b']와 copied['b']가 같은 객체인가? {original['b'] is copied['b']}") # False
+# 파이썬 튜터 확인
+```
+
+# 참고
+## List Comprehension
+
+- 간결하고 효율적인 리스트 생성 방법
+
+## List Comprehension 구조
+
+### 기본 구조
+
+```python
+[expression for 변수 in iterable]
+list(expression for 변수 in iterable)
+```
+
+### 조건문 포함 구조
+
+```python
+[expression for 변수 in iterable if 조건식]
+list(expression for 변수 in iterable if 조건식)
+```
+
+-----
+
+### **`[표현식 for 변수 in 순회 가능한 객체 if 조건]`**
+
+❄️ `if 조건` 부분은 선택 사항
+
+-----
+
+> **TIP**
+>
+> **각 구성 요소의 역할**
+>
+>   * **표현식**은 결과 리스트에 추가될 값, **변수**는 순회 중인 현재 요소, **순회 가능한 객체**는 반복할 데이터, **조건식**은 필터링 조건
+>   * `if` 조건식 부분은 선택 사항이며, 조건문을 명시하지 않으면 모든 요소에 대해 표현식이 적용됩니다.
+---
+
+## 사용 전/후 비교
+
+-----
+
+### 사용 전
+
+```python
+numbers = [1, 2, 3, 4, 5]
+squared_numbers = []
+for num in numbers:
+    squared_numbers.append(num**2)
+print(squared_numbers) # [1, 4, 9, 16, 25]
+```
+
+-----
+
+### 사용 후
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+squared_numbers = [num**2 for num in numbers]
+print(squared_numbers) # [1, 4, 9, 16, 25]
+```
+
+## List Comprehension 활용 예시
+
+  * 2차원 배열 생성 시(인접행렬 생성)
+
+-----
+
+### 코드
+
+```python
+data1 = [[0] * 5 for _ in range(5)]
+# 또는
+data2 = [[0 for _ in range(5)] for _ in range(5)]
+
+#풀어서 써봤음
+result = []
+for i in range(5):
+    result.append([])
+    for x in range(5):
+        result[i].append(0)
+
+```
+
+### 결과
+
+```
+# 결과
+[[0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0]]
+```
+---
+# 메서드 체이닝 Method Chaining
+- 여러 메서드를 연속해서 호출하는 방식
+
+
+## 문자열에서의 메서드 체이닝 예시 (1/2)
+
+  * 코드는 다음 순서로 실행됨
+    1.  `text.swapcase()`: 대소문자를 반전시킴
+          * `'heLLo, woRld!'` → `'HEllO, WOrLD!'`
+    2.  `.replace('l', 'z')`: 소문자 ‘l’을 ‘z’로 교체
+          * `'HEllO, WOrLD!'` → `'HEzzO, WOrLD!'`
+
+-----
+
+```python
+text = 'heLLo, woRld!'
+new_text = text.swapcase().replace('l', 'z')
+print(new_text) # HEzzO, WOrLD!
+```
+
+## 문자열에서의 메서드 체이닝 예시 (2/2)
+
+```python
+# 1. 단계별로 실행하기
+text = 'heLLo, woRld!'
+step1 = text.swapcase()
+print('1단계 결과:', step1) # HEllO, WOrLD!
+
+step2 = step1.replace('l', 'z')
+print('2단계 결과:', step2) # HEzzO, WOrLD!
+
+# 2. 한 줄로 실행하기 (위와 동일한 결과)
+new_text = text.swapcase().replace('l', 'z')
+print('최종 결과:', new_text) # HEzzO, WOrLD!
+```
+
+## 리스트에서의 메서드 체이닝 예시
+
+  * `copy()`로 리스트를 복사한 후, `sorted()` 함수로 정렬
+
+
+```python
+numbers = [3, 1, 4, 1, 5, 9, 2]
+result = numbers.copy().sort()
+print(numbers) # [3, 1, 4, 1, 5, 9, 2] (원본은 변경되지 않음)
+print(result)  # None (sort() 메서드는 None을 반환하기 때문)
+
+# 올바른 체이닝 예시
+sorted_numbers = sorted(numbers.copy())
+#sorted는 메서드가 아닌 정렬하는 내장함수 이므로, 반환함
+print(sorted_numbers) # [1, 1, 2, 3, 4, 5, 9]
+
+numbers = [3, 1, 4, 1, 5, 9, 2]
+result = numbers.append(7).extend([8, 9])  # AttributeError
+# None.entend가 되어 에러남
+```
+
+## 메서드 체이닝 주의사항
+
+* 모든 메서드가 체이닝을 지원하는 것은 아님
+    * 메서드가 객체를 반환할 때만 체이닝이 가능
+
+* `None`을 반환하는 메서드는 메서드 체이닝이 불가능
+    * ex) 리스트의 `append()`, `sort()`
+
+* 메서드 체이닝을 사용할 때는 각 메서드의 반환 값을 잘 이해하고 있어야 함
+
+문자열은 체이닝 적극 사용 가능  
+----
+
+## 문자 유형 판별 메서드
+
+* 문자열에 포함된 문자들의 유형을 판별하는 메서드 (1/2)
+
+    * **`isdecimal()`**
+        * 문자열이 모두 숫자 문자(0~9)로만 이루어져 있어야 `True`
+
+    * **`isdigit()`**
+        * `isdecimal()`과 비슷하지만, 유니코드 숫자도 인식 (‘①’ 도 숫자로 인식)
+
+    * **`isnumeric()`**
+        * `isdigit()`과 유사하지만, 몇 가지 추가적인 유니코드 문자들을 인식  
+          (분수, 지수, 루트 기호도 숫자로 인식)
+
+## 문자 유형 판별 메서드
+
+* 문자열에 포함된 문자들의 유형을 판별하는 메서드 (2/2)
+
+* `isdecimal()` ⊆ `isdigit()` ⊆ `isnumeric()`
+
+| `isdecimal()` | `isdigit()` | `isnumeric()` | 예시 |
+| :--- | :--- | :--- | :--- |
+| True | True | True | `"038"`, `"〇३੮"`, `"０３８"` |
+| False | True | True | `"0³⁸"`, `"0.3 &"`, `"①③⑧"` |
+| False | False | True | `"⅘"`, `"ⅠⅢⅤ"`, `"⑩⑬⑮"`, `"壹貳參"` |
+| False | False | False | `"abc"`, `"38.0"`, `"-38"` |
+----
+외울 필요 x 
+
+
+
+
+# 비시퀀스 데이터 구조
+
+## 딕셔너리 Dictionary
+
+> **키(Key)’** 와 **‘값(Value)** > 을 짝지어 저장하는 자료구조
+
+---
+* 딕셔너리는 내부적으로 해시 테이블을 사용하여 **키-값** 쌍을 관리합니다.
+* 키를 통한 값의 **삽입, 삭제, 검색**이 데이터의 크기와 관계없이 **매우 빠릅니다.**
+* 키(Key)는 **hashable한 고유 값**이어야 하지만, 값(Value)은 중복이 가능하고 어떤 자료형도 저장할 수 있습니다.
+
+## 딕셔너리 메서드
+
+| 메서드 | 설명 |
+| :--- | :--- |
+| **`D.get(k)`** | **키 k에 연결된 값을 반환 (키가 없으면 None을 반환)** |
+| **`D.get(k, v)`** | **키 k에 연결된 값을 반환하거나 키가 없으면 기본값으로 v를 반환** |
+| **`D.keys()`** | **딕셔너리 D의 키를 모은 객체를 반환** |
+| **`D.values()`** | **딕셔너리 D의 값을 모은 객체를 반환** |
+| **`D.items()`** | **딕셔너리 D의 키/값 쌍을 모은 객체를 반환** |
+| **`D.pop(k)`** | **딕셔너리 D에서 키 k를 제거하고 연결됐던 값을 반환 (없으면 오류)** |
+| **`D.pop(k, v)`** | **딕셔너리 D에서 키 k를 제거하고 연결됐던 값을 반환 (없으면 v를 반환)** |
+| **`D.clear()`** | **딕셔너리 D의 모든 키/값 쌍을 제거** |
+| **`D.setdefault(k)`** | **딕셔너리 D에서 키 k와 연결된 값을 반환** |
+| **`D.setdefault(k, v)`** | **딕셔너리 D에서 키 k와 연결된 값을 반환\<br\>k가 D의 키가 아니면 v와 연결한 키 k를 D에 추가하고 v를 반환** |
+| **`D.update(other)`** | **other 내 각 키에 대해 D에 있는 키면 D에 있는 그 키의 값을 other에 있는 값으로 대체. other에 있는 각 키에 대해 D에 없는 키면 키/값 쌍을 D에 추가** |
+-----
+
+## `.get(key[, default])`
+
+-----
+
+키 연결된 값을 반환하거나 키가 없으면 `None` 혹은 기본 값을 반환
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+print(person.get('name'))              # Alice
+print(person.get('country'))           # None
+print(person.get('country', 'Unknown')) # Unknown
+print(person['country'])               # KeyError: 'country'
+```
+
+
+## `.keys()`
+
+-----
+
+딕셔너리 키를 모은 객체를 반환
+
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person.keys()) # dict_keys(['name', 'age'])
+
+for item in person.keys():
+    print(item)
+"""
+name
+age
+"""
+```
+## `.values()`
+
+-----
+
+딕셔너리 값을 모은 객체를 반환
+
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person.values()) # dict_values(['Alice', 25])
+
+for item in person.values():
+    print(item)
+"""
+Alice
+25
+"""
+```
+
+## `.items()`
+
+-----
+
+딕셔너리 키/값 쌍을 모은 객체를 반환
+
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person.items()) # dict_items([('name', 'Alice'), ('age', 25)])
+
+for key, value in person.items():
+    print(key, value)
+"""
+name Alice
+age 25
+"""
+```
+
+## `.clear()`
+
+-----
+
+딕셔너리의 모든 키/값 쌍을 제거
+
+```python
+person = {'name': 'Alice', 'age': 25}
+person.clear()
+print(person) # {}
+```
+
+## `.setdefault(key[, default])`
+
+-----
+
+키와 연결된 값을 반환  // .get(), .pop()처럼  
+키가 없다면 default와 연결한 키를 딕셔너리에 추가하고 default를 반환  
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+print(person.setdefault('country', 'KOREA')) # KOREA
+print(person)                                 # {'name': 'Alice', 'age': 25, 'country': 'KOREA'}
+```
+
+## `.update([other])`
+
+-----
+
+`other`가 제공하는 키/값 쌍으로 딕셔너리를 갱신하고 기존 키는 덮어씀
+
+```python
+person = {'name': 'Alice', 'age': 25}
+other_person = {'name': 'Jane', 'country': 'KOREA'}
+
+person.update(other_person)
+print(person) # {'name': 'Jane', 'age': 25, 'country': 'KOREA'}
+
+person.update(age=100, address='SEOUL')
+print(person) # {'name': 'Jane', 'age': 100, 'country': 'KOREA', 'address': 'SEOUL'}
+```
+
+### 딕셔너리 메서드 공식문서
+[딕셔너리 메서드](https://www.google.com/search?q=https://docs.python.org/3.11/library/stdtypes.html%23dict)
+
+
+
+## Set
+
+> **고유한** 항목들의 정렬되지 않은 컬렉션
+> 해시 테이블 때문에 dict와 유사한 특성.
+---
+* Set은 내부적으로 **해시 테이블**을 사용하여 데이터를 저장합니다.  
+* 이로 인해 항목의 **고유성**을 효율적으로 보장하며, 항목의 **추가, 삭제, 존재 여부 확인(in 연산)**이 데이터의 크기에 관계없이 **매우 빠릅니다.**  
+* 또한, 합집합(Union), 교집합(Intersection), 차집합(Difference) 등 수학적인 **집합 연산**을 간편하게 수행할 수 있는 것이 가장 큰 특징입니다.  
+---
+
+| 메서드 | 설명 |
+| :--- | :--- |
+| `s.add(x)` | **세트 s에 항목 x를 추가. 이미 x가 있다면 변화 없음** |
+| `s.update(iterable)` | 세트 s에 다른 iterable 요소를 추가 |
+| `s.clear()` | 세트 s의 모든 항목을 제거 |
+| `s.remove(x)` | **세트 s에서 항목 x를 제거. 항목 x가 없을 경우 Key error** |
+| `s.pop()` | 세트 s에서 임의의 항목을 반환하고, 해당 항목을 제거 |
+| `s.discard(x)` | 세트 s에서 항목 x를 제거 |
+---
+
+## `.add(x)`
+
+-----
+
+세트에 x를 추가
+
+```python
+my_set = {'a', 'b', 'd', 'c', 1, 2, 3, 4}
+
+my_set.add(4)
+print(my_set) # {1, 'b', 3, 2, 'c', 'd', 'a', 4} (순서는 다를 수 있음)
+
+my_set.add(4)
+print(my_set) # {1, 'b', 3, 2, 'c', 'd', 'a', 4} (변화 없음)
+```
+## `.update(iterable)`
+
+-----
+
+세트에 다른 iterable 요소를 추가
+
+```python
+my_set = {'a', 'b', 'c', 1, 2, 3}
+my_set.update([1, 4, 5])
+print(my_set) # {'c', 2, 3, 1, 'b', 4, 5, 'a'} (순서는 다를 수 있음)
+```
+
+## `.clear()`
+
+-----
+
+세트의 모든 항목을 제거
+
+```python
+my_set = {'a', 'b', 'c', 1, 2, 3}
+my_set.clear()
+print(my_set) # set()
+```
+
+## `.remove(x)`
+
+-----
+
+세트에서 항목 x를 **제거**, 항목 x가 없을 경우 **KeyError**
+
+```python
+my_set = {'a', 'b', 'c', 1, 2, 3}
+
+my_set.remove(2)
+print(my_set) # {'b', 1, 3, 'c', 'a'} (순서는 다를 수 있음)
+
+my_set.remove(10)
+print(my_set) # KeyError: 10
+```
+
+## `.pop()`
+
+-----
+
+세트에서 **임의의** 요소를 제거하고 **반환**
+
+```python
+my_set = {'a', 'b', 'c', 1, 2, 3}
+
+element = my_set.pop()
+print(element)  # 1 (제거되는 요소는 실행 시마다 다를 수 있음)
+print(my_set)   # {2, 3, 'b', 'a', 'c'} (순서 및 남은 요소는 다를 수 있음)
+```
+
+## 세트의 집합 메서드
+
+| 메서드 | 설명 | 연산자 |
+| :--- | :--- | :--- |
+| `set1.difference(set2)` | `set1`에는 들어있지만 `set2`에는 없는 항목으로 세트를 생성 후 반환 | `set1 - set2` |
+| `set1.intersection(set2)` | `set1`과 `set2` 모두 들어있는 항목으로 세트를 생성 후 반환 | `set1 & set2` |
+| `set1.issubset(set2)` | `set1`의 항목이 모두 `set2`에 들어있으면 `True`를 반환 | `set1 <= set2` |
+| `set1.issuperset(set2)` | `set1`가 `set2`의 항목을 모두 포함하면 `True`를 반환 | `set1 >= set2` |
+| `set1.union(set2)` | `set1` 또는 `set2`에(혹은 둘 다) 들어있는 항목으로 세트를 생성 후 반환 | `set1 | set2` |
+---
+
+
+# 참고
+
+## 해시 테이블(hash table)
+
+> 해시 테이블은 **‘키(Key)’**와 **‘값(Value)’**을 짝지어 저장하는 자료구조입니다.  
+
+---
+수백 권의 책이 있는 도서관에서 책을 찾는다고 상상해 보세요.  
+
+책 제목(키)을 색인(해시 함수)에서 찾아 몇 번째 책장(인덱스)에 있는지 알아내면, 해당 책장(배열)으로 바로 가서 책(값)을 꺼낼 수 있습니다. 책장 전체를 일일이 뒤지는 것보다 훨씬 빠르죠.  
+
+## 해시 테이블의 원리
+  
+1.  키를 해시 함수를 통해 해시 값으로 변환  
+2.  변환된 해시 값을 인덱스로 삼아 데이터를 저장하거나 찾음  
+3.  이로 인해 검색, 삽입, 삭제를 매우 빠르게 수행  
+
+## 해시 (Hash)
+
+> 임의의 크기를 가진 데이터를 고정된 크기  
+> 의 **고유한 값**으로 변환하는 것
+
+---
+* 생성된 해시 값(고유한 정수)은 해당 데이터를 식별하는 ‘지문’ 역할을 함
+* 파이썬에서는 이 해시 값을 이용해 해시 테이블에 데이터를 저장
+* 이 변환을 수행하는 것이 **해시 함수**
+---
+
+## 해시 함수란?
+
+### 해시 함수 (Hash function)
+
+> 임의의 길이 데이터를 입력 받아 고정 길이(**정수**)로  
+> 변환해 주는 함수. 이 **‘정수’가 바로 해시 값**
+
+---
+
+* 주로 해시 테이블을 구현할 때, 매우 빠른 검색 및 데이터 저장 위치 결정을 위해 활용
+* ‘해시 알고리즘’이라고도 부름
+
+---
+
+> **TIP**
+>
+> **해시 테이블이 매우 빠른 이유:**
+> * 해시 함수는 키(Key)를 입력받아 데이터를 저장하거나 찾을 배열의 **‘정확한 인덱스’를 즉시 계산**합니다.
+> * 마치 책의 제목(키)을 알면 색인(해시 함수)을 통해 페이지 번호(인덱스)를 바로 알아내고, 해당 페이지(배열 위치)로 바로 이동하여 내용을 찾는 것과 같습니다.  
+---
+
+
+
+## `set`의 요소 & `dict`의 키와 해시 테이블 관계
+
+### `set`
+* 각 요소를 해시 함수로 변환해 나온 해시 값에 맞춰 해시 테이블 내부 버킷(bucket)에 위치시킴  
+* 그래서 “순서” 라기보다 “버킷 위치(인덱스)”가 요소의 위치를 결정  
+* 따라서 `set`는 **순서를 보장하지 않음**  
+
+---
+
+### `dict`
+* 키(key) → 해시 함수 → 해시 값 → 해시 테이블에 저장  
+* 단 `set`와 달리 **“삽입 순서”**는 유지한다는 것이 언어 사양에 따라 보장 됨 (python 3.7 이상)  
+    * 즉, 키를 추가한 순서대로 반복문 순회할 때 나오게 됨  
+    * 사용자에게 보여지는 키 순서는 삽입 순서가 유지되도록 설계된 것  
+
+
+## `set`의 `pop` 메서드 예시 - 정수
+
+  * 정수(숫자) 값은 해시 값이 숫자 자기 자신과 동일하거나 단순 계산으로 고정됨
+
+-----
+
+### 코드
+
+```python
+my_set = {3, 2, 1, 9, 100, 4, 87, 39, 10, 52}
+
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set.pop())
+print(my_set)
+```
+
+### 출력
+
+```
+1
+2
+3
+100
+4
+39
+9
+10
+52
+87
+set()
+```
+
+> 정수는 해시 함수 거쳐도 정수 그대로 저장
+> 따라서 출력이 똑같이 나옴
+
+## `set`의 `pop` 메서드 예시 - 문자열
+
+  * 문자열은 해시 계산 시 파이썬의 해시 난수화(`Hash Randomization`)가 적용되므로, 실행마다 순서가 달라질 수 있음
+
+-----
+
+### 코드
+
+```python
+my_str_set = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+
+print(my_str_set.pop())
+print(my_str_set.pop())
+print(my_str_set.pop())
+print(my_str_set.pop())
+print(my_str_set.pop())
+```
+
+### 출력 예시 (순서가 매번 다름)
+
+```
+a
+f
+h
+e
+d
+...
+```
+----
+
+## 파이썬에서의 해시 함수
+
+### 정수
+
+  * 같은 정수는 항상 같은 해시 값을 가짐
+  * 예) `hash(1)`은 여러 번 호출해도 결과가 동일
+
+### 문자열
+
+  * 문자열 해시 시, 파이썬 인터프리터 시작 때 설정되는 난수 시드(seed)가 달라질 수 있음  
+  * 보안상 이유로 해시 난수화 도입  
+  * 각 실행마다 달라질 수 있어 ‘a’의 해시 값도 매번 바뀔 수 있음  
+
+-----
+
+> 난수 시드(seed)가 해시 함수의 재료로 쓰임
+
+
+## 해시 난수화와 난수 시드
+
+* 파이썬 프로세스가 새로 시작될 때마다 해시를 계산할 때 사용하는 난수 시드가 달라짐  
+* 해시 함수가 매번 바뀌는 것이 아니라, 해시 계산에 쓰이는 시드 값이 실행마다 달라지는 것  
+* 이로 인해 동일한 데이터라도 매번 해시 값이 달라져 결과적으로 버킷 배치가 달라짐  
+
+## hashable
+
+  * `hash()` 함수에 넣어 해시 값을 구할 수 있는 객체를 의미
+  * 대부분의 **불변 타입**은 해시 가능
+      * 예) `int`, `float`, `str`, `tuple`(단, 내부에 불변만 있을 경우)
+  * 가변형 객체(예: `list`, `dict`, `set`)는 기본적으로 해시 불가능
+      * 이유: 값이 변하면 해시 값도 달라질 수 있어 해시 테이블 무결성이 깨짐
+
+-----
+
+```python
+print(hash(1)) #int
+print(hash(1.0)) #float
+print(hash('1')) #str
+print(hash((1, 2, 3))) #tuple
+
+# TypeError: unhashable type: 'list'
+print(hash((1, 2, [3, 4])))
+```
+
+
+
+
+
+
+```python
+print(hash(1)) # 1
+print(hash(1)) # 1
+print(hash('a')) # 실행시마다 다름
+print(hash('a')) # 실행시마다 다름
+```
+
+## hashable과 불변성 간의 관계
+
+* 해시 테이블(예: `set`, `dict`의 `KEY`)에는 **hashable**(해시가 가능한 객체)만 저장 가능
+* 불변 객체는 생성 후 값 변경이 불가능하므로, 항상 같은 해시 값을 유지
+    * → 해시 테이블이 안정적으로 동작
+* 다만, “`hash` 가능하다 `!=` 불변이다”가 절대적이지는 않지만  
+  일반적으로 내장 자료형 기준에서는 불변이어야 해시 가능
+
+---
+
+> **TIP**
+>
+> **가변 객체는 왜 hashable하지 않을까?**
+> * **해시 값의 불변성**: 해시 테이블은 객체의 해시 값을 이용해 데이터를 저장하고 검색할 위치(인덱스)를 결정합니다.  
+> * **문제 발생**: 만약 `list`와 같은 가변 객체를 키로 사용하고, 그 리스트의 내용을 변경하면 해시 값도 함께 변하게 됩니다.  
+> * **데이터 손실**: 이 경우, 데이터를 저장했던 인덱스와 변경 후 찾으려는 인덱스가 달라져 해당 데이터를 영원히 찾을 수 없게 됩니다.  
+> * **결론**: 따라서 해시 테이블의 안정적인 동작을 보장하기 위해, 파이썬은 가변 객체의 해시 값 계산을 허용하지 않습니다.  
+
+
+## 가변형 객체가 hashable 하지 않은 이유
+
+  * 값이 변경될 수 있으므로, 같은 객체라도 값이 바뀌면 해시 값도 달라질 수 있음
+  * 해시 테이블에서는 “동일 키 → 동일 위치”로 가정하고 빠른 검색을 수행하는데, 이 가정이 깨짐
+  * 예) 리스트, 집합, 딕셔너리 자체를 `set`이나 `dict`의 키로 쓸 수 없음
+
+-----
+
+```python
+# TypeError: unhashable type: 'list'
+print(hash([1, 2, 3]))
+
+# TypeError: unhashable type: 'list'
+my_set = {[1, 2, 3], 1, 2, 3, 4, 5}
+
+# TypeError: unhashable type: 'set'
+my_dict = {{3, 2}: 'a'}
+```
+
+## `hashable` 객체가 필요한 이유
+
+1.  **해시 테이블 기반 자료 구조 사용**
+    * `set`의 요소, `dict`의 키
+    * 중복 방지 & 빠른 검색, 조회
+
+2.  **불변성을 통한 일관된 해시 값**
+    * 한 번 해시 값이 정해지면 바뀌지 않아야 해시 테이블 무결성이 유지
+
+3.  **안정성과 예측 가능성 유지**
+    * 동일한 데이터는 항상 동일한 해시 값을 반환 → 로직을 단순화
+
+## 해시 테이블 정리
+
+* 해시 테이블은 해시 값을 인덱스로 삼아 데이터를 저장, 검색
+* 파이썬의 `set`은 순서가 없고, `pop()`시 어떤 요소가 반환될지 정해져 있지 않음
+* `dict`은 파이썬 3.7+ 버전에선 삽입 순서가 보장되지만, 내부 구현은 여전히 해시 테이블
+* 해시 함수는 정수/문자열 등 타입에 따라 다르게 동작하며, 문자열 해시 시 난수화로 실행마다 달라질 수 있음
+* `hashable`(해시가 가능한 객체) 객체만 `set`과 `dict`의 키로 사용 가능하며, 일반적으로 불변 타입이 이에 해당  
+
+
+# 파이썬 문법 규격
+
+## EBNF
+
+“Extended Backus-Naur Form”
+
+---
+
+- BNF를 확장한 표기법  
+메타 기호를 추가하여 더 간결하고 표현력이 강해진 형태
+- 서로 다른 프로그래밍 언어, 데이터 형식, 프로토콜 등의 문법을 통일하여 정의하기 위함  
+
+## 대표적인 EBNF 메타기호
+
+| 메타 기호 | 의미 |
+| :--- | :--- |
+| `[]` | 선택적 요소 |
+| `{}` | 0번 이상 반복 |
+| `()` | 그룹화 |
+---
+
+
+## EBNF 메타기호 `[]` 사용 예시
+
+  * 딕셔너리의 `pop` 메서드
+
+<!-- end list -->
+
+```python
+pop(key[, default])
+```
+
+
+
+
+
+
+
+
+
+# 새로 알게 된 내용
+
+## list
+> extend는 [] () {} 벗겨짐
+```python
+list = [1,2,3]
+list.append([1,2,3]) # [1,2,3,[1,2,3]]
+
+list = [1,2,3,]
+list.extend([1,2,3]) # [1,2,3,1,2,3]
+```
+
+
+
+> sorted(tuple) 하면 list가 돼서 튜플 형식이 필요하면 tuple(sorted(tup))로 바꿔줘야 함  
+> isdecimal()은 굳이 문자열을 int로 바꿔줄 필요가 없이 문자열 자체에 숫자가 있으면 판단해줌.   
+> pop(0) 하면 my_list 0번째 인덱스 제거하고 반환    
+
+```python
+for idx, each in elemensts:
+  idx -= 1
+  #idx를 -1 해줘도 다시 for문으로 돌아오면 idx 초기화 됨.
+```
+### .get(key[,default])
+> 대괄호를 통해 키를 찾을 시, 키가 없으면 에러 발생  
+> 없다면 원하는 다른 값을 반환하도록 해야하면 get
+
+### .keys
+> dict_keys(['name', 'age']) 형태로 나옴  
+> 결과가 대괄호 형태? 리스트처럼 순회 가능한가? >> 가능함  
+> 실시간으로 동기화하여 확인 가능함  
+> .keys 쓰고 키값바꾸면 얘도 바뀜  
+
+```python
+person = {'name': 'Alice', 'age': 25}
+per_keys = person.keys()
+person['country'] = 'KOREA'
+print(person.keys()) 
+# dict_keys(['name', 'age', 'country'])
+```
+
+### .values()
+> 얘도 리스트 형식으로 값을 반환 >> 순회 가능   
+
+### .items()
+> dict_items([('name', 'Alice'), ('age', 25)])  형식으로 값을 반환  
+> 리스트 안에 튜플 반환
+
+```python
+for key, value in person.items():
+    print(key, value)
+
+# name Alice
+# age 25
+```
+
+### .pop(key[,default])
+> 제거 + 반환,
+> 없으면 에러, 또는 default 호출
+
+### .setdefault
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person.setdefault('name', 'hihi'))
+# 키가 이미 있으므로 연결된 Alice 반환
+```
+### .clear()
+```python
+#똑같은 딕셔너리 유지
+person = {'name': 'Alice', 'age': 25}
+person.clear()
+
+#재할당 (다른 딕셔너리가 된 것)
+person = {'name': 'Alice', 'age': 25}
+person = {}
+```
+
+### .update(other)
+- 'age' = 100 ?? 문자열에 정수할당은 불가  
+- update는 근본적으로 함수임.   
+- def 함수('문자열' = 정수) 불가  
+- 함수(매개변수(인자) = 값)  
+
+
+## set
+- 리스트의 중복제거를 위해 set() 사용?    
+- 리스트 -> 세트 -> 리스트 하면 순서 보장 x  
+- 따라서 순서 유지가 중요하면 못씀  
+---
+
+### .pop()
+> 임의의 요소를 제거하고 반환 한다는데 무언가의 규칙과 확률이 있는 듯 함  
+> 정수의 경우 해시 난수화가 되지 않아 버킷에 저장된 순서대로 나올 확률이 높음  set는 비시퀀스이기때문에 보장은 없음  
+```python
+for i in range(100):
+    my_set = {'a', 'b', 'c', 1, 2, 3}
+    element = my_set.pop()
+    print(element)
+
+# 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ...
+```
+
+## *arg
+> 여러 인자를 매개변수 *arg를 통해 받을 때 인자들을 튜플로 묶어서 받음  
+> 따라서 len(sets)는 세트 내부 원소 개수가 아니라, 전달된 세트 덩어리의 개수를 세게 됨  
+
+```python
+def union_multiple_sets(*sets):
+  #받아온 튜플이 두개 이상이면 합집합을 통해 합침
+    if len(sets) <= 1:
+        print("최소 두 개의 셋이 필요합니다.")
+    else:
+      return set.union(*sets)
+
+result = union_multiple_sets({1, 2}, {3, 4}, {5, 6})
+print(result)  # {1, 2, 3, 4, 5, 6}
+
+result = union_multiple_sets({2, 1})
+# 출력 : 최소 두 개의 셋이 필요합니다
+```
+---
+
+
+## 재귀 호출한 함수의 결과를 현재 리스트에 합치기
+결론: 재귀로 부르는 빈 리스트때문에 key_list가 계속 비어있지는 않음
+
+```python
+def get_all_keys_from_dict(dic):
+    key_list = []
+    for key, value in dic.items():
+        key_list.append(key)
+
+        if type(value) == dict:
+            small_key = get_all_keys_from_dict(value)
+            key_list.extend(small_key)
+
+    return key_list
+
+my_dict = {'person': {'name': 'Alice', 'age': 25}, 'location': 'NY'}
+result = get_all_keys_from_dict(my_dict)
+print(result)  # ['person', 'name', 'age', 'location']
+
+```
+
+간단한 예시 {'a': 1, 'b': {'c': 2}}로 따라가 보겠습니다.
+
+첫 번째 호출: get_all_keys_from_dict({'a': 1, 'b': {'c': 2}})
+
+이 호출을 (A)라고 부르겠습니다.
+
+A는 자신만의 key_list_A = []를 만듭니다.
+
+'a' 키를 발견하고 key_list_A는 ['a']가 됩니다.
+
+'b'의 값 {'c': 2}가 딕셔너리인 것을 발견하고, 새로운 재귀 호출을 시작합니다.
+
+두 번째 호출: get_all_keys_from_dict({'c': 2})
+
+이 호출을 (B)라고 부르겠습니다.
+
+B는 A와는 완전히 별개인 자신만의 key_list_B = []를 만듭니다.
+
+'c' 키를 발견하고 key_list_B는 ['c']가 됩니다.
+
+B는 더 이상 할 일이 없으므로 return key_list_B 즉, ['c']를 반환합니다.
+
+다시 첫 번째 호출 (A)로 복귀
+
+A는 B가 반환한 값 ['c']를 sub_keys라는 변수에 받습니다. (sub_keys는 ['c'])
+
+이제 key_list_A.extend(sub_keys)를 실행합니다.
+
+자신이 원래 가지고 있던 key_list_A(['a'])에 sub_keys(['c'])를 더합니다.
+
+그 결과 key_list_A는 ['a', 'c']가 됩니다.
+
+A는 모든 작업을 마치고 최종 결과 ['a', 'c']를 반환합니다.
+
+---
+
+## 얕은 복사
+```python
+orig = [1,[2,3]]
+shallow = orig[:]
+shallow[1].append(4)
+print(orig)
+print(orig is shallow) #얕은 복사
+print(orig == shallow)
+
+# [1, [2, 3, 4]]
+# False
+# True
+```
+> shallow 는 orig를 얕은 복사함
+>새로운 겉 껍데기: 얕은 복사는 shallow라는 새로운 리스트(겉 껍데기)를 만듭니다.  
+
+> 내용물 공유: 하지만 그 안에 들어있는 요소가 리스트([2, 3])와 같은 변경 가능한(mutable) 객체일 경우, 그 객체 자체를 복사하는 것이 아니라 메모리 주소(참조)만 복사합니다.  
+
+> 결과적으로 orig와 shallow는 서로 다른 리스트지만, 그들의 두 번째 요소(orig[1]과 shallow[1])는 완전히 동일한 하나의 내부 리스트를 가리키게 됩니다.  
+
+> is : 완전히 동일한 객체(메모리 주소)인지?
+> orig[:] 는 새로운 리스트 객체를 생성, 따라서 다른 별개의 객체
+> 얕은 복사하면 is 비교 시 무조건 False
+----
+
+## Set와 hash
+
+Set 자신: set이라는 자료구조 자체는 .add(), .remove() 등으로 요소를 추가하거나 삭제할 수 있는 수정 가능한(mutable) 객체입니다. 따라서 set 자체는 해시 값을 가질 수 없으며, 다른 set이나 dict의 키가 될 수 없습니다. 이것이 hash({1,2,3})가 에러를 발생시키는 이유입니다.  
+
+Set의 요소: set은 내부적으로 해시 테이블을 사용해 '요소'들을 저장합니다. 따라서 set에 들어가는 '요소'들은 반드시 해시 가능한(hashable), 즉 불변(immutable) 객체여야 합니다.  
+
+따라서 내부적으로 해쉬테이블 통해 값 저장하지만 set 자체는 hash가능하지 않음  
+ex) hash({1,2,3}) 에러남
