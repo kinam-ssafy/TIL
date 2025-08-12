@@ -23,10 +23,10 @@ for t in range(1, T+1):
 
     #중복 제거 세트
     set1 = set(str1)
-    set2 = set(str2)
-    cross = set1 & set2 # 교집합세트
+    set2 = set(str2) # 이렇게 하면 중복문자는 제거됨
+    cross = set1 & set2 # 제거하고 나서 교집합 세트 만듦
 
-    no_str1 = list(set1)
+    no_str1 = list(set1)# 다시 리스트화
     no_str2 = list(set2)
     no_cross = list(cross)
 
