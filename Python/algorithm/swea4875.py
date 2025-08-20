@@ -20,13 +20,18 @@ NxN 크기의 미로에서 출발지에서 목적지에 도착하는 경로가 �
 T = int(input())
 for t in range(1, T+1):
     N = int(input())
-    arr = [list(map(int, input().split())) for _ in range(N)]
-    visited = [[] * N for _ in range(N)]
+    arr = [list(map(int, input())) for _ in range(N)]
+    visited = [[False] * N for _ in range(N)]
     stack = [] # 탐색 경로를 저장할 스택
 
     di = [0, 1, 0, -1]
     dj = [1, 0, -1, 0]
 
+    result = 0
+    start = None
+    end = None
+    isbreak = 0
+    
     for i in range(N): # 시작점과 끝점 인덱스 파악
         for j in range(N):
             if arr[i][j] == 2:
@@ -41,14 +46,23 @@ for t in range(1, T+1):
         if isbreak == 1:
             break
 
-    while len(stack) >= 1:
+    while stack:
         current_i, current_j = stack.pop()
 
         if arr[current_i][current_j] == 3:
+            result = 1
             break
 
-            for ni, nj in list(zip(di, dj)):
+        if not visited[current_i][current_j]:
+            visited[current_i][current_j] = True
 
+            for ni, nj in zip(di, dj):
+                fi, fj = current_i + ni, current_j + nj
+
+                if 0 <= fi < N and 0 <= fj < N and arr[fi][fj] != 1 and not visited[fi][fj]:
+                    stack.append([fi, fj])
+
+    print(f"#{t} {result}")
 
 
 
