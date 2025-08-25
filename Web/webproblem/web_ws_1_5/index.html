@@ -1,0 +1,98 @@
+
+<!-- 다음 내용을 포함하도록 HTML을 구성한다:
+상단 SSAFY 로고 이미지와 설명 텍스트
+강조된 문장(굵게, 줄바꿈 포함)
+프로그램 설명 문단
+주관, 후원, 위탁 정보를 포함한 텍스트
+가로줄(hr)을 활용한 구분선
+3개의 이모지 이미지 + 텍스트 구성 목록 (ul 사용) -->
+<!-- 삼성청년 SW아카데미
+**대한민국 SW의 미래**를 이끕니다.
+
+**삼성의 SW 교육 경험과 고용노동부의 취업 지원 노하우를 바탕으로, 취업 준비생에게 SW
+역량 향상 교육 및 다양한 취업지원 서비스를 제공하여 취업에 성공하도록 돕는 프로그
+램입니다**
+
+본 교육과정은 삼성이 주관하고 고용노동부가 후원하며, 아이들과 미래재단이 함께합니
+다.
+(교육운영은 멀티캠퍼스에서 위탁 실시)
+가로줄
+주관 멀캠이미지 후원 고용노동부이미지
+씨앗이미지 **최고의 교육**
+꽃봉오리이미지 **맞춤형 교육**
+꽃이미지 **자기주도적 학습** -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .ssafy img{
+      width: 200px;
+      height: 50px;
+    }
+    ul img{
+      width: 150px;
+      height: 120px;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    삼성청년 SW아카데미
+  </div>
+  <div>
+    <strong>대한민국 SW의 미래</strong>를 이끕니다.
+  </div>
+  <br>
+  <div>
+    <strong>삼성의 SW 교육 경험과 고용노동부의 취업 지원 노하우를 바탕으로, 취업 준비생에게 SW</strong>
+  </div>
+  <div>
+    <strong>역량 향상 교육 및 다양한 취업지원 서비스를 제공하여 취업에 성공하도록 돕는 프로그</strong>
+  </div>
+  <div>
+    <strong>램입니다</strong>
+  </div>
+  <br>
+  <div>
+    본 교육과정은 삼성이 주관하고 고용노동부가 후원하며, 아이들과 미래재단이 함께합니<br>다.
+  </div>
+  <div>
+    (교육운영은 멀티캠퍼스에서 위탁 실시)
+  </div>
+  <hr>
+  <div class="ssafy">
+    <span>
+      <strong>주관</strong><img src="images/multicampus_logo.png" alt="">
+      <strong>후원</strong><img src="images/mob_logo_moel.png" alt="">
+    </span>
+  </div>
+  <ul>
+    <li>
+      <span>
+      <img src="images/happling.png" alt=""><strong>최고의 교육</strong>
+      </span>
+    </li>
+    <li>
+      <span>
+      <img src="images/happlossom.png" alt=""><strong>맞춤형 교육</strong>
+      </span>
+    </li>
+    <li>
+      <span>
+      <img src="images/happlower.png" alt=""><strong>자기주도적 학습</strong>
+      </span>
+    </li>
+  </ul>
+</body>
+</html>
+
+

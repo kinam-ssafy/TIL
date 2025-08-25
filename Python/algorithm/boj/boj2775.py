@@ -12,24 +12,24 @@
 '''
 
 # #시간복잡도에서 시간초과남
-T = int(input())
-for t in range(1, T+1):
-    k = int(input())
-    n = int(input())
+# T = int(input())
+# for t in range(1, T+1):
+#     k = int(input())
+#     n = int(input())
 
-    def sum_people(층, 호):
-        total = 0 #총합
+#     def sum_people(층, 호):
+#         total = 0 #총합
 
-        if 층 == 0: #0층일때?
-            return 호   #각 호실에는 호실과 같은 인원수
+#         if 층 == 0: #0층일때?
+#             return 호   #각 호실에는 호실과 같은 인원수
         
-        for i in range(1, 호+1):
-            total += sum_people(층-1, i)    #1층씩 작아짐
+#         for i in range(1, 호+1):
+#             total += sum_people(층-1, i)    #1층씩 작아짐
 
-        return total
+#         return total
     
-    result = sum_people(k, n)
-    print(result)
+#     result = sum_people(k, n)
+#     print(result)
 
 
 #누적합 방식으로 가볼것

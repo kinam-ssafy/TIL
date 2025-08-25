@@ -1,4 +1,109 @@
 
+## Block 요소 (Block-level Elements)
+
+### 특징:
+- **전체 너비를 차지**: 부모 요소의 전체 너비를 사용
+- **새 줄에서 시작**: 항상 줄바꿈이 일어남
+- **width, height 설정 가능**: 크기 조절이 자유로움
+- **margin, padding 모든 방향 적용 가능**
+- **다른 Block/Inline 요소를 포함할 수 있음**
+
+### 주요 Block 요소들:
+
+**문단 관련:**
+- `<p>` - 문단
+- `<div>` - 범용 컨테이너
+
+**제목 관련:**
+- `<h1>` ~ `<h6>` - 제목
+- `<header>`, `<footer>` - 헤더, 푸터
+
+**구획/구조 관련:**
+- `<section>` - 섹션
+- `<article>` - 독립적인 콘텐츠
+- `<nav>` - 내비게이션
+- `<aside>` - 사이드바
+- `<main>` - 메인 콘텐츠
+
+**목록 관련:**
+- `<ul>`, `<ol>` - 목록
+- `<li>` - 목록 항목
+
+**기타:**
+- `<blockquote>` - 인용문
+- `<pre>` - 미리 서식화된 텍스트
+- `<hr>` - 수평선
+- `<table>` - 테이블
+
+## Inline 요소 (Inline Elements)
+
+### 특징:
+- **내용만큼의 너비**: 콘텐츠 크기만큼만 차지
+- **같은 줄에 배치**: 줄바꿈이 일어나지 않음
+- **width, height 설정 불가**: 내용에 따라 크기 결정
+- **좌우 margin/padding만 적용**: 상하는 적용되지 않음
+- **주로 텍스트와 관련된 요소들**
+
+### 주요 Inline 요소들:
+
+**링크:**
+- `<a>` - 하이퍼링크
+
+**이미지:**
+- `<img>` - 이미지
+
+**텍스트 강조:**
+- `<strong>` - 중요한 텍스트 (굵게)
+- `<em>` - 강조 텍스트 (기울임)
+- `<b>` - 굵은 글씨
+- `<i>` - 기울임 글씨
+- `<u>` - 밑줄
+- `<mark>` - 하이라이트
+
+**기타 텍스트 관련:**
+- `<span>` - 범용 인라인 컨테이너
+- `<code>` - 코드
+- `<kbd>` - 키보드 입력
+- `<small>` - 작은 텍스트
+- `<sub>` - 아래 첨자
+- `<sup>` - 위 첨자
+
+## 시각적 차이 예시:
+
+```html
+<!-- Block 요소 -->
+<h1>제목 1</h1>
+<h2>제목 2</h2>
+<p>첫 번째 문단입니다.</p>
+<p>두 번째 문단입니다.</p>
+
+<!-- Inline 요소 -->
+<p>
+  이것은 <strong>강조된 텍스트</strong>이고, 
+  <a href="#">링크</a>도 있습니다. 
+  <em>기울임 텍스트</em>도 같은 줄에 나타납니다.
+</p>
+```
+
+## 문제 해결 가이드:
+
+**요구사항에 맞는 요소 선택:**
+
+✅ **Block 요소 사용해야 할 때:**
+- 문단 → `<p>`
+- 제목 → `<h1>` ~ `<h6>`
+- 줄 나눔이 필요한 구조 → `<div>`, `<section>`
+- 구획 나누기 → `<header>`, `<nav>`, `<main>`, `<footer>`
+
+✅ **Inline 요소 사용해야 할 때:**
+- 링크 → `<a>`
+- 이미지 → `<img>`
+- 텍스트 강조 → `<strong>`, `<em>`, `<b>`, `<i>`
+- 특정 텍스트 스타일링 → `<span>`
+
+
+
+
 ## form
 \<form\> 태그: 사용자 입력을 서버로 전송하기 위한 컨테이너 역할  
 
@@ -218,3 +323,68 @@ label 태그의 핵심은 for 속성임.
 | `background-color` | **배경색** 지정 | `background-color: #F0F0F0;` |
 | `width` | **요소의 가로 너비** 지정 | `width: 300px;` |
 | `height` | **요소의 세로 높이** 지정 | `height: 200px;` |
+
+
+## CSS 상속(Inheritance)이란?
+
+CSS 상속은 부모 요소의 CSS 속성값이 자식 요소에게 자동으로 전달되는 메커니즘입니다. 모든 CSS 프로퍼티가 상속되는 것은 아니고, 상속되는 것과 되지 않는 것이 구분됩니다.
+
+## 상속되는 프로퍼티 (Inherited Properties)
+
+주로 **텍스트와 관련된 속성들**이 상속됩니다:
+
+- `color` - 텍스트 색상
+- `font-family` - 폰트
+- `font-size` - 글자 크기
+- `font-weight` - 글자 굵기
+- `text-align` - 텍스트 정렬
+- `line-height` - 줄 높이
+- `letter-spacing` - 글자 간격
+- `word-spacing` - 단어 간격
+- `text-transform` - 텍스트 변환
+- `visibility` - 보이기/숨기기
+
+## 상속되지 않는 프로퍼티 (Non-inherited Properties)
+
+주로 **레이아웃과 박스 모델 관련 속성들**이 상속되지 않습니다:
+
+- `width`, `height` - 크기
+- `margin`, `padding` - 여백
+- `border` - 테두리
+- `background` - 배경
+- `position` - 위치
+- `display` - 표시 방식
+- `float` - 플로트
+- `overflow` - 넘침 처리
+
+## 상속 제어 키워드
+
+- `inherit` - 부모로부터 강제로 상속받음
+- `initial` - 기본값으로 설정
+- `unset` - 상속되는 속성은 inherit, 아니면 initial
+
+## 문제 해결 접근법
+
+
+1. **상속되는 속성을 상속되지 않게**: `color`, `text-align`에 `initial` 또는 구체적인 값 사용
+2. **상속되지 않는 속성을 상속되게**: `width`, `height`, `border`에 `inherit` 사용
+
+예시:
+```css
+.parent {
+    color: red;
+    text-align: center;
+    width: 300px;
+    border: 2px solid blue;
+}
+
+.child {
+    /* 상속되지 않는 속성을 상속받게 */
+    width: inherit;
+    border: inherit;
+    
+    /* 상속되는 속성을 상속받지 않게 */
+    color: initial; /* 또는 구체적인 색상 */
+    text-align: initial; /* 또는 left, right 등 */
+}
+```
