@@ -675,3 +675,178 @@ h4 {
     <p class="yellow">TEST</p>
 </body>
 ```
+
+## 상속
+네, 요청하신 교안 캡처본 내용을 정리해 드립니다.
+
+### CSS 상속
+
+* 기본적으로 CSS는 상속을 통해 부모 요소의 속성을 자식에게 상속하여 재사용성을 높임.
+
+---
+
+### 상속 되는 속성
+
+* 텍스트 관련 요소(font, color, text-align), opacity, visibility 등
+
+---
+
+### 상속 되지 않는 속성
+
+* Box model 관련 요소(width, height, border, box-sizing 등)
+* position 관련 요소(position, top/right/bottom/left, z-index 등)
+
+### CSS 상속 예시
+
+  * 상속 예시 HTML:
+
+<!-- end list -->
+
+```html
+<ul class="parent">
+    <li class="child">Hello</li>
+    <li class="child">Bye</li>
+</ul>
+```
+
+  * 상속 예시 CSS:
+
+<!-- end list -->
+
+```css
+/* 상속 예시 CSS */
+
+.parent {
+    /* 상속 O */
+    color: red;
+    /* 상속 X */
+    border: 1px solid black;
+}
+```
+
+  * 결과: 
+      * Hello  
+      * Bye  
+      빨간 글씨
+
+### CSS 상속 여부 확인
+
+* MDN의 각 속성별 문서 하단에서 상속 여부를 확인할 수 있음.  
+
+## CSS Box Model 
+
+### CSS Box Model
+
+* 웹 페이지의 모든 HTML 요소를 감싸는 사각형 상자 모델
+* 요소의 크기, 배치, 간격을 결정하는 규칙
+
+### CSS Box Model 구성 요소
+
+* **내용(content)**, **안쪽 여백(padding)**, **테두리(border)**, **외부 간격(margin)**으로 구성되어 요소의 크기와 배치를 결정함.
+
+![alt text](image/image.png)
+
+![alt text](image/image2.png)
+
+![alt text](image/image3.png)
+
+### Box 구성 요소 예시
+
+  * **HTML 코드**:
+
+<!-- end list -->
+
+```html
+<body>
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+</body>
+```
+
+  * **CSS 코드**:
+
+<!-- end list -->
+
+```css
+/* Box 구성 요소 예시 css*/
+.box1 {
+    width: 200px;
+    padding-left: 25px;
+    padding-bottom: 25px;
+    margin-left: 25px;
+    margin-top: 50px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+}
+.box2 {
+    width: 200px;
+    padding: 25px 50px;
+    margin: 25px auto;
+    border: 1px dashed black;
+}
+```
+
+  * **결과**: `box1`과 `box2`의 크기, 여백, 테두리가 위 CSS 설정에 따라 화면에 나타남. `box2`의 `margin: 25px auto`는 가로 중앙 정렬을 가능하게 함.
+
+  ## shorthand 속성 (단축 속성)
+
+  ### shorthand 속성: 'border'
+
+  * `border-width`, `border-style`, `border-color`를 한 번에 설정하기 위한 속성임.
+  * 작성 순서는 영향을 주지 않음.
+
+<!-- end list -->
+
+```css
+border: 2px solid black;
+```
+
+-----
+
+### shorthand 속성: 'margin' & 'padding'
+
+  * 4방향의 속성을 각각 지정하지 않고 한 번에 지정할 수 있는 속성임.
+  * **4개 값**: 상/우/하/좌 순서 (시계방향)
+
+<!-- end list -->
+
+```css
+/* 상/우/하/좌 */
+margin: 10px 20px 30px 40px;
+padding: 10px 20px 30px 40px;
+```
+
+  * **3개 값**: 상 / 좌우 / 하 순서
+
+<!-- end list -->
+
+```css
+/* 상 / 좌우 / 하 */
+margin: 10px 20px 30px;
+padding: 10px 20px 30px;
+```
+
+  * **2개 값**: 상하 / 좌우 순서
+
+<!-- end list -->
+
+```css
+/* 상하 / 좌우 */
+margin: 10px 20px;
+padding: 10px 20px;
+```
+
+  * **1개 값**: 4방향 모두 동일
+
+<!-- end list -->
+
+```css
+/* 4방향 모두 동일 */
+margin: 10px;
+padding: 10px;
+```
+
+## box-sizing 속성(박스의 크기 계산법)
+p82~
+
