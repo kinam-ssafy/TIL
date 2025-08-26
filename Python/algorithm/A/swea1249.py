@@ -32,38 +32,14 @@ for t in range(1, T+1):
 
         if ti == N-1 and tj == N-1:
             print(f"#{t} {visited[ti][tj] - 1}")
+            break
 
         for ni, nj in zip(di, dj):
             fi, fj = ti+ni, tj+nj
-            if 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 0:
+
+            if 0 <= fi < N and 0 <= fj < N and arr[fi][fj] in list(range(10)):
                 visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
                 q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 1:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 2:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 3:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 4:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 5:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 6:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 7:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 8:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
-            elif 0 <= fi < N and 0 <= fj < N and visited[fi][fj] == -1 and arr[fi][fj] == 9:
-                visited[fi][fj] = visited[ti][tj] + arr[fi][fj]
-                q.append([fi, fj])
+
             
             
