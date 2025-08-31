@@ -16,13 +16,43 @@
 다음 줄부터 테스트 케이스의 별로 N이 주어지고, 
 다음 줄에 1000000이하인 서로 다른 N개의 자연수가 주어진다. 5<=N<=500
 '''
+def enq(n):
+    global last
+    last += 1
+    tree[last] = n
+    c = last    #추가된 자식 노드
+    p = c // 2  #추가된 자식 노드의 부모 노드
+    while p and tree[p] > tree[c]:  #부모가 있고 부모 노드가 자식노드보다 크면
+        tree[p], tree[c] = tree[c], tree[p] #자식 노드가 더 크도록 교환
+        c = p   #방금 부모 노드를 새로운 자식 노드로 인식
+        p = c // 2  #새로운 부모번호
+
+
+
 
 T = int(input())
 for t in range(1, T+1):
     N = int(input())
     value = list(map(int, input().split()))
 
-    tree = [0] + value
+    tree = [0] * (N + 1)
+    last = 0
+    for x in value:
+        enq(x)
+
+    p = last // 2
+    ans = 0
+    while p:
+        ans += tree[p]
+        p //= 2
+
+    print(f"#{t} {ans}")
     
 
-    
+#1 7
+#2 5
+#3 65
+
+#1 4
+#2 23
+#3 63

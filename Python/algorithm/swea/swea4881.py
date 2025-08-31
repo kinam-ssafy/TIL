@@ -4,20 +4,32 @@ NxN 배열에 숫자가 들어있다. 한 줄에서 하나씩 N개의 숫자를 
 
 조건에 맞게 숫자를 골랐을 때의 최소 합을 출력하는 프로그램을 만드시오.'''
 
+
+def dfs(i, sum):
+    global min_sum
+    if sum >= min_sum:
+        return
+
+    if i == N:
+        min_sum = min(min_sum, sum)
+        return
+    
+    for j in range(N):
+        if visited[j] == 0:
+            visited[j] = 1
+            dfs(i + 1, sum + arr[i][j])
+            visited[j] = 0
+
+
+
 T = int(input())
 for t in range(1, T+1):
     N = int(input())
     arr = [list(map(int, input().split())) for _ in range(N)]
+    visited = [0] * N
 
-    visited = [[0] * N for _ in range(N)]
-    res = 0
-    di = [0, 1, 0, -1]
-    dj = [1, 0, -1, 0]
 
-    # if 
-    for i in range(2):
-        for j in range(2):
-            visited_idx = arr.index(min(arr))
-            # if visited[visited_idx]
-            res += min(arr)
-            print(visited_idx)
+    min_sum = float('inf')  #최솟값 찾기 위한 변수 선언
+    dfs(0, 0)
+    
+    print(f"#{t} {min_sum}")
