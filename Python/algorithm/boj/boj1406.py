@@ -49,24 +49,26 @@ P $	: $라는 문자를 커서 왼쪽에 추가함
 
 
 
-str_list = list(input())
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+str_list = deque(input().strip())  #인풋을 리스트로 받기
 idx = len(str_list)
-M = int(input())    #입력할 명령어의 개수
+M = int(input())
 for i in range(M):
-    oper = input()
-    if len(oper) == 3:  #'P x' 이런식으로 P랑 추가할 문자면
+    oper = input().strip()  
+    
+    if len(oper) == 3:      #문자를 추가하는 동작
         str_list.insert(idx, oper[-1])
         idx += 1
-    
-    elif oper == 'L' and idx > 0:
+    elif oper == 'L' and idx > 0:   #왼쪽으로 커서이동
         idx -= 1
-    elif oper == 'D' and idx < len(str_list):
+    elif oper == 'D' and idx < len(str_list):   #오른쪽으로 커서이동
         idx += 1
-    elif oper == 'B':
-        if idx == 0:
-            continue
-        else:
-            str_list.pop(idx)
-            idx -= 1
-            #pop하고나서 리스트에 있는 문자들 공백을 기준으로 합쳐야할지? 확인해봐야함
-            #pop이 원래 있던 인덱스는 냅두는지 확인해봐야함
+    elif oper == 'B' and idx > 0:   #왼쪽 지우기
+        idx -= 1
+        # str_list.pop(idx)
+        del str_list[idx]
+
+print(''.join(str_list))
