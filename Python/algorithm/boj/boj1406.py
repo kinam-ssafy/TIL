@@ -49,26 +49,69 @@ P $	: $라는 문자를 커서 왼쪽에 추가함
 
 
 
-import sys
-from collections import deque
-input = sys.stdin.readline
+# import sys
+# from collections import deque
+# input = sys.stdin.readline
 
-str_list = deque(input().strip())  #인풋을 리스트로 받기
-idx = len(str_list)
-M = int(input())
-for i in range(M):
-    oper = input().strip()  
+# str_list = deque(input().strip())  #인풋을 리스트로 받기
+# idx = len(str_list)
+# M = int(input())
+# for i in range(M):
+#     oper = input().strip()  
     
-    if len(oper) == 3:      #문자를 추가하는 동작
-        str_list.insert(idx, oper[-1])
-        idx += 1
-    elif oper == 'L' and idx > 0:   #왼쪽으로 커서이동
-        idx -= 1
-    elif oper == 'D' and idx < len(str_list):   #오른쪽으로 커서이동
-        idx += 1
-    elif oper == 'B' and idx > 0:   #왼쪽 지우기
-        idx -= 1
-        # str_list.pop(idx)
-        del str_list[idx]
+#     if len(oper) == 3:      #문자를 추가하는 동작
+#         str_list.insert(idx, oper[-1])
+#         idx += 1
+#     elif oper == 'L' and idx > 0:   #왼쪽으로 커서이동
+#         idx -= 1
+#     elif oper == 'D' and idx < len(str_list):   #오른쪽으로 커서이동
+#         idx += 1
+#     elif oper == 'B' and idx > 0:   #왼쪽 지우기
+#         idx -= 1
+#         # str_list.pop(idx)
+#         del str_list[idx]
 
-print(''.join(str_list))
+# print(''.join(str_list))
+
+
+
+
+# 커서위치를 중심으로 스택과 큐 만들기
+from collections import deque
+
+front = list(input().strip())
+back = deque()
+
+# front 커서 back 의 구조로 구현할 것
+# front에서는 pop, append
+# back에서는 popleft, appendleft
+
+M = int(input())    #명령 M개 들어옴
+for i in range(M):
+    oper = input()
+
+    if len(oper) == 3:  #문자 추가
+        front.append(oper[-1])
+    
+    elif oper == 'L':    #커서 왼쪽으로
+        if front:
+            back.appendleft(front.pop())
+        
+        else:
+            continue
+    
+    elif oper == 'D':   #커서 오른쪽으로
+        if back:
+            front.append(back.popleft())
+        
+        else:
+            continue
+    
+    elif oper == 'B':    #왼쪽 지우기
+        if front:   #지울게 있어야 함
+            front.pop()
+
+        else:   #front 비어있으면 무시
+            continue
+
+print(*front, *back, sep='')
