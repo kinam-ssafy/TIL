@@ -70,6 +70,7 @@ for i in range(N):
         if i-1 >= 0 and i+1 < N and j-1 >= 0:
             t_sum = arr[i][j] + arr[i-1][j] + arr[i+1][j] + arr[i][j-1]
             max_sum = max(max_sum, t_sum)
+            
         visited[i][j] = 1
         bfs(i, j, arr[i][j], 1)
         visited[i][j] = 0
