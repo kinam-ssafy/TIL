@@ -26,13 +26,21 @@ for tc in range(1, T+1):
     BtoA = A + F
 
     dir = 0
-
+    i = 0
+    res = 0
     while True:
-        
-        
-        
-        time += (D // AtoB)
+        if i % 2 == 0:
+            time += (D / AtoB)
+            D -= (A + B) * (D / AtoB)
 
-        D -= (A + B)*time
+        else:
+            time += (D / BtoA)
+            D -= (A + B) * (D / BtoA)
+            
+        if abs(D) < 0.0000001:
+            res = F * time
+            break
+    
+        i += 1
 
-
+    print(f"#{tc} {res}")
