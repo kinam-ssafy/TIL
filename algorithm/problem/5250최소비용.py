@@ -21,10 +21,11 @@
 
 1<=T<=50, 3<=N<=100, 0<=H<1000
 '''
+
 def dijkstra(start_i, start_j):
     pq = [(0, start_i, start_j)]
     dists = [[INF] * N for _ in range(N)]
-    dists[start_i][start_j] = 1
+    dists[start_i][start_j] = 0 
 
     di = [0, 1, 0, -1]
     dj = [1, 0, -1, 0]
@@ -32,32 +33,32 @@ def dijkstra(start_i, start_j):
     while pq:
         dist, ci, cj = heappop(pq)
 
-        if ci == N - 1  and cj == N - 1:
-            return dists[ci][cj]
-
         if dists[ci][cj] < dist:
             continue
 
         for dir in range(4):
             ni, nj = ci + di[dir], cj + dj[dir]
-            new_dist = dist + dists[ni][nj]
-            if 0 <= ni < N and 0 <= nj < N and dists[ni][nj] > new_dist:
-                dists[ni][nj] = new_dist
-                heappush(pq, (new_dist, ni, nj))
+            if 0 <= ni < N and 0 <= nj < N:
+                new_dist = dist + 1 # 기본적으로 한 칸 이동 시 1씩 늘어남
+                if arr[ci][cj] < arr[ni][nj]:   #계단이 있는 경우
+                    new_dist += arr[ni][nj] - arr[ci][cj]   #높이 차이만큼 더해줌
 
-    return dists[N-1][N-1]
+                if dists[ni][nj] > new_dist:    #새로운 거리정보가 기존 거리정보보다 작으면
+                    dists[ni][nj] = new_dist    # 갱신해줌
+                    heappush(pq, (new_dist, ni, nj))
+
+    return dists[N-1][N-1]  # 도착 지점에 저장된 거리 정보 리턴
 
 
 from heapq import heappop, heappush
-INF = int(1000000)
+INF = int(1000000) # 최댓값 설정
 
 
 T = int(input())
 for t in range(1, T+1):
     N = int(input())
+    # 추가 소비되는 연료가 저장될 리스트
     arr = [list(map(int, input().split())) for _ in range(N)]
-
-
 
     result = dijkstra(0, 0)
     print(f"#{t} {result}")
