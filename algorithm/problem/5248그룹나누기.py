@@ -11,22 +11,50 @@
 1번부터 N번까지의 출석번호가 있고, M 장의 신청서가 제출되었을 때 
 전체 몇 개의 조가 만들어지는지 출력하는 프로그램을 만드시오.
 '''
+# def find_set(x):
+#     if x == parents[x]:
+#         return x
+    
+#     parents[x] = find_set(parents)
+#     return parents[x]
+
+# def union(x, y):
+#     rx = find_set(x)
+#     ry = find_set(y)
+
+#     if rx == ry: # 같은 집합이면?
+#         return
+    
+#     if rx < ry:
+#         parents[ry] = rx
+
+#     else:
+#         parents[rx] = ry
+def find_set(x):
+    while parents[x] != x:
+        x = parents[x]
+    return x
+
+def union(x, y):
+    # y의 대표원소를 x의 대표원소로 대체
+    parents[find_set(y)] = find_set(x) 
+
+    
+
 
 T = int(input())
 for t in range(1, T+1):
     N, M = map(int, input().split())
     arr = list(map(int, input().split()))
+    parents = [i for i in range(N + 1)]
 
-    adj_list = [[] for _ in range(101)]
-    
-    for i in range(0, 2*M, 2):
-        adj_list[arr[i]].append(arr[i+1])
-        adj_list[arr[i+1]].append(arr[i])
+    for i in range(M):
+        a, b = arr[i*2], arr[i*2+1]
+        union(a, b)
 
-    visited = [0] * (N + 1)
+    ans = 0
+    for i in range(1, N+1):
+        if parents[i] == i: # 대표 원소면
+            ans += 1
 
-    for student in adj_list:
-        for i in student:
-            if not visited[i]:
-                visited[i] = 1
-                
+    print(f"#{t} {ans}")
