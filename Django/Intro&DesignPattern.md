@@ -21,7 +21,7 @@
 * Design Pattern
 * 프로젝트와 앱
 * 프로젝트 및 앱 구조
-> MVC 패턴은 매번 시험 나옴
+> MVC 패턴은 매번 시험 나옴(서술형)
 
 ### 요청과 응답
 * Django에서의 요청과 응답
@@ -682,9 +682,9 @@ def index(request):
 - 'manage.py'는 장고 명령어 제공
 10. `ctrl + C` : 서버 끄기
 11. `python manage.py startapp articles` : 앱 생성
-12. firstpjy의 settings.py 파일(프로젝트 설정을 관리) -> INSTALLED APPS에 'articles' 추가 : 앱 등록
+12. `firstpjy`의 `settings.py` 파일(프로젝트 설정을 관리) -> `INSTALLED APPS`에 `'articles'` 추가 : 앱 등록
 - 사용자가 생성한 app은 상단부터 작성하는 것을 권장(Django의 내부 구동 순서 때문)
-13.  http://127.0.0.1:8000/ariticles/ 를 메인 페이지로 하고싶으면 urls.py 파일에서  `path('articles/', 뷰함수)` 함수를 선언. `from articles import views` 추가
+13.  `http://127.0.0.1:8000/ariticles/` 를 메인 페이지로 하고싶으면 `urls.py` 파일에서  `path('articles/', 뷰함수)` 함수를 선언. `from articles import views` 추가
 14. articles의 views.py로 들어가
 ```python
 def index(request):
