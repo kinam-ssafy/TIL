@@ -22,9 +22,13 @@ L, C = map(int, input().split())
 
 alpha = list(map(str, input().split()))
 # print(alpha)
+# 정렬된 문자열을 좋아하므로 정렬
+alpha.sort()
 
-ans = set()
+# 정답 암호를 담을 리스트
+ans = []
 
+#자음2개 모음1개의 조건을 체크하는 함수
 def check(ch):
     자음cnt = 0
     모음cnt = 0
@@ -36,17 +40,20 @@ def check(ch):
             자음cnt += 1
 
     if 모음cnt >= 1 and 자음cnt >= 2:
-        return True 
+        if ch == ''.join(sorted(ch)):
+            return True 
     
     else:
         return False
 
 def dfs(idx, char):
+    # 문자열의 길이조건 만족하고 자음 모음 조건 맞으면 정답 리스트에 추가
     if len(char) == L:
         if check(char):
-            ans.add(char)
+            ans.append(char)
         return 
     
+    # 문자열 백트래킹
     for i in range(idx, C):
         char += alpha[i]
         dfs(i + 1, char)
