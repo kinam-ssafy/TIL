@@ -21,7 +21,15 @@
 이때, 주어지는 두 사람이 친구 관계 그래프상에서 경로가 존재하는지 안 하는지를 구하는 프로그램을 작성하시오.
 
 '''
+def find_set(x):
+    # 자신 == 부모: 해당 집합의 대표자
+    while x != parents[x]:
+        x = parents[x]
 
+    return x 
+
+def union(a, b):
+    parents[find_set(b)] = find_set(a)
 
 
 T = int(input())
@@ -29,19 +37,17 @@ for t in range(1, T+1):
     N = int(input()) # 유저 수 N
     K = int(input()) # 친구 관계의 수 K
 
-    adj_list = [[] for _ in range(N)]
-
+    # adj_list = [[] for _ in range(N)]
+    parents = [i for i in range(N)]
     for _ in range(K):
         a, b = map(int, input().split())
 
-        adj_list[a].append(b)
-        adj_list[b].append(a)
-    
-    print(adj_list)
-
+        # adj_list[a].append(b)
+        # adj_list[b].append(a)
+        union(a, b)
     M = int(input())
 
-    print(f"Scenario {t}:")
+
     ######### 직접 연결되어있는 것이 아니라 간선 연결이 되어있는지 묻는 듯 #########
     # for _ in range(M):
     #     u, v  = map(int, input().split())
@@ -50,25 +56,19 @@ for t in range(1, T+1):
     #     else:
     #         print(f"ans 0")
     ############################################################################
-
-    parents = [i for i in range(N)]
-
-    def find_set(x):
-        # 자신 == 부모: 해당 집합의 대표자
-        while x != parents[x]:
-            x = parents[a]
-
-        return x 
-    
-    def union(a, b):
-        parents[find_set(b)] = find_set(a)
-    
+    friend = []
     for _ in range(M):
         u, v = map(int, input().split())
-        if find_set(u) == find_set(v):
+        friend.append(u)
+        friend.append(v)
+
+    print(f"Scenario {t}:")
+    for i in range(0, len(friend), 2):
+        if find_set(friend[i]) == find_set(friend[i+1]):
             print(1)
         else:
             print(0)
 
+    print()
 
     
