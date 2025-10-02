@@ -32,7 +32,7 @@ import sys
 input = sys.stdin.readline
 
 arr = [list(input().strip()) for _ in range(12)]
-print(arr)
+
 
 
 
@@ -46,3 +46,4 @@ def dfs(char, i, j):
 
 
 def puyo():
+    
