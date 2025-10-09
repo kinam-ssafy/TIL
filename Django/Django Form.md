@@ -1051,3 +1051,14 @@ class ReservationForm(forms.ModelForm):
 ```
 > Meta : 메타데이터 > 데이터를 설명하는 데이터
 > Python의 Inner class라는 문법과 무관함
+
+
+## forms.py와 models.py의 차이점
+### models.py
+- 데이터베이스 테이블의 구조를 정의
+- 어떤 데이터를 저장할지 설계
+
+### forms.py (사용자 입력 폼 정의)
+- 사용자가 입력을 받는 HTML 폼을 정의
+- 사용자에게 어떤 입력 화면을 보여줄지 설계
+- 입력 데이터의 유효성 검사 수행
