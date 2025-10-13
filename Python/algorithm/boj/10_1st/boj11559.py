@@ -39,11 +39,60 @@ arr = [list(input().strip()) for _ in range(12)]
 di = [0, 1, 0, -1]
 dj = [1, 0, -1, 0]
 
+colors = 'RGBPY'
+
+ans = 0
+
+def dfs(char, ci, cj):
+    stack = [(ci, cj)] # dfs용 스택
+    visited[ci][cj] = 1
+    puyo = [(ci, cj)] # 뿌요 터질 인덱스 담을 리스트
+
+    while stack:
+        y, x = stack.pop()
+        for d in range(4):
+            ni, nj = y + di[d], x + dj[d]
+            if 0 <= ni < 12 and 0 <= nj < 6 and not visited[ni][nj] and arr[ni][nj] == char:
+                visited[ni][nj] = 1
+                stack.append((ni, nj))
+                puyo.append((ni, nj))
+
+    return puyo
 
 
-def dfs(char, i, j):
-    
+def puyopuyo():
+    global ans, visited
+    # 전체 배열 확인해서 글자 아래에 빈공간 있으면 내려감
+    while True: # 뿌요 터지는지 검사. 더이상 터질 뿌요 없으면 종료
+        ispuyo = 0 # 뿌요 터졌나?
+        while True: # 중력 검사. 내려갈 색깔 글자 없으면 종료
+            isgravity = 0 # 내려갔나?
+            for i in range(11, 0, -1): # 바닥부터 검사함
+                for j in range(6):
+                    if arr[i][j] == '.':
+                        if arr[i-1][j] != '.': #바닥이 .인데 위가 색깔이면
+                            arr[i][j], arr[i-1][j] = arr[i-1][j], arr[i][j]
+                            isgravity = 1 # 내려가는것
 
+            if isgravity == 0: # 안내려가면? 끝
+                break
+        
+        visited = [[0] * 6 for _ in range(12)] # 방문 배열 초기화
 
-def puyo():
-    
+        for i in range(11, -1, -1):
+            for j in range(6):
+                if arr[i][j] != '.' and not visited[i][j]:
+                    puyo_list = dfs(arr[i][j], i, j) # dfs돌아서 뿌요터질리스트 리턴
+                    if len(puyo_list) >= 4: # 이어진게 4개이상이면
+                        ispuyo = 1 # 뿌요 터지고
+                        for i, j in puyo_list:
+                            arr[i][j] = '.' # 뿌요터짐
+
+        if ispuyo == 0: # 뿌요 안터지면 끝
+            break
+        
+        else:
+            ans += 1 
+
+puyopuyo()
+print(ans)
