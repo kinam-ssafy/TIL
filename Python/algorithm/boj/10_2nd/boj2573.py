@@ -61,6 +61,7 @@ while True:
                 bingsan.append((i, j))
     
     if not bingsan:
+        ans = 0 #빙산 모두 녹았는데 분리가 안된 경우
         break
     
     bingsan_cnt = 0
@@ -78,12 +79,25 @@ while True:
                     if 0 <= ni < N and 0 <= nj < M and not visited[ni][nj] and arr[ni][nj] > 0:
                         visited[ni][nj] = 1
                         q.append((ni, nj))
-                    
-                    elif 0 <= ni < N and 0 <= nj < M and not visited[ni][nj] and arr[ni][nj] == 0 and arr[y][x] > 0:
-                        arr[y][x] -= 1
-                        if arr[ni][nj] < 0:
-                            arr[ni][nj] = 0
     
+    if bingsan_cnt >= 2:
+        break
+
+    #빙산 녹일 양 계산 ( 위에서 같이 진행할 경우 빙산이 녹아서 0이 되어버려 바닷물로 취급되는 경우때문에 따로 분리 )
+    melt = [[0] * M for _ in range(N)]
+    for ci, cj in bingsan:
+        for d in range(4):
+            ni, nj = ci + di[d], cj + dj[d]
+            if 0 <= ni < N and 0 <= nj < M and arr[ni][nj] == 0:
+                # arr[ci][cj] -= 1 >> 순차적으로 빼면 0이 될 때 바닷물취급
+                melt[ci][cj] += 1
+
+    for ci, cj in bingsan:
+        arr[ci][cj] -= melt[ci][cj]
+        if arr[ci][cj] < 0:
+            arr[ci][cj] = 0
+
+
     ans += 1
 
 print(ans)

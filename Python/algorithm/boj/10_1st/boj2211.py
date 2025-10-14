@@ -10,7 +10,54 @@ N(1 ≤ N ≤ 1,000)개의 컴퓨터로 구성된 네트워크가 있다. 이들
 네트워크를 복구해서 통신이 가능하도록 만드는 것도 중요하지만, 해커에게 공격을 받았을 때 보안 패킷을 전송하는 데 걸리는 시간도 중요한 문제가 된다. 따라서 슈퍼컴퓨터가 다른 컴퓨터들과 통신하는데 걸리는 최소 시간이, 원래의 네트워크에서 통신하는데 걸리는 최소 시간보다 커져서는 안 된다.
 원래의 네트워크에 대한 정보가 주어졌을 때, 위의 조건을 만족하면서 네트워크를 복구하는 방법을 알아내는 프로그램을 작성하시오.
 '''
+# 조건 1. 네트워크를 복구한 후에 서로 다른 두 컴퓨터 간에 통신이 가능하도록 복구
+# 조건 2. 슈퍼컴퓨터가 다른 컴퓨터들과 통신하는데 걸리는 최소 시간이, 
+# 원래의 네트워크에서 통신하는데 걸리는 최소 시간보다 커져서는 안 됨
+
+# 최단경로 트리문제 > 다익스트라 
+
+
 import sys
+from heapq import heappop, heappush
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
+
+adj_list = [[] for _ in range(N + 1)]
+for _ in range(M):
+    a, b ,c = map(int, input().split()) # a번 컴퓨터, b번 컴퓨터, 통신시간 c
+    adj_list[a].append((b, c))
+    adj_list[b].append((a, c))
+
+def dijkstra():
+    dist = [float('inf')] * (N + 1)
+    visited = [0] * (N + 1)
+    dist[1] = 0
+
+    pq = [(0, 1)] # 거리, 노드
+
+    while pq:
+        d, current = heappop(pq)
+
+        if d > dist[current]:
+            continue
+
+        for next_node, cost in adj_list[current]:
+            new_dist = d + cost
+            
+            if new_dist < dist[next_node]: # 거리가 더 짧으면
+                dist[next_node] = new_dist # 갱신
+                visited[next_node] = current
+                heappush(pq, (new_dist, next_node))
+    
+    return visited
+
+visit = dijkstra()
+
+edges = []
+for i in range(2, N + 1): # 2번부터 N번 까지
+    edges.append((visit[i], i))
+
+print(len(edges))
+for a, b in edges:
+    print(a, b)
