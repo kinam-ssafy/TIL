@@ -20,31 +20,55 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 
-N, K, R = map(int, input().split())
+N, K, R = map(int, input().split()) # K : 소의 마릿수, R : 길
 
-arr = [[0] * N for _ in range(N)]
+# arr = [[0] * N for _ in range(N)] 필요없는듯
 
+way_position = []
+way_set = set()
 for _ in range(R):
     r, c, r_dash, c_dash = map(int, input().split())
-    arr[c][r] = 1
-    arr[c_dash][r_dash] = 1
+    # arr[c-1][r-1] = 1
+    # arr[c_dash-1][r_dash-1] = 1
+    # way_position.append((r-1, c-1, r_dash-1, c_dash-1))
+    way_set.add((r-1, c-1, r_dash-1, c_dash-1))
+    way_set.add((r_dash-1, c_dash-1, r-1, c-1))
 
 cow_position = []
 for _ in range(K):
     i, j = map(int, input().split())
-    cow_position.append((i, j))
+    cow_position.append((i-1, j-1))
 
 di = [0, 1, 0, -1]
 dj = [1, 0, -1, 0]
 
 def bfs(start_i, start_j):
+    visited = [[0] * N for _ in range(N)]
     q = deque([(start_i, start_j)])
-
+    visited[start_i][start_j] = 1
+    cnt = 0
+    cow = set()
     while q:
         ci, cj = q.popleft()
 
-        for d in range(4):
-            ni, nj = ci + d
+        for idx, (i, j) in enumerate(cow_position):
+            if ci == i and cj == j:
+                cow.add(idx)
 
+        if len(cow) == K:
+            return 0
+        
+        for d in range(4):
+            ni, nj = ci + di[d], cj + dj[d]
+            if (ci, cj, ni, nj) not in way_set:
+                if 0 <= ni < N and 0 <= nj < N and not visited[ni][nj]:
+                    visited[ni][nj] = 1
+                    q.append((ni, nj))
+        
+    return (K - len(cow))
+
+ans = 0
 for i, j in cow_position:
-    bfs(i, j)
+    ans += bfs(i, j)
+
+print(ans // 2)
