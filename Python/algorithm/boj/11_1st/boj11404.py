@@ -15,3 +15,73 @@ n(2 ≤ n ≤ 100)개의 도시가 있다.
 시작 도시와 도착 도시를 연결하는 노선은 하나가 아닐 수 있다.
 '''
 
+# 플로이드-워셜 알고리즘을 사용하는 모든 쌍 최단 경로 문제
+
+'''
+모든 정점 쌍 사이의 최단 경로를 한 번에 구하는 알고리즘 
+다익스트라가 "한 점에서 다른 모든 점"으로 가는 최단 경로를 구한다면, 
+플로이드-워셜은 "모든 점에서 모든 점"으로 가는 최단 경로를 구함
+
+중간에 k를 거쳐가면 더 빠를까?를 모든 경우에 대해 확인
+
+A에서 B로 가는 방법:
+1. 직접 가기: A → B
+2. K를 거쳐가기: A → K → B
+
+더 짧은 경로를 선택
+
+# 1. 초기화
+dist = [[INF] * n for _ in range(n)]
+for i in range(n):
+    dist[i][i] = 0  # 자기 자신은 0
+
+# 2. 간선 정보 입력
+dist[a][b] = cost
+
+# 3. 플로이드-워셜 (핵심!)
+for k in range(n):          # 경유지
+    for i in range(n):      # 출발지
+        for j in range(n):  # 도착지
+            # k를 거쳐가는게 더 빠르면 갱신
+            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+
+
+
+k=1일 때: 1번만 경유지로 사용한 최단 경로
+k=2일 때: 1,2번을 경유지로 사용한 최단 경로
+k=3일 때: 1,2,3번을 경유지로 사용한 최단 경로
+'''
+
+
+import sys
+input = sys.stdin.readline
+INF = float('inf')
+
+n = int(input()) # 도시의 개수
+m = int(input()) # 버스의 개수
+
+#dist[a][b] : a에서 b로 가는 비용
+dist = [[INF] * (n + 1) for _ in range(n + 1)] # 거리 배열
+
+# 자기 자신에게 가는 비용 0 
+for i in range(1, n + 1):
+    dist[i][i] = 0
+
+# 간선 정보
+for _ in range(m):
+    a, b, c = map(int, input().split()) #a: 시작 도시, b: 도착 도시, c: 비용
+    dist[a][b] = min(dist[a][b], c)
+
+for k in range(1, n + 1): # 경유지
+    for i in range(1, n + 1): # 출발지
+        for j in range(1, n + 1): # 도착지
+            if dist[i][j] > dist[i][k] + dist[k][j]: # 경유지면 a에서 k, k에서 j로 이동한 것
+                dist[i][j] = dist[i][k] + dist[k][j]
+
+for i in range(1, n + 1):
+    for j in range(1, n + 1):
+        if dist[i][j] == INF:
+            print(0, end=' ')
+        else:
+            print(dist[i][j], end=' ')
+    print()
