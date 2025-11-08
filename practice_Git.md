@@ -38,6 +38,260 @@ $ git push --force origin master
 변경사항 강제 반영
 
 
+
+# Git branch 명령어 및 활용법
+
+## 브랜치 확인 및 생성
+```bash
+# 현재 브랜치 확인
+git branch
+
+# 모든 브랜치 확인 (원격 포함)
+git branch -a
+
+# 새 브랜치 생성
+git branch feature/login
+
+# 브랜치 생성과 동시에 이동
+git checkout -b feature/signup
+
+# 또는 (최신 방법)
+git switch -c feature/signup
+
+```
+
+## 브랜치 이동
+```bash
+# 브랜치 이동 (기존 방법)
+git checkout main
+
+# 브랜치 이동 (최신 방법)
+git switch main
+```
+
+## 브런치 삭제
+```bash
+# 로컬 브랜치 삭제
+git branch -d feature/login
+
+# 강제 삭제 (merge 안 된 브랜치도 삭제)
+git branch -D feature/login
+
+# 원격 브랜치 삭제
+git push origin --delete feature/login
+```
+
+## 협업 시 주요 명령어
+## 원격 저장소 연동
+
+```bash
+# 원격 저장소 확인
+git remote -v
+
+# 원격 브랜치 최신 정보 가져오기
+git fetch origin
+
+# 원격 브랜치를 로컬로 가져오기
+git checkout -b feature/posts origin/feature/posts
+```
+
+## 브랜치 푸시
+```bash
+# 현재 브랜치를 원격에 푸시
+git push origin feature/login
+
+# 처음 푸시할 때 (upstream 설정)
+git push -u origin feature/login
+# 이후부터는 git push만 해도 됨
+```
+
+
+## 브랜치 병합
+```bash
+# main 브랜치로 이동
+git switch main
+
+# feature/login 브랜치를 main에 병합
+git merge feature/login
+
+# 충돌 발생 시 해결 후
+git add .
+git commit -m "Merge feature/login"
+```
+
+## Pull (원격 변경사항 가져오기)
+```bash
+# 현재 브랜치에 원격 변경사항 가져오기
+git pull origin main
+
+# rebase 방식으로 가져오기 (더 깔끔한 히스토리)
+git pull --rebase origin main
+```
+
+
+# 협업 워크 플로우
+
+## 1단계: 작업 시작
+
+```bash
+# 최신 main 받아오기
+git switch main
+git pull origin main
+
+# 새 기능 브랜치 생성
+git switch -c feature/accounts
+
+# 작업 진행...
+```
+
+## 2단계: 작업 중 커밋
+```bash
+# 변경사항 확인
+git status
+
+# 스테이징
+git add accounts/models.py accounts/forms.py
+
+# 커밋
+git commit -m "feat: Add User model and CustomUserCreationForm"
+```
+
+## 3단계: 원격에 푸시
+```bash
+# 처음 푸시
+git push -u origin feature/accounts
+
+# 이후 푸시
+git push
+```
+
+
+## 4단계: 병합 전 최신화
+```bash
+# main의 최신 변경사항 가져오기
+git switch main
+git pull origin main
+
+# 내 브랜치로 돌아가서 main 병합
+git switch feature/accounts
+git merge main
+
+# 충돌 해결 후
+git add .
+git commit -m "Merge main into feature/accounts"
+git push
+```
+
+## 5단계: Merge Request
+> GitLab에서 Merge Request 생성 -> 팀원 리뷰 -> 승인 후 병합
+
+## 브런치 상태 확인
+```bash
+# 브랜치 간 차이 확인
+git diff main..feature/accounts
+
+# 커밋 히스토리 확인
+git log --oneline --graph --all
+
+# 특정 브랜치의 커밋 확인
+git log feature/accounts
+```
+
+## Stash(임시 저장)
+```bash
+# 현재 작업 임시 저장
+git stash
+
+# 브랜치 전환 후 다시 불러오기
+git switch feature/posts
+git stash pop
+
+# stash 목록 확인
+git stash list
+
+# 특정 stash 적용
+git stash apply stash@{0}
+```
+
+## 브랜치 이름 변경
+```bash
+# 로컬 브랜치 이름 변경
+git branch -m old-name new-name
+
+# 현재 브랜치 이름 변경
+git branch -m new-name
+```
+
+# 충돌 해결하기
+```bash
+# 충돌 발생 시
+<<<<<<< HEAD
+# 현재 브랜치의 코드
+=======
+# 병합하려는 브랜치의 코드
+>>>>>>> feature/accounts
+
+# 충돌 해결 후
+git add 충돌파일.py
+git commit -m "Resolve merge conflict"
+```
+
+## 권장 커밋 메시지 컨벤션
+```bash
+feat: 새로운 기능 추가
+fix: 버그 수정
+docs: 문서 수정
+style: 코드 포매팅
+refactor: 코드 리팩토링
+test: 테스트 코드
+chore: 빌드 업무, 패키지 설치 등
+
+# 예시
+git commit -m "feat: Add login view and template"
+git commit -m "fix: Resolve signup form validation error"
+git commit -m "docs: Update README with setup instructions"
+```
+
+## 예시
+## 두 명이 각자 기능 개발
+```bash
+# 팀원A (accounts 담당)
+git switch -c feature/accounts
+# 작업...
+git add .
+git commit -m "feat: Add login/logout functionality"
+git push -u origin feature/accounts
+
+# 팀원B (posts 담당)
+git switch -c feature/posts
+# 작업...
+git add .
+git commit -m "feat: Add post CRUD functionality"
+git push -u origin feature/posts
+
+# 각자 GitLab에서 MR 생성 → 리뷰 → 병합
+```
+
+팀원 A 작업이 먼저 병합됨
+```bash
+# 팀원B는 최신 main을 자기 브랜치에 반영
+git switch feature/posts
+git fetch origin
+git merge origin/main
+# 충돌 해결
+git push
+```
+
+
+
+
+
+
+
+
+
+
+
 # Git 연습하기
 ## Git Status, Log, Add, Commit 연습하기 
 
