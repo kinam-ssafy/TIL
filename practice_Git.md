@@ -37,7 +37,8 @@ $ git push --force origin master
 
 변경사항 강제 반영
 
-
+예: 최근 3개 커밋을 수정하려면
+git rebase -i HEAD~3
 
 # Git branch 명령어 및 활용법
 
