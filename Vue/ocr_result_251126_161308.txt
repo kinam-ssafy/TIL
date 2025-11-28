@@ -1,0 +1,1940 @@
+================================================================================
+OCR 추출 결과
+================================================================================
+
+
+## 📄 page-87243d15-cb1418e2-0001.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+SSAFY
+Vue
+Introduction of Vue
+K
+Python
+
+
+## 📄 page-87243d15-cb1418e2-0002.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+'OUTH
+목 차
+Frontend Development
+Client-side frameworks
+SPA
+CSR
+Vue
+Component
+
+
+## 📄 page-87243d15-cb1418e2-0003.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+'OUTH
+목 차
+Vue tutorial
+Vue Application 생성
+반응형 상태
+Vue 기본 구조
+참고
+ref 객체
+Ref Unwrap 주의사항
+SEO
+CSR과 SSR
+
+
+## 📄 page-87243d15-cb1418e2-0004.jpg
+--------------------------------------------------------------------------------
+Onboarding
+함께가요 미래로!
+EnablingPeople
+학습 시작
+"지난 시간, 우리논 서버에서 데이터지 받아와 DOM올 직접 수정하는 AJAX 방식올 배워습니다.
+하지만 데이터가 바필 때마다 매번 DOM 요소홀 찾아 수정하는 작업, 더 편하게 할 수스 없올까요?"
+Vue는 이 과정올 완전히 자동화합니다.
+우리가 할 일은 '데이터가 바뀌면 이는 이런 모습이어야 한다'고 선언하는 것입니다.
+데이터가 바뀌면 화면이 '알아서' 바뀌는 Vue의 반응성 덕분에, 우리논 더 이상 번거로운 DOM 조작에
+신경 쓸 필요가 없습니다.
+
+
+## 📄 page-87243d15-cb1418e2-0005.jpg
+--------------------------------------------------------------------------------
+함께가요 미래로!
+Objectives
+EnablingPeople
+학습 목표
+SPA와 CSR의 개념과 현대 웬 개발에서의 역할올 설명한다.
+Vue의 핵심 기능인 선언적 렌더팅과 반응성올 이해한다.
+createApp과 mount틀 사용해 Vue 업 인스템스틀 생성하다.
+ref 함수름 사용해 반응형 상태틀 선언하고 사용할 수 있다.
+횟수염 구문({{}})올 사용해 데이터지 팀플렉에 연결하다.
+V-on 디렉티브로 DOM 이번트트 처리하고 상태틀 변경한다.
+컴포년트 기반 아키택처의 개념과 장점올 설명할 수 있다.
+5
+
+
+## 📄 page-87243d15-cb1418e2-0006.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+Frontend
+Development
+
+
+## 📄 page-87243d15-cb1418e2-0007.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Frontend Development
+EnablingPeople
+이론
+Frontend Development
+웬사이트와 웬 애플리키이선의 사용자 인터폐이스()와 사용자 경험(UX)올 만들고 디자인하는 것
+HTML CSS JavaScript 등올 활용하여 사용자가 직접 상호작용하는 부분올 개발
+django
+A
+Frontend
+Framework
+Client
+Server
+<그림1_Vue_Introduction of Vue_Frontend Development>
+
+
+## 📄 page-87243d15-cb1418e2-0008.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+Client-side frameworks
+
+
+## 📄 page-87243d15-cb1418e2-0009.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Client-side frameworks
+EnablingPeople
+이론
+Client-side frameworks
+Client-side
+콜라이언트 축에서 이와 상호작용올 개발하기
+위해 사용되는 JavaScript 기반 프레임위크
+frameworks
+웬사이트의 사용자 인터페이스(U)틀 효율적으로 만들기 위해 미리 짜농은 코드의 뼈대입니다.
+복잡한 웬 애플리키이선올 마치 레고 조립하듯 가능한 부품 단위로 쉽게 개발할 수 D게 도와줍니다
+오늘날 대부분의 동적인 웬사이트는 이 프레임위크릇 사용하다 Vue, React, Angular가 가장 대표적입니다.
+A
+<그림2_Vue_Introduction of Vue_client side frameworks>
+
+
+## 📄 page-87243d15-cb1418e2-0010.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Client-side frameworks
+EnablingPeople
+이론
+Client-side frameworks가 필요한 이유 - 1
+단순히 무어가틀 읽는 곳에서
+>
+무언가틀 하는 곳으로 변화
+사용자는 이제 웬에서 문서만을 읽는 것이 아난 음악울 스리망하고 영화틀 보고 지구 반대편
+사람들과 텍스트 및 영상 채팅올 통해 즉시 통신하고 있음
+이처럼 현대적이고 복잡한 대화형 웬 사이트트
+'웬 애플리키이선 (web applications) "이라 부름
+JavaScript 기반의 Client-side frameworks가 등장하면서 매우 동적인 대화형 애플리키이선올 훨씬
+더 쉽계 구축할 수 잇게 팀
+10
+
+
+## 📄 page-87243d15-cb1418e2-0011.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Client-side frameworks
+EnablingPeople
+이론
+Client-side frameworks가 필요한 이유 - 2
+다루는 데이터가 많아짐
+내 폐이지 및 프로필
+토리
+일스
+만약 친구가 이름올 변경햇다면?
+폐이지로 전환
+통보 만들기
+친구 목록  타임라인 스토리 등 친구 이름이 출력되는
+연락처
+모든 긋이 함께 변경되어야 함
+{A님
+손 생각올 하고 계신가요?
+애플리켜이선의 기본 데이터틀 안정적으로 추적하고
+라이브 방송
+사진 동영상
+기분 활등
+업데이트(렌터팅, 추가, 삭제 등) 하는 도구가 필요
+애플리키이선의 상태가 변경월 때마다 U가 일관성 잇게
+업데이트되어야 함
+@
+<그림3_Vue_Introduction of Vue_Client side frameworks가 필요한 이유>
+77
+3:벼:-
+
+
+## 📄 page-87243d15-cb1418e2-0012.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Client-side frameworks
+EnablingPeople
+이론
+Vanilla JS만으로는 간단하지 않음
+불필요한 코드의 반복
+<label
+for="inputArea">Username:
+<llabel>
+const initalText
+=
+Unknown
+User
+<input type="
+text
+id="inputArea
+name="inputArea
+>
+Const
+1nputArea
+document.querySetector
+#1nputArea
+chr>
+const
+username1
+document.querySelector(' #username1
+const username2
+document.querySeLector
+#username2
+<hi>안녕   하세요
+<span
+id=
+username1"></span><lhi>
+const
+username3
+document.querySelector
+#username3
+const username4
+document.querySelector('#username4
+<div>
+<span
+id="username2"></span>님의
+친구 목록
+usernamei.textContent
+initalText
+<ldiv>
+username2.textContent
+initalText
+<div>
+username3.textContent
+initalText
+<span
+id="username3">lspan>님의
+알림
+목록
+username4.textContent
+initalText
+시ldiv>
+<div>
+inputArea.addEventListener(' input
+function (e)
+{
+<span
+id="username4"><lspan>님의
+친구
+요청   목록
+username1.textContent
+=
+e.target.value
+<ldiv>
+username2.textContent
+=
+e.target
+value
+username3.textContent
+=
+e.target.value
+username4.textContent
+=
+e.target.value
+}
+12
+
+
+## 📄 page-87243d15-cb1418e2-0013.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Client-side frameworks
+EnablingPeople
+이론
+Client-side frameworks의 필요성
+1
+동적이고 반응적인 웬 애플리켜이선 개발
+실시간 데이터 업데이트
+2.
+코드 재사용성 증가
+컴포년트 기반 아키택처
+모둘화된 코드 구조
+3.
+개발 생산성 향상
+강력한 개발 도구 지원
+13
+
+
+## 📄 page-87243d15-cb1418e2-0014.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+SPA
+
+
+## 📄 page-87243d15-cb1418e2-0015.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+SPA
+EnablingPeople
+이론
+SPA
+Single Page Application
+단일 폐이지에서 동작하는 웬
+애플리키이선
+SPA
+하나의 HTML 파일 위에서 JavaScript가 필요한 부분만 교체하여 '진짜' 폐이지 이동 없이 동작합니다.
+마치 하나의 무대에서 배우와 배경만 계속 바꾸분 연극과 같습니다.
+입처럼 빠르고 부드러운 사용자 경험올 제공합니다.
+15
+
+
+## 📄 page-87243d15-cb1418e2-0016.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+SPA
+EnablingPeople
+이론
+Single Page Application (SPA) 작동 원리
+1
+최초 로드 시 어플리키이선에 필요한 주요 리소스틀 다운로드
+2.
+폐이지 경신에 대해 필요한 데이터만을 비동기적으로 전달 받아 화면의 필요한 부분만 동적으로 강신
+AJAX와 같은 기술올 사용하여 필요한 데이터만 비동기적으로 로드
+폐이지 전체름 다시 로드함 필요 없이 필요한 데이터만 서버로부터 가져와서 화면에 표시
+3
+JavaScript틀 사용하여 콜라이언트 축에서 동적으로 곤렌즈트 생성하고 업데이트
+CSR방식
+16
+
+
+## 📄 page-87243d15-cb1418e2-0017.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+CSR
+
+
+## 📄 page-87243d15-cb1418e2-0018.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+CSR
+EnablingPeople
+이론
+CSR
+Client Side Rendering
+콜라이언트에서 h렌즈트 렌더팅
+하는 방식
+CSR
+일단 반 집(HTML)에 들어간 뒤, 가구(JavaScript)틀 배송받아 직접 조립하는 방식
+브라우저는 거의 텅 반 HTML과 JavaScript 파일올 받아k니다.
+후 JavaScript가 실행되어 데이터지 요청하고 화면올 동적으로 완성합니다.
+18
+
+
+## 📄 page-87243d15-cb1418e2-0019.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+CSR
+EnablingPeople
+이론
+Client Side Rendering(CSR) 작동 원리
+1
+사용자가 웬사이트에 요청올 보범
+비동기
+하나의 작업이 끝날 때까지
+2.
+서버는 최소한의 HTML과 JavaScript 파일올 콜라이언트로 전송
+기다리지 않고 다른 작업울 실행
+3.
+틀라이언트는 HTML과 JavaScript클 다운로드 받음
+{개념1_Vue_Introduction of Vue_비동기>
+4.
+브라우저가 JavaScript틀 실행하여 동적으로 폐이지 콤렌즈름 생성
+5.
+필요한 데이터는 AP틀 통해 서버로부터 비동기적으로 가져올
+19
+
+
+## 📄 page-87243d15-cb1418e2-0020.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+CSR
+EnablingPeople
+이론
+CSR 작동 예시
+DOM
+1
+틀라이언트는 서버로부터 최소한의 HTML 폐이지와 어플리키이선 실행에
+자바스크립트가 HTML올 조작할
+수퍼게 만문 객체 모델
+필요한 JavaScript클 응답 받음
+{개념2_Vue_Introduction of Vue
+DOM>
+2.
+그런 다음 콜라이언트 축에서 JavaScript틀 사용하여 DOM올 업데이트하고 폐이지틀 렌더림
+3
+이후 서버는 더 이상 HTML올 제공하지 않고 요청에 필요한 데이터만 응답
+4
+Google Maps; Facebook, Instagrar 등의 서비스에서 폐이지 강신 시 새로고찮이 없는 이유
+최초 요청
+HTML
+Ajax
+{;}
+Client
+JsON
+Server
+<그림4_Vue_Introduction of Vue_CSR 작동 예시>
+20
+
+
+## 📄 page-87243d15-cb1418e2-0021.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+CSR
+EnablingPeople
+이론
+CSR 과 SPA의 장점
+1
+빠른 폐이지 전환
+폐이지가 처음 로드된 후에는 필요한 데이터만 가져오면 되고 JavaScript눈 전체 폐이지틀 새로 고칠 필요 없이
+폐이지의 일부틀 다시 렌더팅할 수 잇기 때문
+서버로 전송되논 데이터의 양울 최소화 (서버 부하 방지)
+2.
+사용자 경험
+새로고찮이 발생하지 않아 네이티브 입과 유사한 사용자 경험올 제공
+3
+Frontend와 Backend의 명확한 분리
+Frontend는 UI 렌더림 및 사용자 상호 작용 처리들 담당 & Backend는 데이터 및 API 제공을 담당
+대규모 애플리켜이선올 더 쉽게 개발하고 유지 관리 가능
+21
+
+
+## 📄 page-87243d15-cb1418e2-0022.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+CSR
+EnablingPeople
+이론
+CSR 과 SPA의 단점
+1
+느린 초기 로드 속도
+전체 폐이지틀 보기 전에 약간의 지연올 느길 수 있음
+JavaScript가 다운로드 구문 분석 및 실행월 때까지 폐이지가 완전히 렌더림 되지 않기 때문
+2.
+SEO(검색 엔진 최적화) 문제
+폐이지틀 나중에 그려 나가는 것이기 때문에 검색에 잘 노출되지 않울 수 있음
+검색엔진 입장에서 HTML올 읽어서 분석해야 하는데 아직 굳렌즈가 모두 존재하지 않기 때문
+초기 로딩 속도가 느리지만, 초기 로딩만 끝나고 나면 훌륭한 UX 경험흘 주는 장점이 단점올 상쇄합니다.
+TIP
+위에서 언급한 단점은 Nextjs, Nuxtjs 같은 하이브리드 프레임위크릇 통해 대부분 해결활 수 잇게 되없습니다.
+이들은 SEO와 초기 로딩 속도 문제름 해결하면서 SPA의 장점은 그대로 누길 수 있게 해중니다.
+22
+
+
+## 📄 page-87243d15-cb1418e2-0023.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+CSR
+EnablingPeople
+이론
+SPA VS MPA
+CSR VS. SSR
+Multi Page Application (MPA)
+여러 개의 HTML 파일이 서버로부터 각각 로드
+사용자가 다른 폐이지로 이동할 때마다 새로운 HTML 파일이 로드둑
+Server-side Rendering (SSR)
+서버에서 화면올 렌더팅 하는 방식
+모든 데이터가 담긴 HTML올 서버에서 완성 후 플라이언트에거 전달
+23
+
+
+## 📄 page-87243d15-cb1418e2-0024.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+Vue
+
+
+## 📄 page-87243d15-cb1418e2-0025.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue
+EnablingPeople
+이론
+Vue
+Vue
+사용자 인터페이스홀 구축하기
+위한 JavaScript 프레임위크
+Vue눈 웬사이트 이틀 쉽고 빠르게 만들 수 잇게 도와주는 프론트엔드 프레임위크입니다.
+레고 불록처럼 가능한 부품(컴포년트)으로 화면올 조립하고 데이터가 바뀌면 화면도 자동으로 바뀌는
+반응성이 가장 근 특징입니다.
+배우기 쉽고 직관적이면서도 강력해 , 초보자부터 전문가까지 폭넓게 사용하는 인기 왜는 기술입니다:
+25
+
+
+## 📄 page-87243d15-cb1418e2-0026.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue
+EnablingPeople
+이론
+Whatis Vue?
+Evan You에l 의해 발표(2014)
+학사
+미술 미술사 / 석사
+디자인 & 테크놀로지 전공
+Angular 개발팀 출신
+최신 버전은
+Vue 3" (2024)
+https Llvuejs orgL
+Vue 2 문서에 접속하지 않도록 주의
+26
+
+
+## 📄 page-87243d15-cb1418e2-0027.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue
+EnablingPeople
+이론
+Vue틀 학습하는 이유
+Organizations
+Rank
+Organization
+Stars
+1
+낮은 학습 곡선
+mnicrosoft
+2,608,579
+간결하고 직관적인 문법올 가지고 있어 빠르게 의할 수 있음
+google
+1,830,846
+apache
+1,068,205
+잘 정리원 문서들 기반으로 어렵지 않게 학습 할 수 잇음
+4
+facebook
+946,662
+2.
+확장성과 생태계
+alibaba
+752,848
+facebookresearch
+739,463
+다양한 플러그인과 라이브러리블 제공하는 높은 확장성
+vuejs
+592,168
+전세계적으로 활성화듣 커유니티틀 기반으로 많은 개발자들이
+Tencent
+479,214
+새로운 기능을 개발하고 공유하고 잇음
+tensorflow
+468,667
+10
+openai
+447,699
+3
+유연성 및 성능
+그림5_Vue_Introduction of Vue_Vue 학습 이유>
+작은 규모의 프로적트부터 대규모의 애플리키이선까지 다양한 프로적트에 적합
+4.
+주목발는 Client-side framework
+httpsLlgitstar-ranking comL
+27
+
+
+## 📄 page-87243d15-cb1418e2-0028.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue
+EnablingPeople
+이론
+SSAFY에서의 Vue
+1
+Vue눈 React나 Angular 에 비해 문법이 간결하고 직관적이어서, 학습이 비교적 수월
+짧은 시간내에 효율적으로 결과물올 만들어 날 수 있음
+2.
+거대하고 활발한 커유니티틀 가지고 있어 풍부한 문서 투토리얼, 예제 및 다양한 리소스홀 공유
+받을 수 있음
+최신 업데이트 및 트랜드틀 공유함으로써 지속적인 학습올 축진
+28
+
+
+## 📄 page-87243d15-cb1418e2-0029.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue
+EnablingPeople
+이론
+Vue 체험하기
+<script
+src=
+'https:llunpkg
+com/vue@3/dist/vue.globaL.js">lscript>
+Hello vue!
+<script>
+Count is: 2
+const
+{ createApp,
+ref }
+=
+Vue
+const app
+=
+createApp({
+setup()
+const message
+=
+ref('Helo
+vue! ' )
+const
+count
+=
+ref(0)
+<그림6_Vue_Introduction of Vue_Vue 체험하기 결과>
+return
+{
+<--
+first-vue.htm
+-->
+message,
+count
+<div id="app">
+<hi>{{ message }}시lhi>
+<button
+V-on:click=
+count++">
+Count
+is:
+{{ count }}
+clbutton>
+app.mount('#app')
+시ldiv>
+dlscript>
+29
+
+
+## 📄 page-87243d15-cb1418e2-0030.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue
+EnablingPeople
+이론
+Vue의 2가지 핵심 기능
+1
+선언적 렌더팅 (Declarative Rendering)
+표준 HTML올 확장하는 Vue
+팀플렉 구문"올 사용하여 JavaScript 상태(데이터)틀 기반으로 화면에 출력월
+HTML올 선언적으로 작성
+2.
+반응성 (Reactivity)
+JavaScript 상태 변경올 추적하고 변경사항이 발생하면 자동으로 [OM올 업데이트
+30
+
+
+## 📄 page-87243d15-cb1418e2-0031.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue
+EnablingPeople
+이론
+Vue의 주요 특징 정리
+1.
+반응형 데이터 바인딩
+데이터 변경 시 자동 UI 업데이트
+2.
+컴포년트 기반 아키택처
+재사용 가능한 UI 조각
+3
+간결한 문법과 직관적인 API
+낮은 학습 곡선
+높은 가독성
+4.
+유연한 스레일림
+작은 프로적트부터 대규모 어플리키이선까지 적합
+37
+
+
+## 📄 page-87243d15-cb1418e2-0032.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+Component
+
+
+## 📄 page-87243d15-cb1418e2-0033.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Component
+EnablingPeople
+이론
+Component
+재사용 가능한 코드 불록
+이름 독립적이고 재사용 가능한 일부분으로 분할하고 각 부분올 개별적으로 다물 수 있음
+자연스럽게 애플리키이선은 중철원 Component의 트리 형태로 구성독
+cRoot>
+cHeader>
+cMain>
+cAside>
+cArticle-X2
+Item-X3
+<그림7_Vue_Introduction of Vue_Component>
+33
+
+
+## 📄 page-87243d15-cb1418e2-0034.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Component
+EnablingPeople
+이론
+Component 예시
+웬 서비스는 여러 개의 Component로 이루어저 있음
+매거진
+8m
+Kmo
+4
+9
+NRun
+Msym Par더l
+Ayoymlits
+CAOUns
+Vious
+WUUSY
+UWS
+로그인
+S
+sootstis pioss
+F
+VIBE 검색
+RatunRiun
+'Oirgi
+투데이
+Kusu Run
+차트
+Rshmin
+Shymsuodin Chowghury
+Cos
+Crvs
+Voomo KhMun
+Syrim ga
+최신일범
+UvJxOreo
+Vcnionurot bnurtrcotbul swicoyrus
+Furt mcstoui uwinc kovrus Groratora
+Gonaiounlor lincvri Wurtlular COA
+uorcin picctu "urtuli COI Pircetu
+oon
+Daroy
+moro hrturos 'aticr oocctui
+humbvou lDbicx pachctu )u
+DJ 스테이선
+ncsa Mac
+Irs gcot Ocs or4 06o )
+Vovy hrui
+New Release #115
+(국세라필
+소미더머니 11
+VIBE MAG
+s
+Fu부u plun
+테일러 스위프트 (여자) 아이들
+라올 수 없는 에너지
+화제의 참가자는?
+022.10.25
+2022.10.21
+2022.10.20
+:
+Rsns
+이달의 노래
+no
+'I:
+Wwyhin
+UO UUX OLSGMEA
+Nnuyhn
+Caos
+Jrrsrlo
+Grus
+RdtunRytun
+#내돈내들
+NEWS
+su408
+AA
+koousotourdiouna udtcn
+Orw
+cow UUxPancu
+morin
+ONSTAGE
+S6
+uirtos loua pacnoni Roia Vao
+Twos M기
+VIBE 오디오
+Rusw Rorun
+Erommiud)tmto)
+Eoyd
+Sorm ya
+Nnmotrun
+매" 맵버신 구독
+Sudd
+Ar3oy YoTa Aaidti
+Ovs
+AoOocos
+Coor
+Woo
+Vonry Mosun
+Ysccooos
+7016
+Curbrosoul Sminc kovus C'ounaoing
+데스크톱업 설치
+uocion piroyu "untuto Co무 Purctaiikyt
+Ry Rimun
+헤이즈가 데뭐 8년 만에 첫 단독 혼서트름 개최
+휴이치 사카모토가 2년 만에 온라인 혼서트름
+성시경이 3년 만에 연말 큰서트름 개최합니다
+wy
+하다
+개치하
+Woslam Uc Gcul Oosonc ulvo )
+SVIII
+c
+오늘 뭐 듣지?
+X H
+00*00
+00 00
+'저 버드음 금리해보세오
+<그림8_Vue_Introduction of Vue_Component 예시>
+34
+Dr
+Vnwd
+
+
+## 📄 page-87243d15-cb1418e2-0035.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+Vue tutorial
+
+
+## 📄 page-87243d15-cb1418e2-0036.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue tutorial
+EnablingPeople
+이론
+Vue틀 사용하는 방법
+1.
+'CDN' 방식
+2.
+'NPM' 설치 방식
+CDN 방식 이후 진행
+36
+
+
+## 📄 page-87243d15-cb1418e2-0037.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+Vue Application 생성
+
+
+## 📄 page-87243d15-cb1418e2-0038.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue Application 생성
+EnablingPeople
+이론
+Vue Application 생성하기 (1/6)
+vue
+사용올 위한 CDN 작성
+<
+vue-instancehtmi
+->
+<div
+id="app">ldiv>
+<script
+src=
+'https:llunpkg.com/vue@3/distlvue.global.js">
+{lscript>
+<cript>
+const { createApp }
+=
+const app
+=
+createApp(
+setup()
+{}
+}
+app.mount('#app' )
+dlscript>
+38
+Vue
+
+
+## 📄 page-87243d15-cb1418e2-0039.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue Application 생성
+EnablingPeople
+이론
+Vue Application 생성하기 (2/6)
+Application instance
+vue-instance htmi
+<div
+id="app">ldiv>
+CDN에서 Vue틀 사용하는 경우 전역 Vue 객체름 불러오게 팀
+<script
+구조분해합당 문법으로 Vue 객체의 createApp 함수름 할당
+src=
+'https:llunpkg.comlvue@3/dist/vue.global.js">
+dlscript>
+<script>
+const
+{ createApp }
+=
+Vue
+const
+app
+=
+createApp(
+setup() {}
+}
+)
+app.mount('#app')
+dlscript>
+39
+
+
+## 📄 page-87243d15-cb1418e2-0040.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue Application 생성
+EnablingPeople
+이론
+Vue Application 생성하기 (3/6)
+Application instance
+vue-instance htmi
+<div
+id="app">ldiv>
+모든 Vue 어플리키이선은 createApp 함수로
+<script
+새 Application instance틀 생성하는 것으로 시작함
+src=
+'https:/lunpkg.com/vue@3/dist/vue.globaljs">
+dlscript>
+<script>
+const
+{ createApp }
+=
+Vue
+const app
+=
+createAppc
+setup() {}
+app.mount('#app')
+dlscript>
+40
+
+
+## 📄 page-87243d15-cb1418e2-0041.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue Application 생성
+EnablingPeople
+이론
+Vue Application 생성하기 (4/6)
+Root Component
+vue-instance htmi
+<div
+id="app">ldiv>
+createApp 함수어는 객체(컴포년트)가 전달
+<script
+모든 App에는 다른 컴포년트들올 하위 컴포년트로 포함할 수
+src=
+'https:/lunpkg.com/vue@3/dist/vue.globaljs">
+dlscript>
+잇는 Root(최상위) 컴포년트가 필요 (현재는 단일 컴포년트)
+<script>
+const
+{ createApp }
+=
+Vue
+const
+app
+=
+createApp
+setup() {}
+app.mount('#app')
+dlscript>
+41
+
+
+## 📄 page-87243d15-cb1418e2-0042.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue Application 생성
+EnablingPeople
+이론
+Vue Application 생성하기 (5/6)
+Mounting the App (입 연결)
+vue-instance htmi
+<div
+id="app">ldiv>
+HTML 요소에 Vue Application instance틀 탑재 (연결)
+<script
+각 입 인스터스에 대해 mount()논눈 한 번만 호출할 수 있음
+src=
+'https:llunpkg.com/vue@3/distlvue.global.js">
+dlscript>
+<script>
+const
+{ createApp }
+=
+const app
+=
+createApp(
+setup() {}
+app.mount
+'#app' )
+script>
+42
+Vue
+
+
+## 📄 page-87243d15-cb1418e2-0043.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue Application 생성
+EnablingPeople
+이론
+Vue Application 생성하기 (6/6)
+setup() 함수
+vue-instance htm
+<div
+id="app">ldiv>
+컴포년트가 동작하기 전에 미리 준비하는 "시작점" ,
+'초기 설정용 함수
+<script
+이 함수 안에서 데이터지 정의하거나, 화면에 표시할 값을 계산하거나,
+src=
+'https:/lunpkg.com/vue@3/distlvue.gLobal.js">
+각종 로직(함수)올 준비할 수 잇음
+<lscript>
+setupo서 준비한 값들은 이후 팀플렉이나 컴포년트의 다른 부분에서
+<script>
+const { createApp }
+=
+Vue
+바로 사용 가능
+const app
+=
+createApp(
+setup() {}
+app.mount(' #app' )
+<lscript>
+43
+
+
+## 📄 page-87243d15-cb1418e2-0044.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+반응형 상태
+
+
+## 📄 page-87243d15-cb1418e2-0045.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+반응형 상태
+EnablingPeople
+이론
+반응형 상태
+반응형 상태 (데이터)틀 선언하는 함수
+refl)
+(Declaring Reactive State)
+일반 JavaScript 변수름 Vue가 변화틀 감지할 수 짓는 반응형 객체로 만들어줌니다.
+컴포년트 내에서 변하는 값(예: 숫자, 문자열, input 값 등의 상태름 추적하고 관리하기 위해 사용되니다.
+45
+
+
+## 📄 page-87243d15-cb1418e2-0046.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+반응형 상태
+EnablingPeople
+이론
+ref 함수 (1/2)
+.value 속성이 있는 ref 객체로 쾌핑(wrapping)하여 반환하는 함수
+ref로 선언되 변수의 값이 변경되면 해당 값을 사용하는 팀플렉에서 자동으로 업데이트
+인자는 어떠한 타입도 가능
+래굉(wrapping)
+여러 요소홀 하나의 태그나
+const
+{ createApp,
+ref
+=
+Vue
+컴포년트로 감싸는 구조
+const
+app
+=
+createApp({
+{개념3_Vue_Introduction of Vue_래핑(wrapping)>
+setup
+const message
+=
+ref
+Hello vue! ')
+console. Log(message)
+11
+ref 객체
+console.Log(message.valuie)
+11
+Hello vue!
+})
+46
+
+
+## 📄 page-87243d15-cb1418e2-0047.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+반응형 상태
+EnablingPeople
+이론
+ref 함수 (2/2)
+팀플렉의 참조에 접근하려면 setup 함수에서 선언 및 반환 필요
+편의상 팀플렉에서 ref틀 사용할 때는 .value틀 작성할 필요 없음 (자동으로 언래핑(unwrapped) 팀)
+const
+app
+=
+createApp({
+<
+
+vue-instance htmi
+setup()
+const
+message
+=
+ref('Helo
+vue! ' )
+<div
+id="app'
+return {
+<hi>{ message }}kIhi>
+message
+시ldiv>
+즉 ref 함수는 반응형올 가지논 참조 변수름 만드는 것
+ref === reactive reference)
+47
+
+
+## 📄 page-87243d15-cb1418e2-0048.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+Vue 기본 구조
+
+
+## 📄 page-87243d15-cb1418e2-0049.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue 기본 구조
+EnablingPeople
+이론
+Vue 기본 구조
+createAppO)에 전달되는 객체는 Vue 컴포년트
+컴포년트의 상태는 setup( 함수 내에서 선언되어야 하여 객체틀 반환해야 함
+const
+app
+=
+createApp({
+setup()
+{
+const message
+=
+ref('Hello vue! ')
+return
+message
+})
+49
+
+
+## 📄 page-87243d15-cb1418e2-0050.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue 기본 구조
+EnablingPeople
+이론
+팀플렉 렌더림
+동적 텍스트
+데이터(변수) 값에 따라 내용이
+실시간으로 바뀌논 텍스트
+반환된 객체의 속성은 팀플렉에서 사용할 수 있음
+{개념4_Vue_Introduction of Vue_동적 텍스트>
+Mustache syntax(꽃수염 구문 {{ }} )틀 사용하여 메시지 값을 기반으로 동점 텍스트틀 렌더팅
+const
+app
+createApp({
+<div
+'app'
+>
+setup(
+<hiy{{ message }}k/hi>
+const
+message
+=
+ref('Hello
+vue!
+<ldiv>
+return
+message
+})
+찌렌즈는 식별자나 경로에만 국한되지 않으며 유호한 JavaScript 표현식올 사용할 수 있음
+<hi{{ message.sptit('
+).reversel).join('') }}Ihi>
+50
+id=
+
+
+## 📄 page-87243d15-cb1418e2-0051.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Vue 기본 구조
+EnablingPeople
+이론
+Event Listeners in Vue
+v-on' directive틀 사용하여 DOM 이멘트틀 수신할 수 있음
+자세한 directive 학습은 다음 시간에 진행
+함수 내에서 반응형 변수름 변경하여 구성 요소 상태름 업데이트
+버튼
+const
+{
+createApp,
+ref
+}
+=
+Vue
+2
+2
+const app
+createApp({
+setup()
+2
+const
+number
+=
+ref(0)
+const
+increment
+=
+function
+() {
+<그림9_Vue_Introduction of Vue_vue 이번트 예시 결과>
+1 |
+console. Log(number)
+11
+ref 객체
+<
+event-listener htm
+-->
+number.value++
+}
+<div
+id="app">
+return
+{
+<button
+V-on:click="increment
+>
+버튼시button>
+number,
+<pY{{ number }}Ip>
+increment
+<pY{{
+number }}시Ip>
+<p>{{ number }}Ip>
+시ldiv>
+})
+57
+
+
+## 📄 page-87243d15-cb1418e2-0052.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+참고
+
+
+## 📄 page-87243d15-cb1418e2-0053.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+ref 객체
+
+
+## 📄 page-87243d15-cb1418e2-0054.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+ref 객체
+EnablingPeople
+이론
+ref 객체가 필요한 이유
+일반적인 변수가 아뇨 객체 데이터 타입으로 사용하는 이유는?
+Vue눈 팀플렉에서 ref 사용하고 나중에 ref의 값을 변경하면 자동으로 변경 사항울 감지하고
+그에 따라 DOM올 업데이트 함("의존성 추적 기반의 반응형 시스템")
+Vue눈 렌더림 중에 사용된 모든 ref틀 추적하여, 이후 ref의 값이 변경되면 해당 ref틀 사용하는 컴포년트틀
+다시 렌더팅
+이틀 위해서 참조 자료형의 객체 타입으로 구현한 것
+JavaScriptol서는 일반 변수의 접근 또는 변형올 감지할 방법이 없기 때문
+https//vuejsorglguidelessentials/reactivity-fundamnentals html#why-refs
+54
+
+
+## 📄 page-87243d15-cb1418e2-0055.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+ref 객체
+EnablingPeople
+이론
+반응형 변수 Vs. 일반 변수
+ref눈 값이 바뀌면 화면이 자동으로 업데이트 되지만 일반 변수는 값이 바뀌어도 화면이 강신되지 않음
+const
+app
+=
+createApp({
+<--
+ref-VS-variable.htmi
+-- >
+반응형 변수: 3
+setup()
+<div id="app
+>
+const
+reactiveValue
+=
+ref(0)
+<p>반응형 변수:
+let
+normalValue
+{{ reactiveValue }}Ip>
+일반 변수: 0
+const updateValues
+=
+function () {
+<p>일반
+변수: {{ normalValue }}Ip>
+reactiveValue.value++
+<button
+V-on:cLick-"updateValues
+>
+값 업데이트
+normalValue++
+값 업데이트시button>
+}
+(ldiv>
+return
+<그림10_Vue_Introduction of Vue_반응형 변수 vs 일반 변수>
+reactiveValue,
+normalValue
+)
+updateValues
+})
+55
+
+
+## 📄 page-87243d15-cb1418e2-0056.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+Ref Unwrap 주의사항
+
+
+## 📄 page-87243d15-cb1418e2-0057.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Ref Unwrap 주의사항
+EnablingPeople
+이론
+템플렉에서의 unwrap 시 주의사항 (1/2)
+팀플렉에서의 unwrap은 ref가 setupo서 반환된 객체의 최상위 속성일 경우에만 적용
+const object
+=
+{ id:
+ref(0)
+}
+{{ object.id + 1 }}
+I
+[object object]1
+[object object] 이 출력되는 이유
+object눈 최상위 속성이지만 object id논 그렇지 않음
+표현식올 평가할 때 objectid가 unwrap 되지 않고 ref 객체로 남아 잇기 때문
+해결 방법은?
+57
+
+
+## 📄 page-87243d15-cb1418e2-0058.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+Ref Unwrap 주의사항
+EnablingPeople
+이론
+템플렉에서의 unwrap 시 주의사항 (2/2)
+이 문제름 해결하기 위해서는 id틀 객체에서 분해하여 최상위 속성으로 만들어야 함
+const object
+=
+{ id:
+ref(0) }
+const
+{ id }
+=
+object
+{{ id + 1 }} // 1
+6C
+단 , ref가 "{{ }}"의 최종 평가 값인 경우는 unwrap 가능
+const object
+=
+{ id:
+ref(0) }
+{{ objectid }} //
+0
+==
+{{ object.id.value }} // 0
+58
+
+
+## 📄 page-87243d15-cb1418e2-0059.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+SEO
+
+
+## 📄 page-87243d15-cb1418e2-0060.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+SEO
+EnablingPeople
+이론
+SEO (Search Engine Optimization)
+검색 엔진
+웬상에 존재하는 가능한 모든
+google, bing과 같은 검색 엔진 등에 내 서비스나 제품 등이
+정보들올 긁어 모으는방식으로
+동작
+효율적으로 검색 엔진에 노출되도록 개선하는 과정올 일런는 작업
+<개념5_Vue_Introduction of Vue_검색 엔진>
+정보의 대상은 주로 HTML에 작성된 내용
+SPA
+하나의 폐이지 안에서 내용만
+최근에는 SPA
+CSR로 구성원 서비스의 비중이 증가
+바뀌가여 보여주논웬업
+<개념6_Vue_Introduction of Vue_SPA>
+SPA 서비스도 검색 대상으로 넓히기 위해 JS틀 지원하는 방식으로 발전하는 중
+CSR
+서버는 뼈대만 주고 브라우저가
+직접 폐이지 그리논 방식
+<개념7_Vue_Introduction of Vue_CSR>
+60
+
+
+## 📄 page-87243d15-cb1418e2-0061.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+CSR 과 SSR
+
+
+## 📄 page-87243d15-cb1418e2-0062.jpg
+--------------------------------------------------------------------------------
+Build
+함께가요 미래로!
+CSR 과 SSR
+EnablingPeople
+이론
+CSR & SSR
+CSR과 SSR은 흑과 백이 아님
+애플리키이선의 목적 규모 성능 및 SEO 요구 사항에 따라 달라질 수 있음
+내 서비스에 적합한 렌더림 방식올 적절하게 활용할 수 있어야 함
+SPA 서비스에서도 SSR올 지원하는 Framework가 발전하고 있음
+Vue의 Nuxtjs
+React의 Nextjs
+
+
+## 📄 page-87243d15-cb1418e2-0063.jpg
+--------------------------------------------------------------------------------
+Run
+함께가요 미래로!
+EnablingPeople
+실습
+Vue tutorial
+Vue template
+2794. Vue3 시작하기
+2798. 팀플렉 렌더림 연습
+2795. Vue3 다양한 데이터 렌더림
+2799. 팀플렉 렌더팅 연습 2
+2796. Vue3 사용해 보기
+3091. 선언적 렌더팅
+63
+
+
+## 📄 page-87243d15-cb1418e2-0064.jpg
+--------------------------------------------------------------------------------
+Test
+함께가요 미래로!
+EnablingPeople
+확인 문제
+0
+각 문제에 올바른 답안올 생각해붙시다
+1
+콜라이언트 사이드 프레임위크가 아뇨 것은?
+2
+SPA에 대한 설명으로 올바른 것은?
+a) Vue
+a) 여러 HTML 파일로 구성되다.
+b) React
+b) 폐이지 이동 시 항상 새로고침이 발생하다.
+C) Angular
+C) 단일 HTML 폐이지 위에서 동적으로 동작하다.
+d) Django
+d) 서버에서 모든 폐이지름 렌더팅하다.
+3
+CSR 방식의 특징으로 올바른 것은?
+4
+Vue의 핵심 기능이 아난 것은?
+a) 서버가 완성원 HTML올 제공하다.
+a) 선언적 렌더림
+b) 초기 로딩 속도가 매우 빠르다.
+b) 반응성
+C) 브라우저가 JavaScript로 폐이지틀 그린다.
+C) 컴포년트 기반 아키택처
+d) 검색 엔진 최적화(SEO)에 매우 유리하다.
+d) 절차적 렌더량
+64
+
+
+## 📄 page-87243d15-cb1418e2-0065.jpg
+--------------------------------------------------------------------------------
+Test
+함께가요 미래로!
+EnablingPeople
+확인 문제
+0
+각 문제에 올바른 답안올 생각해붙시다
+이틀 독립적이고 재사용 가능한 단위로
+5
+6
+Vue 애플리켜이선올 생성하는 함수는 무엇인가요?
+분할하여 관리하는 것은?
+a) 컴포년트 (Component)
+a) mount()
+b) 디넥티브 (Directive)
+b) setupl)
+C) 인스터스 (Instance)
+C)
+createAppl)
+d) 팀플렉 (Template)
+d) refl)
+7
+Vue 인스터스트 실제 DOM 요소에 연결하는
+8
+Vue에서 반응형 상태(데이터)틀 선언하는 함수는?
+메서드는?
+a) connectO
+a) reactivel)
+b) setupl)
+b) refl)
+C) createApp()
+C) datal)
+d) mountl)
+d) statel)
+65
+
+
+## 📄 page-87243d15-cb1418e2-0066.jpg
+--------------------------------------------------------------------------------
+Test
+함께가요 미래로!
+EnablingPeople
+확인 문제
+0
+각 문제에 올바른 답안올 생각해붙시다
+스크립트에서 ref로 선언되 변수의 값에
+9
+10
+팀플렉에서 데이터지 동적으로 표시하는 구문은?
+접근하는 방법은?
+a
+message
+a) [[ message ]]
+b) message value
+b)
+message )
+messagetext
+{{message }}
+message data
+d)
+message >
+11
+DOM 이번트트 수신하기 위해 사용하는
+12
+CSR 방식의 단점이 아난 것은?
+디넥터브는?
+a) v-bind
+a) 느린 초기 로드 속도
+b) v-if
+b) SEO 문제 발생 가능성
+C) V-for
+C) 서버 부하 방지
+d) V-on
+d) JS 실행까지 폐이지가 비어있음
+66
+
+
+## 📄 page-87243d15-cb1418e2-0067.jpg
+--------------------------------------------------------------------------------
+Test
+함께가요 미래로!
+EnablingPeople
+확인 문제
+정답 및 해설
+1 d) Django 2 C) 단일 HTML 폐이지 위에서 동적으로 동작한다. 3. C) 브라우저가 JavaScript로 폐이지틀 그린다.
+4 d) 절차적 렌터량 5. a) 컴포년트 (Component) 6. c) createApp() 7. d) mount() 8 b) refl)
+1
+Django논 Python 기반의 서버 사이드 프레임위크이려
+5
+컴포년트는 이틀 독립적인 조각으로 분할하여 개발의 재사용
+나머지는 JS 기반의 콜라이언트 사이드 프레임위크입니다.
+성과 관리 효율성올 높이는 핵심 개념입니다.
+2.
+SPA논 하나의 HTML 파일 위에서, JavaScript가 필요한 부
+6.
+모든 Vue 애플리키이선은 createApp() 함수로 새로운 애플
+분만 교체하여 폐이지 이동 없이 동작합니다.
+리레이선 인스템스틀 생성하여 시작월니다.
+3
+CSR은 브라우저가 최소한의 HTML과 JavaScript틀 받아온
+7 
+mount() 메서드는 생성원 Vue 애플리키이선 인스템스클 특
+후 JS틀 실행하여 동적으로 폐이지틀 완성하는 방식입니다.
+정 DOM 요소에 탑재 (연결)합니다.
+4
+Vue눈 데이터(상태)틀 기반으로 화면이 어떻게 보일지 선언
+8.
+refl) 함수는 인자로 받은 값을 변화가 감지되는 반응형 객체
+적으로 작성하는 방식울 사용합니다.
+로 감싸서 반환하는 함수입니다.
+
+
+## 📄 page-87243d15-cb1418e2-0068.jpg
+--------------------------------------------------------------------------------
+Test
+함께가요 미래로!
+EnablingPeople
+확인 문제
+정답 및 해설
+9 b) message value 10. C) {{ message }} 1. d) v-on 12. C) 서버 부하 방지
+9
+스크립트 코드 내에서는 .value 속성올 통해 ref 객체가 감
+싸고 잇는 실제 값에 접근해야 합니다.
+10.
+Vue눈 못수염 구문(Mustache syntax인 {{}}틀 사용하여
+데이터클 화면에 동적으로 렌더랑합니다.
+11.
+V-on
+디리티브는 클렉 입력 등 DOM 이멘트트 수신하여 특
+정 JavaScript 코드트 실행활 때 사용합니다.
+12. CSR은 필요한 데이터만 서버에 요청하므로 폐이지 전체름
+매번 만드는 서버 렌더팅 방식보다 서버 부하가 적습니다.
+68
+
+
+## 📄 page-87243d15-cb1418e2-0069.jpg
+--------------------------------------------------------------------------------
+Review
+함께가요 미래로!
+EnablingPeople
+활동 정리
+핵심 키 위드
+개념
+설명
+예시
+Vue
+사용자 인터페이스틀 구축하는 JS 프레임위크
+{div id="app">
+SPA
+단일 폐이지에서 동작하는 월 업
+폐이지 이동 시 새로고침 없음
+CSR
+플라이언트에서 폐이지틀 렌너팅
+반 HTML올 받고 JS로 화면 구성
+선언적 렌더랑
+JS 상태 기반으로 HTML올 선언
+{hiyf{ message }}Ih7>
+반응성
+데이터 변경 시 DOM 자동 업데이트
+count value++
+refl)
+반응형 상태 (데이터)틀 선언하는 함수
+const count = ref(O)
+컴포년트
+재사용 가능한 독립적인 UI 조각
+Header />, <Article
+<표1_Vue_Introduction of Vue_핵심키워드>
+69
+
+
+## 📄 page-87243d15-cb1418e2-0070.jpg
+--------------------------------------------------------------------------------
+Review
+함께가요 미래로!
+EnablingPeople
+활동 정리
+오늘 공부한 내용
+요 약
+및
+정 리
+Client-side frameworks
+복잡하고 동적인 웬 애플리키이선의 사용자 인터페이스(U)틀 효율적으로 만들기 위한 JavaScript 코드의 뼈대
+데이터가 변경되면 U틀 자동으로 업데이트하여 개발자가 DOM올 직접 조작하는 번거로움올 줄여중
+SPA (Single Page Application)
+단일 HTML 폐이지 위에서 동작하는 웬 어플리키이선
+최초 요청 시 필요한 모든 리소스틀 받고 이후어는 폐이지 이동 없이 필요한 데이터만 비동기적으로 교체하여 화면올 강신
+CSR (Client-Side Rendering)
+SPA가 동작하는 렌더림 방식으로 콜라이언트(브라우저)에서 화면올 그리논 것' 의미
+서버는 거의 비어외는 HTML과 JavaScript 파일올 보내고 브라우저가 JavaScript틀 실행해 동적으로 폐이지틀 완성함
+70
+
+
+## 📄 page-87243d15-cb1418e2-0071.jpg
+--------------------------------------------------------------------------------
+Review
+함께가요 미래로!
+EnablingPeople
+활동 정리
+오늘 공부한 내용
+요 약
+및
+정 리
+Vue
+사용자 인터페이스(U) 구축올 위한 JavaScript 프레임위크
+컴포년트(Component)
+이틀 독립적이고 재사용 가능한 조각으로 나눈 코드 불록
+Vue 입은 컴포년트들의 트리 구조로 구성월
+선언적 렌너팅 (Declarative Rendering)
+JavaScript의 데이터(상태)틀 기반으로 화면에 출력월 HTML올 템플렉 문법올 통해 선언적으로 작성
+반응성 (Reactivity):JavaScript 데이터(상태)가 변경되면 Vue가 이틀 감지하여 화면(DOM)올 자동으로 업데이트
+71
+
+
+## 📄 page-87243d15-cb1418e2-0072.jpg
+--------------------------------------------------------------------------------
+Review
+함께가요 미래로!
+EnablingPeople
+활동 정리
+오늘 공부한 내용
+요 약
+및
+정 리
+Vue 기본 사용법
+7
+Vue Application 생성
+createApp() 함수로 Vue 업 인스런스클 생성
+mount('#app') 메서드틀 사용해 생성된 입흘 특정 HTML 요소에 연결
+2
+반응형 상태 선언
+ref() 함수름 사용하여 변화틀 감지할 수 잇는 반응형 변수름 선언
+ref(로만든 변수는 .value 속성올 가진 객체이다, JavaScript에l서는 ryRef value로 접근해야 함
+72
+
+
+## 📄 page-87243d15-cb1418e2-0073.jpg
+--------------------------------------------------------------------------------
+Review
+함께가요 미래로!
+EnablingPeople
+활동 정리
+오늘 공부한 내용
+요 약
+및
+정 리
+Vue 기본 사용법
+3
+팀플렉에 데이터 연결
+곳수염 구문 ({{ }})올 사용해 setup 함수에서 반환된 반응형 데이터들 HTML에 표시
+팀플렉 안에서는 . value 없이 변수 이름만으로 값에 접근 가능
+4,
+이번트 처리
+V-On 디라터브 (예: V-on click틀 사용해 버튼 클프과 같은 DOM 이번트틀 감지하고 지정된 함수v 실행
+73
+
+
+## 📄 page-87243d15-cb1418e2-0074.jpg
+--------------------------------------------------------------------------------
+Review
+함께가요 미래로!
+EnablingPeople
+활동 정리
+"지난 시간 우리논 서버에서 데이터지 받아와 DOM올 직접 수정하는 AJAX 방식올 배월습니다.
+하지만 데이터가 바필 때마다 매번 DOM올 찾아 수정하는 작업, 더 편하게 할 수는 없올까요?"
+Thi>{{ message }}리lhi>
+const message
+=
+ref(' 기존 메시지' );
+1 |
+버튼 클리
+시,
+데이터만
+변경
+function updateMessage() {
+message.Value
+=
+새로운 메시지! ' ;
+querySelector로 요소v 찾아 textContent틀 직접 바꾸는 명령형 방식에서,
+이제는 ref()로 선언한 message 데이터만 바꾸면 화면이 저절로 강신되는 선언형 방식으로 전환되없습니다.
+더 이상 DOM올 조작하지 않고 데이터만 관리하면 되는, 더 효율적인 개발 방식올 학습햇습니다.
+74
+
+
+## 📄 page-87243d15-cb1418e2-0075.jpg
+--------------------------------------------------------------------------------
+SAMSUNG
+함께가요 미래로!
+SW
+NPCADEMY
+EnablingPeople
+YOUTH
+f}
+감사합니다
+K]
+[J
