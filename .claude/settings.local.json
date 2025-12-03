@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(g++:*)",
+      "Bash(./boj1712)",
+      "Bash(boj1712.exe:*)",
+      "Bash(where:*)",
+      "Bash(echo:*)",
+      "Bash(/c/mingw64/bin/g++.exe:*)",
+      "Bash(./boj1712.exe)",
+      "Bash(C:mingw64bing++.exe:*)",
+      "Bash(C:msys64ucrt64bing++.exe --version)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
