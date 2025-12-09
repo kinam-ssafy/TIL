@@ -1,4 +1,4 @@
-# Vue Basic Syntax 1 교안 정리
+# Vue Basic Syntax 1
 
 ## 📚 목차
 1. Template Syntax

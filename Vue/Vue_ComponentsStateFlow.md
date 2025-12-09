@@ -1,4 +1,4 @@
-# Vue Component State Flow 교안 정리
+# Vue Component State Flow
 
 ## 📚 목차
 1. Passing Props

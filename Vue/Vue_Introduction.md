@@ -1,4 +1,4 @@
-# Vue Introduction 교안 정리
+# Vue Introduction
 
 ## 📚 목차
 1. Frontend Development

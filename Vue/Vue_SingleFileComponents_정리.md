@@ -1,4 +1,4 @@
-# Vue Single File Components 교안 정리
+# Vue Single File Components
 
 ## 📚 목차
 1. Component

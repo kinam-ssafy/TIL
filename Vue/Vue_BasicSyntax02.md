@@ -1,5 +1,4 @@
-# Vue Basic Syntax 02 교안 정리
-
+# Vue Basic Syntax 02
 ## 📚 목차
 1. Computed Property
 2. Computed vs. Methods
