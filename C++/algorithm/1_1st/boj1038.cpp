@@ -18,5 +18,57 @@ N번째 감소하는 수를 출력하는 프로그램을 작성하시오.
 31, 14
 32, 15
 
+규칙?
+동일한 수는 못 들어감
+중복 x 뽑기
+감소하는 수 모두 만들기
+
+숫자로 백트래킹 BFS 수행?
 
 */
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <queue>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<long long> ans; // 크기 지정 x
+    queue<long long> q;
+
+    // 0~9까지는 일단 집어넣기
+    for (int i = 0; i < 10; i++) {
+        ans.push_back(i);
+        q.push(i);
+    }
+
+    while (!q.empty()) { 
+        long long current = q.front(); // 맨 앞 반환
+        q.pop(); // 맨 앞 제거
+        // 파이썬이면 popleft()면 됐을텐데 C++은 반환, 제거 따로
+        int last = current % 10; // 마지막 숫자
+
+        for (int i = 0; i < last; i++) {
+            long long next = current * 10 + i;
+
+            q.push(next);
+            ans.push_back(next);
+        }
+    }
+
+    sort(ans.begin(), ans.end());
+
+    if (n >= ans.size()) {
+        cout << -1;
+    }
+    else {
+        cout << ans[n];
+    }
+
+    return 0;
+}
