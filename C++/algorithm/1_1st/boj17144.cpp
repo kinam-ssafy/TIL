@@ -56,6 +56,7 @@ boj17144 - 미세먼지 안녕!
 using namespace std;
 
 int R, C, T;
+vector<vector<int>> arr;
 
 int main() {
     ios::sync_with_stdio(false);
@@ -63,8 +64,7 @@ int main() {
 
     cin >> R >> C >> T;
 
-    vector<vector<int>> arr(R, vector<int>(C));
-
+    arr.assign()
 
 
 
