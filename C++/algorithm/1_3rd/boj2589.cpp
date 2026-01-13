@@ -16,11 +16,77 @@
 
 #include <iostream>
 #include <deque>
+#include <string>
 
 using namespace std;
 
+int N, M;
+char arr[50][50]; // 보물 지도의 크기는 50, 50 이하 
+
+// 3개의 값 묶어서 넣기 위한 tuple같은거 선언
+struct Node {
+    int i;
+    int j;
+    int dist;
+};
+
 int main() {
-    
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);  
+
+    cin >> N >> M;
+
+    for (int i = 0; i < N; i++) {
+        string s;
+        cin >> s; // "LWWLWLW" 이런식으로 한 줄의 string을 입력받을 것
+
+        for (int j = 0; j < M; j++) {
+            arr[i][j] = s[j];
+        }
+    }
+
+    int di[4] = {0, 1, 0, -1};
+    int dj[4] = {1, 0, -1, 0};
+
+    int ans = 0;
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            if (arr[i][j] == 'L') {
+                // 매 BFS마다 방문배열 초기화
+                int visited[50][50] = {0};
+                deque<Node> q;
+                q.push_back({i, j, 0});
+                visited[i][j] = 1;
+
+                while (!q.empty()) {
+                    Node current = q.front();
+                    int ci = current.i;
+                    int cj = current.j;
+                    int dist = current.dist;
+                    q.pop_front();
+
+                    if (ans < dist) {
+                        ans = dist;
+                    }
+                    
+                    for (int d = 0; d < 4; d++) {
+                        int ni, nj;
+                        ni = ci + di[d];
+                        nj = cj + dj[d];
+
+                        //python식 조건문 쓰지않기위해 박제
+                        //if ((0 <= ni < N) and (0 <= nj < M) and (visited[ni][nj] == 0) and (arr[ni][nj] == 'L')) 
+                        if (0 <= ni && ni < N && 0 <= nj && nj < M && visited[ni][nj] == 0 && arr[ni][nj] == 'L') {
+                            visited[ni][nj] = 1;
+                            q.push_back({ni, nj, dist + 1});
+                        }
+                    }
+                }
+            }
+        }
+    }
+    cout << ans;
 
 
 
