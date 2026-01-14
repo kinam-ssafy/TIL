@@ -22,10 +22,10 @@
 
 왼쪽 위 고른 경우 :
     1. 오른쪽 아래 고르기
-    2. 안고르기?
+    2. 안고르기? << 오른쪽 오른쪽 아래 골라야함
 왼쪽 아래 고른 경우 :
     1. 오른쪽 위 고르기
-    2. 안고르기
+    2. 안고르기 << 오른쪽 오른쪽 위 골라야 함
 
 '''
 
@@ -37,6 +37,8 @@ for tc in range(1, T):
     N = int(input())
     arr = [list(map(int, input().split())) for _ in range(2)]
     dp = [[0] * N for _ in range(2)]
+    dp[0][0] = arr[0][0] + arr[0][1] + arr[1][0]
+    dp[1][0] = arr[1][0] + arr[1][1] + arr[0][0]
 
     for i in range(1, N):
         dp[0][i] = max
