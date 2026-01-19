@@ -18,7 +18,7 @@
 #include <deque>
 #include <string>
 
-using namespace std;
+using namespace st
 
 int N, M;
 char arr[50][50]; // 보물 지도의 크기는 50, 50 이하 
