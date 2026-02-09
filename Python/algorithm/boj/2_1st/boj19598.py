@@ -20,10 +20,51 @@
 0~40 
 5~10, 15~30 
 회의실 두개
+
+0 40
+5 10
+15 30
+20 40 이면?
+
+0 40
+5 10 15 30
+20 40  
+3개?
+
+1. (0, 40) -> [40]
+2. (5, 10) 시작시간이 이전 회의의 끝나는 시간보다 일찍임. 5 < 40 [40, 10] 회의 2개
+3. (15, 30) 15 > 10 ... 10을 빼고 30 넣기 [40, 30]
+4. (20, 40) 20 < 30 ... [40, 30, 40]
+
+[(0, 40), (5, 10), (15, 30)]
+for i in range(len(arr)):
+    arr[i][0]
+
 """
 
 # 시작 시간 순으로 정렬,
 
 import sys
 input = sys.stdin.readline
+from heapq import heappop, heappush
+
+N = int(input().strip())
+arr = [list(map(int, input().split())) for _ in range(N)]
+meetings = []
+
+arr.sort(key=lambda x:(x[0], x[1]))
+
+for i in range(len(arr)):
+    if not meetings:
+        heappush(meetings, arr[i][1]) #끝나는 시간을 넣어줌
+
+    elif arr[i][0] >= meetings[0]:
+        heappop(meetings)
+        heappush(meetings, arr[i][1])   
+
+    elif arr[i][0] < meetings[0]:
+        heappush(meetings, arr[i][1])
+
+print(len(meetings))
+
 
