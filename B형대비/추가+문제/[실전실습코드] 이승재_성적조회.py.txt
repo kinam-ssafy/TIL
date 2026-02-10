@@ -1,0 +1,274 @@
+'''
+
+파이썬은 treeset을 지원하지 않습니다. 따라서 다른 언어의 풀이와는 많이 다른 방식으로 구현되어 있습니다.
+
+우선 풀이를 위해서는 아래 두가지 자료구조에 대해 알아야 합니다.
+
+
+1. segment tree
+
+1과 0으로 구성된 배열이 있다고 하겠습니다. 여기서 1인 위치 중 앞에서부터 k번째 위치를 찾는 작업을 해야한다면, 이는 세그먼트 트리를 이용해 빠르게 구현해낼 수 있습니다.
+
+구간합을 저장하는 segment tree를 만들어줍니다. 이 segment tree의 리프노드에 기존 배열 값들을 매칭시켜준 뒤 초기 트리 형태를 구성해줍니다.
+그 후 k번째로 작은 값을 찾는 과정은 다음과 같이 진행합니다.
+(1) 루트에서 출발합니다.
+(2-1) 만약 내 왼쪽 자식의 값이 k보다 크거나 같다면 우리가 찾는 k번째 수는 내 왼쪽에 있습니다. 왼쪽으로 내려가줍니다.
+(2-2) 만약 내 왼쪽 자식의 값이 k보다 작다면 우리가 찾는 k번째 수는 내 오른쪽에 있습니다. k에서 내 왼쪽 자식의 값만큼을 빼준 뒤 오른쪽으로 내려갑니다.
+
+위와 같은 과정을 진행하다 리프노드에 도착하면 k번째 작은 값이 있는 위치를 알 수 있습니다. O(log N)
+
+같은 원리로 1인 위치 중 가장 앞이나 가장 뒤 인덱스도 찾을 수 있고, 특정 구간 내에서 가장 앞, 가장 뒤의 값도 찾을 수 있습니다.(아래의 get_min, get_max 함수)
+
+
+
+2. heap
+
+heap에서 lazy하게 값을 빼는 방법을 알아야 합니다.
+기본 heap의 경우 중간에서 값을 빼는 것이 불가능합니다. 이를 해결하기 위해 실제로 중간에서 빼지는 않지만 마치 뺀 것처럼 만드는 방식을 사용합니다.
+
+초기 min_heap에 [2, 4, 5, 5, 6, 10]이 있다고 가정하겠습니다. 적혀있는 순서대로 저장되어 있지는 않겠지만, 저 순서로 pop이 되는 상황입니다.
+여기서 5, 4, 6, 2를 순서대로 pop을 하면 다음과 같이 진행합니다.
+
+(1) 우선 lazy_heap을 만들어줍니다. 이 heap도 minheap입니다.
+(2) 어떤 값을 지우든 우선 지우는 작업을 바로 진행하지는 않고, lazy_heap에 지울 값을 넣어줍니다.
+(2-1) 5를 지운다면 lazy_heap은 [5] 상태가 됩니다. min_heap은 아직 [2, 4, 5, 5, 6, 10]인 상태로, 전혀 변화가 없습니다.
+(2-2) 4를 지운다면 lazy_heap은 [4, 5] 상태가 됩니다. min_heap은 여전히 변화가 없습니다.
+(2-3) 6을 지운다면 lazy_heap은 [4, 5, 6] 상태가 됩니다. min_heap은 여전히 변화가 없습니다.
+(2-4) 2를 지운다면 lazy_heap은 [2, 4, 5, 6] 상태가 됩니다. 여기서 lazy_heap과 min_heap의 top의 값이 2로 같아집니다. top의 값이 서로 달라질때까지 동시에 지워줍니다.
+[2, 4, 5, 6], [2, 4, 5, 5, 6, 10]
+=> [4, 5, 6], [4, 5, 5, 6, 10]
+=> [5, 6], [5, 5, 6, 10]
+=> [6], [5, 6, 10]
+이제 min_heap은 [5, 6, 10]이 됩니다.
+
+어차피 우리는 heap에서 top의 값만 사용하기 때문에 다른 값이 잘못 들어있는 것은 상관 없습니다. 나중에 바로잡아주면 되니 top의 값만 정상이라면 지울 값들을 바로 지우지 않고 남겨두는 방식입니다.
+
+
+
+[풀이]
+
+세그먼트 트리를 3*2개 만들어줍니다. tree[grade][gender]처럼 인덱스를 사용하게 됩니다.
+maxheap과 minheap을 3 * 2 * (최대 점수)개 만들어줍니다. heap[grade][gender][score] 처럼 인덱스를 사용하게 됩니다.
+
+만약 학생이 추가되면 heap[grade][gender][score]에 그 학생의 id를 넣어줍니다. max_heap과 min_heap 모두 적용합니다.
+그 후 tree[grade][gender]의 리프 중 score번째 값에 1을 넣어 업데이트 해줍니다. 이는 학년이 grade, 성별이 gender인 사람 중 점수가 score인 사람이 존재한다는 것을 의미합니다.
+
+만약 학생의 정보를 제거해야 된다면 heap에서 lazy하게 지워줍니다. 만약 그 heap의 사이즈가 0이 된다면 tree[grade][gender]의 score값도 0으로 만들어줍니다.
+
+위처럼 heap과 세그먼트 트리를 관리해주면서 어떤 정보를 얻어야 할 때는 다음과 같이 진행해줍니다.
+
+
+예시) grade, gender인 사람 중 가장 점수가 높은 사람의 id를 구한다. 둘 이상이라면 가장 큰 id를 구한다.
+
+(1) tree[grade][gender]에서 가장 뒤의 1을 찾아줍니다.(get_max 함수) 이 인덱스가 [grade][gender]에서 점수가 가장 높은 사람의 점수입니다. 이를 score라고 하겠습니다.
+(2) max_heap[grade][gender][score]에는 (grade, gender, score)인 사람의 id들이 들어있습니다. 여기서 top 값을 리턴합니다.
+
+
+다른 쿼리들도 비슷한 과정으로 처리됩니다.
+
+
+'''
+
+
+import heapq
+
+SIZE = 1 << 20
+BASE = 1 << 19
+
+class Student:
+    def __init__(self, id=0, score=1000000000):
+        self.id = id
+        self.score = score
+
+    def __lt__(self, other):
+        if self.score != other.score:
+            return self.score < other.score
+        else:
+            return self.id < other.id
+
+# 구간합 segment tree update
+def update(tree, idx, value):
+    idx += BASE
+    tree[idx] = value
+    idx //= 2
+    while idx >= 1:
+        if tree[2 * idx] < tree[2 * idx + 1]:
+            tree[idx] = tree[2 * idx + 1]
+        else:
+            tree[idx] = tree[2 * idx]
+
+        idx //= 2
+
+# 구간합 segment tree의 [l, r] 구간의 합
+def get(tree, l, r):
+    ret = 0
+
+    stack = [[1, 0, BASE - 1, l, r]]
+    while len(stack) > 0:
+        idx, s, e, l, r = tuple(stack[-1])
+        stack.pop()
+
+        if s > r or e < l:
+            continue
+
+        if l <= s and e <= r:
+            ret += tree[idx]
+            continue
+
+        mid = (s + e) // 2
+
+        stack.append([2 * idx, s, mid, l, r])
+        stack.append([2 * idx + 1, mid + 1, e, l, r])
+
+    return ret
+
+# l 이상인 위치 중 가장 앞에 있는 1의 위치
+def get_min(tree, l):
+    stack = [[1, 0, BASE - 1]]
+
+    while len(stack) > 0:
+        idx, s, e = tuple(stack[-1])
+
+        if idx >= BASE:
+            return idx - BASE
+
+        mid = (s + e) // 2
+
+        # 왼쪽 서브트리에 l 이상이면서 1인 위치가 없다면 오른쪽 서브트리를 봐야 하니 stack에 append
+        stack.append([2 * idx + 1, mid + 1, e])
+
+        # 왼쪽에 존재할 가능성이 있다면 왼쪽을 먼저 살펴봐야 하니 오른쪽보다 늦게 stack에 append
+        if mid >= l and tree[2 * idx] > 0:
+            stack.append([2 * idx, s, mid])
+
+# 가장 뒤에 있는 1의 위치
+# 범위 조건이 없기 때문에 스택을 사용할 필요가 없습니다. 오른쪽의 tree 값이 1 이상이라면 무조건 오른쪽에 조건을 만족하는 위치가 존재합니다.
+def get_max(tree):
+    idx, s, e = 1, 0, BASE - 1
+    while idx < BASE:
+        mid = (s + e) // 2
+
+        if tree[2 * idx + 1] == 0:
+            idx = 2 * idx
+            e = mid
+        else:
+            idx = 2 * idx + 1
+            s = mid + 1
+
+    return idx - BASE
+
+# 초기화
+# seg, max_pqs, min_pqs, lazy_max_pqs, lazy_min_pqs를 매번 새로 만들어주는 것은 사실 그리 효율적이지 않습니다.
+# 매 테스트케이스가 끝난 뒤 remove 함수를 이용해 모두 지워주는게 좋을 수 있습니다.
+# 애초에 파이썬에 적합한 문제가 아니니 참고용으로만 봐주시면 좋을 것 같습니다.
+def init():
+    global seg, tps, max_pqs, min_pqs, lazy_max_pqs, lazy_min_pqs
+
+    seg = [[[0 for _ in range(SIZE)] for _ in range(2)] for _ in range(3)]
+    max_pqs = [[[[] for _ in range(BASE)] for _ in range(2)] for _ in range(3)]
+    min_pqs = [[[[] for _ in range(BASE)] for _ in range(2)] for _ in range(3)]
+    lazy_max_pqs = [[[[] for _ in range(BASE)] for _ in range(2)] for _ in range(3)]
+    lazy_min_pqs = [[[[] for _ in range(BASE)] for _ in range(2)] for _ in range(3)]
+    tps = {}
+
+def add(mId, mGrade, mGender, mScore):
+    mGrade -= 1
+
+    max_pq = max_pqs[mGrade][int(mGender == 'female')][mScore]
+    min_pq = min_pqs[mGrade][int(mGender == 'female')][mScore]
+
+    # heap에 id를 추가.
+    heapq.heappush(min_pq, mId)
+    heapq.heappush(max_pq, -mId)
+
+    # segment tree의 score 인덱스에 1을 업데이트.
+    tree = seg[mGrade][int(mGender == 'female')]
+    update(tree, mScore, 1)
+
+    tps[mId] = [mGrade, int(mGender == 'female'), mScore]
+
+    # tree에서 최대 점수 구한 뒤, 그 점수인 사람 중 가장 큰 인덱스 찾기.
+    max_score = get_max(tree)
+    pq = max_pqs[mGrade][int(mGender == 'female')][max_score]
+    lazy_pq = lazy_max_pqs[mGrade][int(mGender == 'female')][max_score]
+
+    # lazy pop
+    while len(lazy_pq) > 0 and lazy_pq[0] == pq[0]:
+        heapq.heappop(lazy_pq)
+        heapq.heappop(pq)
+
+    # lazy하게 뺀 뒤에 남은 가장 큰 값을 리턴.
+    return -pq[0]
+
+def remove(mId):
+    if mId not in tps:
+        return 0
+
+    grade, gender, score = tuple(tps[mId])
+
+    # max_pq에서 lazy pop
+    lazy_max_pq = lazy_max_pqs[grade][gender][score]
+    heapq.heappush(lazy_max_pq, mId)
+    max_pq = max_pqs[grade][gender][score]
+    while len(lazy_max_pq) > 0 and lazy_max_pq[0] == max_pq[0]:
+        heapq.heappop(lazy_max_pq)
+        heapq.heappop(max_pq)
+
+    # min_pq에서 lazy pop
+    lazy_min_pq = lazy_min_pqs[grade][gender][score]
+    heapq.heappush(lazy_min_pq, mId)
+    min_pq = min_pqs[grade][gender][score]
+    while len(lazy_min_pq) > 0 and lazy_min_pq[0] == min_pq[0]:
+        heapq.heappop(lazy_min_pq)
+        heapq.heappop(min_pq)
+
+    # tree에 적용. pq가 비었다면 0으로, 값이 하나라도 있다면 1로 update.
+    tree = seg[grade][gender]
+    update(tree, score, int(len(min_pq) > 0))
+
+    tps.pop(mId)
+
+    # 학생이 없다면 0을 리턴.
+    if tree[1] == 0:
+        return 0
+
+    # 가장 작은 점수 구하기.
+    min_score = get_min(tree, 0)
+    pq = min_pqs[grade][gender][min_score]
+    lazy_pq = lazy_min_pqs[grade][gender][min_score]
+
+    # lazy pop
+    while len(lazy_pq) > 0 and lazy_pq[0] == pq[0]:
+        heapq.heappop(lazy_pq)
+        heapq.heappop(pq)
+
+    return pq[0]
+
+def query(mGradeCnt, mGrade, mGenderCnt, mGender, mScore):
+    ret = Student()
+    for i in range(mGradeCnt):
+        grade = mGrade[i] - 1
+        for j in range(mGenderCnt):
+            tree = seg[grade][int(mGender[j] == 'female')]
+
+            # mScore 이상의 점수인 사람이 없다면 continue
+            if get(tree, mScore, BASE - 1) == 0:
+                continue
+
+            # mScore 이상인 사람 중 가장 점수가 낮은 사람의 점수 구하기.
+            min_score = get_min(tree, mScore)
+            pq = min_pqs[grade][int(mGender[j] == 'female')][min_score]
+            lazy_pq = lazy_min_pqs[grade][int(mGender[j] == 'female')][min_score]
+
+            # lazy pop
+            while len(lazy_pq) > 0 and lazy_pq[0] == pq[0]:
+                heapq.heappop(lazy_pq)
+                heapq.heappop(pq)
+
+            # 구한 학생들 중 가장 우선순위가 높은 것을 리턴.
+            student = Student(pq[0], min_score)
+            if student < ret:
+                ret = student
+
+    return ret.id
+

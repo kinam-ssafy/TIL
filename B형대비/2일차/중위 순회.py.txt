@@ -1,0 +1,19 @@
+def dfs(cur):
+    if cur > n:
+        return
+
+    dfs(cur * 2)
+    print(arr[cur], end='')
+    dfs(cur * 2 + 1)
+
+for tc in range(1, 11):
+    print(f'#{tc} ', end='')
+
+    n = int(input())
+    arr = ['' for i in range(n + 1)]
+    for i in range(1, n + 1):
+        input_line = input().split()
+        arr[i] = input_line[1]
+
+    dfs(1)
+    print()

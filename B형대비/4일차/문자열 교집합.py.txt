@@ -1,0 +1,15 @@
+T = int(input())
+
+for t in range(1, T + 1):
+    ans = 0
+
+    n, m = map(int, input().split())
+    first = set(input().split())
+
+    ans = 0
+    input_list = input().split()
+    for s in input_list:
+        if s in first:
+            ans += 1
+
+    print(f'#{t} {ans}')

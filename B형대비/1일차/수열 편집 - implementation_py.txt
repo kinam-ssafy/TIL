@@ -1,0 +1,89 @@
+class NODE:
+    def __init__(self, v=0, prev=None, next=None):
+        self.v = v
+        self.prev = prev
+        self.next = next
+
+def input_f():
+    global cnt, head
+    global n, Q, L
+
+    n, Q, L = map(int, input().split())
+    cur = head
+    input_lst = list(map(int, input().split()))
+    for i in range(n):
+        if i == 0:
+            head = NODE(input_lst[i], None, None)
+            cur = head
+        else:
+            cur.next = NODE(input_lst[i], cur, None)
+            cur = cur.next
+
+        cnt += 1
+
+def pro():
+    global cnt, head
+
+    for _ in range(Q):
+        input_line = input().split()
+        ch = input_line[0]
+        if ch == 'C':
+            cur = head
+            y, s = int(input_line[1]), int(input_line[2])
+            for i in range(y):
+                cur = cur.next
+            cur.v = s
+        elif ch == 'I':
+            x, y = int(input_line[1]), int(input_line[2])
+            x -= 1
+            if x == -1:
+                if cnt > 0:
+                    newNode = NODE(y, 0, head)
+                    head.prev = newNode
+                    head = newNode
+                else:
+                    head = NODE(y, 0, 0)
+            else:
+                cur = head
+                for i in range(x):
+                    cur = cur.next
+                node = NODE(y, cur, cur.next)
+                if cur.next:
+                    cur.next.prev = node
+                cur.next = node
+
+            cnt += 1
+        elif ch == 'D':
+            x = int(input_line[1])
+            cur = head
+            for i in range(x):
+                cur = cur.next
+            prev = cur.prev
+            next = cur.next
+            if prev:
+                prev.next = next
+            if next:
+                next.prev = prev
+            if prev == None:
+                head = next
+            cnt -= 1
+
+    cur = head
+    for i in range(L):
+        if cur == None:
+            break
+
+        cur = cur.next
+
+    if cur == None:
+        print(-1)
+    else:
+        print(cur.v)
+
+TT = int(input())
+for tt in range(1, TT + 1):
+    head = NODE()
+    cnt = 0
+    input_f()
+    print(f'#{tt} ', end='')
+    pro()

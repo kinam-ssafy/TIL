@@ -1,0 +1,51 @@
+def binSearch(arr, value):
+    ans = len(arr)
+    L = 0
+    R = len(arr) - 1
+
+    while L <= R:
+        mid = (L + R) // 2
+        if arr[mid] >= value:       # value 이상인 위치를 보고 있다면
+            ans = mid
+            R = mid - 1
+        else:       # value 미만인 위치를 보고 있다면
+            L = mid + 1
+
+    return ans
+
+T = int(input())
+
+for test_case in range(1, T + 1):
+    N, M = map(int, input().split())
+    c1, c2 = map(int, input().split())
+    dx = abs(c1 - c2)
+
+    cows = list(map(int, input().split()))
+    cows.sort()
+
+    minDist = 10000000000000
+    count = 0
+
+    horses = list(map(int, input().split()))
+    for i in range(M):
+        X = binSearch(cows, horses[i])      # X := hourses[i] 이상인 소들 중에서 제일 왼쪽 소
+
+        # 1. horses[i] 와 cows[X] 사이의 거리
+        if X < len(cows):       # horses[i] 오른쪽에 소가 "존재" 한다면, 그 소와의 거리 갱신
+            dist = cows[X] - horses[i]
+            if minDist == dist:     # 알고 있던 최소 거리랑 같다면, 경우의 수 증가시키기
+                count += 1
+            elif minDist > dist:    # 알고있던 최소 거리보다 더 좋다면,
+                minDist = dist      # 해당 값으로 갱신
+                count = 1           # 1번 있다.
+
+        # 2. horses[i] 와 cows[X - 1] 사이의 거리
+        if X - 1 >= 0:      # horses 왼쪽에 소가 "존재" 한다면, 그 소와의 거리 갱신
+            dist = horses[i] - cows[X - 1]
+            if minDist == dist:     # 알고 있던 최소 거리랑 같다면, 경우의 수 증가시키기
+                count += 1
+            elif minDist > dist:    # 알고있던 최소 거리보다 더 좋다면,
+                minDist = dist      # 해당 값으로 갱신
+                count = 1           # 1번 있다.
+
+    print(f'#{test_case} {dx + minDist} {count}')

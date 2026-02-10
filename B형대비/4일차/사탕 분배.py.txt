@@ -1,0 +1,28 @@
+def get2Power(cnt, mod):
+    res = 1
+    num = 2
+    while cnt > 0:
+        if cnt % 2 == 1:
+            res = (res * num) % mod
+
+        num = (num * num) % mod
+        cnt //= 2
+
+    return res
+
+def solution(num1, num2, cnt):
+    sum = num1 + num2
+    max_val = sum // 2
+    result = (get2Power(cnt, sum) * num1) % sum
+
+    if result > max_val:
+        return sum - result
+    else:
+        return result
+
+T = int(input())
+
+for testCase in range(1, T + 1):
+    num1, num2, cnt = map(int, input().split())
+
+    print(f'#{testCase} {solution(num1, num2, cnt)}')

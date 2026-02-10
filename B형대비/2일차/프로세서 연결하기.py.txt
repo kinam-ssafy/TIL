@@ -1,0 +1,89 @@
+dr = [-1, 0, 1, 0]
+dc = [0, -1, 0, 1]
+
+def input_f():
+    global N, coreList, arr, ans, maxCnt
+
+    N = int(input())
+    coreList = []   # 전선을 연결할 시도를 할 코어의 모음
+    arr = [list(map(int, input().split())) for i in range(N)]
+
+    for i in range(1, N - 1):
+        for j in range(1, N - 1):
+            if arr[i][j] == 1:
+                coreList.append([i, j])
+
+    ans = 0
+    maxCnt = 0
+
+def inRange(r, c):
+    return 0 <= r < N and 0 <= c < N
+
+def extend(point, d):
+    r = point[0] + dr[d]
+    c = point[1] + dc[d]
+    res = 0
+    while inRange(r, c):
+        if arr[r][c] != 0:
+            return -1
+
+        r += dr[d]
+        c += dc[d]
+
+    r = point[0] + dr[d]
+    c = point[1] + dc[d]
+    while inRange(r, c):
+        arr[r][c] = 2
+        r += dr[d]
+        c += dc[d]
+        res += 1
+
+    return res
+
+def rollback(point, d):
+    r = point[0] + dr[d]
+    c = point[1] + dc[d]
+    while inRange(r, c):
+        arr[r][c] = 0
+        r += dr[d]
+        c += dc[d]
+
+def backtracking(idx, length, cnt):
+    global ans, maxCnt
+
+    # idx := 몇 번째 코어를 연결할 차례인 지
+    # length := 이때까지 사용한 전선의 길이
+    # cnt := 이때까지 연결에 성공한 코어의 개수
+
+    # idx번 코어부터 시작해서 남은 모든 코어를 연결하는 모든 경우를 탐색해주는 함수
+
+    if cnt > maxCnt:
+        maxCnt = cnt
+        ans = length
+    elif cnt == maxCnt:
+        ans = min(ans, length)
+
+    if idx == len(coreList):
+        return
+
+    for d in range(4):
+        nr = coreList[idx][0] + dr[d]
+        nc = coreList[idx][1] + dc[d]
+
+        wireLen = extend(coreList[idx], d)
+        if wireLen == -1:       # d 번 방향으로 전선을 놓는 게 불가능하다면, skip
+            continue
+
+        backtracking(idx + 1, length + wireLen, cnt + 1)
+        rollback(coreList[idx], d)
+
+    backtracking(idx + 1, length, cnt)
+
+def output(t):
+    print(f'#{t} {ans}')
+
+T = int(input())
+for t in range(1, T + 1):
+    input_f()
+    backtracking(0, 0, 0)
+    output(t)

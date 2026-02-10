@@ -1,0 +1,197 @@
+'''
+
+python 답안의 경우 다른 언어의 풀이와 다르게 TreeSet 사용이 불가능하기 때문에 풀이 자체는 동일하나 다소 난이도가 높은 자료구조를 추가로 사용합니다.
+공부해두면 유용한 자료구조긴 하지만 이보다 낮은 난이도의 자료구조에 비해 학습 우선순위가 높진 않으니 깊이 공부하는 것을 권장하진 않습니다.
+
+
+
+아래에서는 segment tree에 대한 배경지식이 있다고 가정하고 간단하게 설명합니다.
+
+사용할 자료구조 : dynamic segment tree
+
+만약 1과 0으로 구성된 배열이 주어지고, 특정 구간의 합을 구하라는 명령이 계속 주어진다면 이는 segment tree를 이용해 간단히 처리 가능합니다.
+하지만 대부분의 값이 0이고, 1이 있는 좌표가 주어지는 문제의 경우 좌표 범위가 작다면 괜찮지만 10억처럼 큰 경우 세그먼트 트리를 만들 수 없습니다. (현재 푸는 문제가 이런 형식입니다.)
+이를 해결하기 위해 초기에 모든 노드를 만들어두는게 아니라 update 과정에서 실제 필요한 노드(0이 아닌 노드)만 만들면서 노드의 수를 줄이는 방식이 dynamic segment tree입니다.
+하나의 업데이트를 진행할 때 그 조상 노드만 영향을 받으니 노드의 수는 최대 (실제 리프의 수) * (log 최대 좌표)만큼 필요합니다.
+
+'''
+
+
+
+N = 100
+MAX_NUM_NODE = 400210
+LAST_START_NODE = N
+FIRST_END_NODE = MAX_NUM_NODE - N - 5
+BASE = 1 << 30  # 최대 좌표, segment tree에서 사용.
+
+class TreeNode:
+    def __init__(self, v=0, l=-1, r=-1):
+        self.v = v
+        self.l = l
+        self.r = r
+
+# segment tree의 node pool
+tree_node = [TreeNode() for _ in range(200000 * 31 + 50000)]
+
+# node pool에서 하나의 node를 꺼내오는 함수. 정확히는 노드가 아닌 인덱스를 리턴.
+def new_node(v, l, r):
+    global node_cnt
+
+    tree_node[node_cnt].v = v
+    tree_node[node_cnt].l = l
+    tree_node[node_cnt].r = r
+
+    node_cnt += 1
+    return node_cnt - 1
+
+# 파이썬의 함수호출이 느리니 비재귀로 구현.
+def update(idx, s, e, pos, v):
+    path = []
+
+    # 리프까지 내려가는 과정.
+    while s != e:
+        path.append(idx)    # 루트부터 리프 부모까지의 경로를 모두 path에 저장.
+
+        mid = (s + e) // 2
+        if pos <= mid:      # 업데이트 하려는 위치가 왼쪽인 경우
+            if tree_node[idx].l == -1:  # 왼쪽 노드가 없다면
+                tree_node[idx].l = new_node(0, -1, -1)  # 왼쪽 노드 할당.
+
+            idx, s, e = tree_node[idx].l, s, mid    # 왼쪽으로 이동.
+        else:               # 업데이트 하려는 위치가 오른쪽인 경우
+            if tree_node[idx].r == -1:  # 오른쪽 노드가 없다면
+                tree_node[idx].r = new_node(0, -1, -1)  # 오른쪽 노드 할당.
+
+            idx, s, e = tree_node[idx].r, mid + 1, e    # 오른쪽으로 이동.
+
+    tree_node[idx].v = v    # 리프 업데이트.
+    for idx in path[::-1]:  # 리프의 부모 노드부터 루트까지 역순으로 올라오며 노드 값 업데이트.
+        tree_node[idx].v = 0
+        if tree_node[idx].l != -1:
+            tree_node[idx].v += tree_node[tree_node[idx].l].v
+        if tree_node[idx].r != -1:
+            tree_node[idx].v += tree_node[tree_node[idx].r].v
+
+# lower_bound를 대체할 함수.
+# r 이하인 좌표 중 가장 큰 좌표를 구한다.
+# 비재귀로 구현.
+def get_max(idx, r):
+    stack = [[idx, 0, BASE - 1]]    # 루트에서 출발.
+
+    while len(stack) > 0:
+        idx, s, e = tuple(stack[-1])
+        stack.pop()
+
+        if s == e:  # 리프에 도착했다면 좌표 리턴.
+            return s
+
+        mid = (s + e) // 2
+
+        # 오른쪽 서브트리에 조건을 만족하는게 존재한다면 그 위치가 정답. 그렇지 않다면 왼쪽 서브트리에서 찾아야 한다.
+
+        # 우선순위가 낮은 왼쪽이 스택에 먼저 append.
+        stack.append([tree_node[idx].l, s, mid])
+
+        # 오른쪽은 가능성이 존재할 때만 스택에 append.
+        # 오른쪽에 r 이하인 좌표가 없거나, 노드 자체가 없거나, 노드는 있지만 값이 0이라면 오른쪽은 가능성이 없는 상황.
+        if mid + 1 <= r and tree_node[idx].r != -1 and tree_node[tree_node[idx].r].v > 0:
+            stack.append([tree_node[idx].r, mid + 1, e])
+
+class Node:
+    def __init__(self, prev=None, next=None):
+        self.prev = prev
+        self.next = next
+
+def link(front, back):  # 두 정점을 서로 연결해주기
+    front.next = back
+    back.prev = front
+
+def init():
+    global node, nodeMap, newNode
+    global node_cnt, root
+
+    node = [Node() for _ in range(MAX_NUM_NODE)]        # 교점들의 이중 연결 리스트
+    nodeMap = [{} for _ in range(N + 1)]                # nodeMap[x][y] := x번 세로줄의 y좌표에 있는 노드를 저장하는 HashMap
+    for i in range(1, N + 1):
+        nodeMap[i][0] = node[i] # i 번 세로줄에 i 번 참가자를 놓는다.
+        nodeMap[i][1000000000] = node[FIRST_END_NODE + i - 1]   # i 번 세로줄의 도착점을 추가한다.
+
+        link(node[i], node[FIRST_END_NODE + i - 1])
+
+        node[i].prev = None
+        node[FIRST_END_NODE].next = None
+
+    newNode = N + 1
+
+    node_cnt = 0
+    root = [new_node(0, -1, -1) for _ in range(101)]
+    for i in range(1, 101):
+        update(root[i], 0, BASE - 1, 0, 1)
+        update(root[i], 0, BASE - 1, 1000000000, 1)
+
+def add(mX, mY):    # (mX, mY)와 (mX + 1, mY)을 잇는 가로줄 추가하기, O(Log N)
+    global newNode
+
+    nowLeft = node[newNode]
+    newNode += 1
+    nowRight = node[newNode]
+    newNode += 1
+
+    prevLeft = nodeMap[mX][get_max(root[mX], mY - 1)]   # mX 번 세로 줄에서 mY 직전 정점 찾기
+    prevRight = nodeMap[mX + 1][get_max(root[mX + 1], mY - 1)]  # (mX + 1) 번 세로 줄에서 mY 직전 정점 찾기
+
+    nextLeft = prevLeft.next    # mX 번 세로 줄에서 mY 직후 정점 찾기
+    nextRight = prevRight.next  # (mX + 1) 번 세로 줄에서 mY 직후 정점 찾기
+
+    # 순서 재조정 하기
+    link(prevLeft, nowRight)
+    link(nowRight, nextRight)
+
+    link(prevRight, nowLeft)
+    link(nowLeft, nextLeft)
+
+    nodeMap[mX][mY] = nowLeft
+    nodeMap[mX + 1][mY] = nowRight
+
+    # (mX, mY) 위치와 (mX, mY + 1) 위치에 노드가 있다는 것을 segment tree에 update
+    update(root[mX], 0, BASE - 1, mY, 1)
+    update(root[mX + 1], 0, BASE - 1, mY, 1)
+
+def remove(mX, mY): # (mX, mY)와 (mX + 1, mY)을 잇는 가로줄 제거하기, O(Log N)
+    nowLeft = nodeMap[mX][mY]   # mX번 세로 줄에서 mY 위치 정점 찾기
+    nowRight = nodeMap[mX + 1][mY]  # (mX + 1)번 세로 줄에서 mY 위치 정점 찾기
+
+    prevLeft = nowRight.prev
+    prevRight = nowLeft.prev
+
+    nextLeft = nowLeft.next
+    nextRight = nowRight.next
+
+    link(prevLeft, nextLeft)
+    link(prevRight, nextRight)
+
+    # 순서 재조정 하기
+    nodeMap[mX].pop(mY)
+    nodeMap[mX + 1].pop(mY)
+
+    # (mX, mY) 위치와 (mX, mY + 1) 위치에 노드가 없다는 것을 segment tree에 update
+    update(root[mX], 0, BASE - 1, mY, 0)
+    update(root[mX + 1], 0, BASE - 1, mY, 0)
+
+def numberOfCross(mID): # mID번 참가자가 지나게 되는 가로줄의 개수 구하기, O(5000)
+    ret = -1
+    now = node[mID] # mID 번 세로줄에서 출발하기
+    while now.next: # 마지막 줄에 도착할 때까지 다음으로 이동하기
+        ret += 1
+        now = now.next
+
+    return ret
+
+def participant(mX, mY):    # (mX, mY)에 도착하는 참가자 찾기, O(5000)
+    now = nodeMap[mX][get_max(root[mX], mY)]    # mX 번 세로 줄에서 mY 직전 정점 찾기
+    while now.prev: # 최상단에 도착할 때까지 이전으로 돌아가기
+        now = now.prev
+
+    for i in range(1, 101):
+        if node[i] == now:
+            return i

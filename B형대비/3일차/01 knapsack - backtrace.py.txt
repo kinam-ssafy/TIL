@@ -1,0 +1,38 @@
+T = int(input())
+
+for testcase in range(1, T + 1):
+    N, K = map(int, input().split())
+    w = [0 for _ in range(N + 1)]
+    v = [0 for _ in range(N + 1)]
+    for i in range(1, N + 1):
+        a, b = map(int, input().split())
+        w[i] = a
+        v[i] = b
+
+    dp = [[0 for _ in range(K + 1)] for _ in range(N + 1)]
+    come = [[0 for _ in range(K + 1)] for _ in range(N + 1)]
+
+    for i in range(1, N + 1):
+        for j in range(K + 1):
+            dp[i][j] = dp[i - 1][j]
+            come[i][j] = 1
+
+            if w[i] <= j:
+                if dp[i][j] < dp[i - 1][j - w[i]] + v[i]:
+                    dp[i][j] = dp[i - 1][j - w[i]] + v[i]
+                    come[i][j] = 2
+
+    used = [0 for i in range(N + 1)]    # used[i] := i번 물건이 사용되었는가?
+    j = K       # 현재 가방 용량
+
+    for i in range(N, 0, -1):
+        if come[i][j] == 1:
+            used[i] = 0
+        else:
+            used[i] = 1
+            j -= w[i]
+
+    for i in range(1, N + 1):
+        print(f'{i}번 물건 사용: {used[i]}')
+
+    print(f'#{testcase} {dp[N][K]}')

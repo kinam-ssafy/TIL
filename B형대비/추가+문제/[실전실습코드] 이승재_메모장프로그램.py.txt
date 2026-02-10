@@ -1,0 +1,72 @@
+from collections import deque
+
+def init(H, W, str):
+    global grid, counting, h, w, cur_r, cur_c, length
+
+    length = 0
+    h = H
+    w = W
+    counting = [[0 for _ in range(26)] for _ in range(303)]
+    grid = [deque() for _ in range(303)]
+    for i in range(H):
+        for j in range(W):
+            if length < len(str):
+                counting[i][ord(str[length]) - ord('a')] += 1
+                grid[i].append(str[length])
+                length += 1
+            else:
+                break
+
+    cur_r = cur_c = 0
+
+def insert(c):
+    global cur_r, cur_c, length
+
+    grid[cur_r].insert(cur_c, c)
+    counting[cur_r][ord(c) - ord('a')] += 1
+    row = cur_r
+    cur_c += 1
+    length += 1
+    if cur_c == w:
+        cur_r += 1
+        cur_c = 0
+    while len(grid[row]) > w:
+        bk = grid[row][-1]
+
+        counting[row][ord(bk) - ord('a')] -= 1
+        grid[row].pop()
+
+        counting[row + 1][ord(bk) - ord('a')] += 1
+        grid[row + 1].append(bk)
+        row += 1
+
+def moveCursor(row, col):
+    global cur_r, cur_c, length
+
+    row -= 1
+    col -= 1
+    if row * w + col >= length:
+        row = length // w
+        col = length % w
+        cur_r = row
+        cur_c = col
+        return '$'
+
+    cur_r = row
+    cur_c = col
+    return grid[row][col]
+
+def countCharacter(c):
+    row = cur_r
+    col = cur_c
+    ret = 0
+    if col:
+        for i in range(col, len(grid[row])):
+            if grid[row][i] == c:
+                ret += 1
+        row += 1
+
+    for i in range(row, h):
+        ret += counting[i][ord(c) - ord('a')]
+
+    return ret

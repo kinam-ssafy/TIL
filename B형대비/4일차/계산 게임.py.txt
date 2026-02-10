@@ -1,0 +1,94 @@
+from collections import deque
+
+MAX_CARD = 50000
+
+class Table:
+    def __init__(self):
+        self.joker = 0
+        self.begin = 0
+        self.end = 0
+        self.cards = [0 for _ in range(MAX_CARD * 2 + 5)]
+        self.idxList = [[deque() for _ in range(20)] for _ in range(20)]
+	    # idxList[joker][score] := 조커의 점수가 joker일 때, 점수가 score인 인덱스 리스트
+	    # 예를 들어, 현재 joker = 9점이고, findNumber의 타겟 점수가 19 점이라면,
+	    # 우리는 idxList[9][19] => 원하는 인덱스 리스트를 바로 알 수 있다.
+
+    def updateIdx(self, idx, mdir):       # [idx ~ (idx + 3)] 의 네 장의 점수를 mdir 방향에 추가한다.
+        total = 0   # 조커 이외의 총점
+        joker_cnt = 0   # 조커 개수
+        for i in range(4):
+            if self.cards[idx + i] == -1:
+                joker_cnt += 1
+            else:
+                total += self.cards[idx + i]
+
+        for i in range(20):     # 조커의 점수를 i 로 가정해보자
+            num = (total + (joker_cnt * i)) % 20
+            if mdir == 0:       # 왼쪽
+                self.idxList[i][num].appendleft(idx)
+            else:               # 오른쪽
+                self.idxList[i][num].append(idx)
+
+    def init(self, mJoker, mNumbers):   # 초기 5장과 조커로 초기화하기
+        self.joker = mJoker % 20     # 조커 점수를 20으로 나눈 나머지로 초기화하기
+        self.begin = self.end = MAX_CARD  # 카드들의 처음, 끝 위치 초기화하기
+        for i in range(20):
+            for j in range(20):
+                self.idxList[i][j] = deque()
+
+        for i in range(5):
+            self.cards[self.end + i] = mNumbers[i]
+
+        self.end += 5
+        for i in range(2):
+            self.updateIdx(MAX_CARD + i, 1)
+
+    def push_front(self, mNumbers): # 새로운 5 장을 왼쪽에 놓기
+        self.begin -= 5
+        for i in range(5):
+            self.cards[self.begin + i] = mNumbers[i]
+        target = self.begin
+        for i in range(4, -1, -1):
+            self.updateIdx(target + i, 0)
+
+    def push_back(self, mNumbers):  # 새로운 5 장을 오른쪽에 놓기
+        for i in range(5):
+            self.cards[self.end + i] = mNumbers[i]
+        target = self.end - 3
+        self.end += 5
+        for i in range(5):
+            self.updateIdx(target + i, 1)
+
+    def find(self, mNum, mNth): # mNum 점수 중에 mNth 번째 위치 찾기
+        lst = self.idxList[self.joker][mNum]
+        if mNth > len(lst):
+            return -1
+        return lst[mNth - 1]
+
+    def changeJoker(self, mJoker):  # 조커 점수 바꾸기
+        self.joker = mJoker % 20
+
+def init(mJoker, mNumbers):
+    global t
+
+    t = Table()
+    t.init(mJoker, mNumbers)
+
+def putCards(mDir, mNumbers):
+    if mDir == 0:
+        t.push_front(mNumbers)
+    else:
+        t.push_back(mNumbers)
+
+def findNumber(mNum, mNth, ret):
+    idx = t.find(mNum, mNth)
+    if idx == -1:
+        return 0
+
+    for i in range(4):
+        ret[i] = t.cards[idx + i]
+
+    return 1
+
+def changeJoker(mValue):
+    t.changeJoker(mValue)

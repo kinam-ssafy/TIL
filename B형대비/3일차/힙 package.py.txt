@@ -1,0 +1,24 @@
+import heapq
+
+TC = int(input())
+
+for tc in range(1, TC + 1):
+    N = int(input())
+
+    print(f'#{tc} ', end='')
+
+    pq = []
+    for i in range(N):
+        input_line = list(map(int, input().split()))
+
+        if input_line[0] == 1:
+            heapq.heappush(pq, -input_line[1])  # python의 heapq는 minheap이니 부호를 바꿔서 push.
+        else:
+            output = -1
+            if len(pq) > 0:
+                output = -pq[0]     # 부호를 바꿔서 push했으니 꺼낼 때 다시 부호를 바꿔준다.
+                heapq.heappop(pq)
+
+            print(output, end=' ')
+
+    print()

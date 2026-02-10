@@ -1,0 +1,26 @@
+def solve():
+    ans = 0     # 내가 찾은 최장 스트릭 길이
+    for i in range(n):      # i := 공부를 시작한 날짜의 인덱스
+        # a[i] 에 공부를 시작한 상태
+
+        L = i
+        R = n - 1
+        while L <= R:
+            mid = (L + R) // 2
+            blank = (a[mid] - a[i] + 1) - (mid - i + 1)     # 빈 날짜 개수
+            if blank > p:       # 불가능
+                R = mid - 1
+            else:               # 가능
+                L = mid + 1
+                ans = max(ans, (a[mid] - a[i] + 1) + (p - blank))
+
+    return ans
+
+T = int(input())
+
+for test_case in range(1, T + 1):
+    n, p = map(int, input().split())
+
+    a = list(map(int, input().split()))
+
+    print(f'#{test_case} {solve()}')

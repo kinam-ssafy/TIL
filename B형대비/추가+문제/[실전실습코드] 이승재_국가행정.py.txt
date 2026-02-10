@@ -1,0 +1,97 @@
+import heapq
+
+def update(index, value):
+    index += base
+    seg[index] = value
+    index //= 2
+    while index >= 1:
+        seg[index] = seg[index * 2] + seg[index * 2 + 1]
+        index //= 2
+
+def get_sum(qs, qe):
+    ret = 0
+    qs += base
+    qe += base
+    while qs <= qe:
+        if qs % 2 == 1:
+            ret += seg[qs]
+            qs += 1
+        if qe % 2 == 0:
+            ret += seg[qe]
+            qe -= 1
+
+        qs //= 2
+        qe //= 2
+
+    return ret
+
+class pq_edge:
+    def __init__(self, index=0, weight=0):
+        self.index = index
+        self.weight = weight
+
+    def __lt__(self, other):
+        if self.weight != other.weight:
+            return self.weight > other.weight
+        else:
+            return self.index < other.index
+
+def init(N, mPopulation):
+    global pq, population, C, seg, base
+
+    seg = [0 for _ in range(1 << 15)]
+    C = [0 for _ in range(10000)]
+    population = mPopulation
+    pq = []
+    base = 1
+    while base < N - 1:
+        base *= 2
+    for i in range(N - 1):
+        C[i] = 1
+        weight = (mPopulation[i] + mPopulation[i + 1])
+        heapq.heappush(pq, pq_edge(i, weight))
+        seg[base + i] = weight
+    for i in range(base - 1, -1, -1):
+        seg[i] = seg[i * 2] + seg[i * 2 + 1]
+
+def expand(M):
+    new_weight = -1
+    while M > 0:
+        index = pq[0].index
+        weight = pq[0].weight
+        heapq.heappop(pq)
+        C[index] += 1
+        new_weight = (population[index] + population[index + 1]) // C[index]
+        heapq.heappush(pq, pq_edge(index, new_weight))
+        update(index, new_weight)
+        M -= 1
+
+    return new_weight
+
+def calculate(from_, to_):
+    if from_ > to_:
+        from_, to_ = to_, from_
+
+    return get_sum(from_, to_ - 1)
+
+def divide(from_, to_, K):
+    lf = 1
+    rg = 10000000
+    while lf < rg:
+        mid = (lf + rg) // 2
+        P = 0
+        i = from_
+        while(i <= to_ and P <= K):
+            total = 0
+            j = i
+            while j <= to_ and total + population[j] <= mid:
+                total += population[j]
+                j += 1
+            i = j
+            P += 1
+        if P <= K:
+            rg = mid
+        else:
+            lf = mid + 1
+
+    return rg

@@ -1,0 +1,89 @@
+HASH_SIZE = pow(2, 30) - 1
+NM = 2005
+targetArr = [[0 for _ in range(NM)] for _ in range(NM)]
+originArr = [[0 for _ in range(NM)] for _ in range(NM)]
+horizonHashArr = [[0 for _ in range(NM)] for _ in range(NM)]
+verticalHashArr = [[0 for _ in range(NM)] for _ in range(NM)]
+
+def getMaxPower(length, shift):
+    result = 1
+    for i in range(length - 1):
+        result = (result << shift) + result
+
+    return result & HASH_SIZE
+
+def getHorizonHash(matrix, length, row, col):
+    result = 0
+    for i in range(length):
+        result = (result << 4) + result + matrix[row][col + i]
+
+    return result & HASH_SIZE
+
+def getVerticalHash(matrix, length, row, col):
+    result = 0
+    for i in range(length):
+        result = (result << 5) + result + matrix[row + i][col]
+
+    return result & HASH_SIZE
+
+def getNext(prev, del_val, maxPower, add, shift):
+    result = prev - (del_val * maxPower)
+    result = (result << shift) + result + add
+
+    return result & HASH_SIZE
+
+def getHashArr(matrix, matrix_height, matrix_width, pattern_height, pattern_width):
+    rowMaxP = getMaxPower(pattern_height, 5)
+    colMaxP = getMaxPower(pattern_width, 4)
+
+    for i in range(matrix_height):
+        hash = getHorizonHash(matrix, pattern_width, i, 0)
+        horizonHashArr[i][0] = hash
+
+        for j in range(1, matrix_width - pattern_width + 1):
+            horizonHashArr[i][j] = getNext(hash, matrix[i][j - 1], colMaxP, matrix[i][j - 1 + pattern_width], 4)
+            hash = horizonHashArr[i][j]
+
+    for j in range(matrix_width - pattern_width + 1):
+        hash = getVerticalHash(horizonHashArr, pattern_height, 0, j)
+        verticalHashArr[0][j] = hash
+
+        for i in range(1, matrix_height - pattern_height + 1):
+            verticalHashArr[i][j] = getNext(hash, horizonHashArr[i - 1][j], rowMaxP, horizonHashArr[i - 1 + pattern_height][j], 5)
+            hash = verticalHashArr[i][j]
+
+def solution(targetArr, originArr):
+    getHashArr(targetArr, H, W, H, W)
+    hashVal = verticalHashArr[0][0]
+    getHashArr(originArr, N, M, H, W)
+
+    cnt = 0
+    for i in range(N - H + 1):
+        for j in range(M - W + 1):
+            if verticalHashArr[i][j] == hashVal:
+                cnt += 1
+
+    return cnt
+
+T = int(input())
+
+for testCase in range(1, T + 1):
+    H, W, N, M = map(int, input().split())
+
+    for i in range(H):
+        s = input()
+        for j in range(W):
+            if s[j] == 'o':
+                targetArr[i][j] = 1
+            else:
+                targetArr[i][j] = 0
+
+    for i in range(N):
+        s = input()
+        for j in range(M):
+            if s[j] == 'o':
+                originArr[i][j] = 1
+            else:
+                originArr[i][j] = 0
+
+    print(f'#{testCase} {solution(targetArr, originArr)}')

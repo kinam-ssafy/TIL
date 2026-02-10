@@ -1,0 +1,74 @@
+import heapq
+
+def dijkstra(fwdList, mHub):
+    X = id2idx[mHub]
+    visit = [False for _ in range(Num)]
+    distance = [100000000 for _ in range(Num)]
+
+    pq = []
+    heapq.heappush(pq, [0, X])
+    distance[X] = 0
+
+    while len(pq) > 0:
+        curNode = pq[0]
+        heapq.heappop(pq)
+        cur = curNode[1]
+
+        if visit[cur]:
+            continue
+
+        visit[cur] = True
+
+        for n in fwdList[cur]:
+            nxt = n[0]
+            if distance[nxt] > distance[cur] + n[1]:
+                distance[nxt] = distance[cur] + n[1]
+                heapq.heappush(pq, [distance[nxt], nxt])
+
+    return distance
+
+def init(N, sCity, eCity, mCost):
+    global id2idx, Num, fwdList, revList
+
+    id2idx = {}
+    idx = 0
+
+    for i in range(N):
+        if sCity[i] not in id2idx:
+            id2idx[sCity[i]] = idx
+            idx += 1
+        if eCity[i] not in id2idx:
+            id2idx[eCity[i]] = idx
+            idx += 1
+    Num = len(id2idx)
+
+    fwdList = [[] for _ in range(Num)]
+    revList = [[] for _ in range(Num)]
+
+    for i in range(N):
+        # 정방향 그래프 구성
+        fwdList[id2idx[sCity[i]]].append([id2idx[eCity[i]], mCost[i]])
+        # 역방향 그래프 구성
+        revList[id2idx[eCity[i]]].append([id2idx[sCity[i]], mCost[i]])
+
+    return Num
+
+def add(sCity, eCity, mCost):
+    # 정방향 그래프에 간선 추가하기
+    fwdList[id2idx[sCity]].append([id2idx[eCity], mCost])
+
+    # 역방향 그래프에 간선 추가하기
+    revList[id2idx[eCity]].append([id2idx[sCity], mCost])
+
+def cost(mHub):
+    # mHub 에서 모든 정점까지의 최단 거리
+    distance = dijkstra(fwdList, mHub)
+    # 모든 정점에서 mHub 까지의 최단 거리
+    revdistance = dijkstra(revList, mHub)
+
+    total = 0
+    for i in range(Num):
+        total += distance[i]
+        total += revdistance[i]
+
+    return total

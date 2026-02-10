@@ -1,0 +1,54 @@
+class Time:
+    def __init__(self, s=0, e=0):
+        self.s = s
+        self.e = e
+
+def upperBound(target):
+    start = 0
+    end = N - 1
+    answer = N
+
+    while start <= end:
+        mid = (start + end) // 2
+
+        if arr[mid].e > target:
+            answer = mid
+            end = mid - 1
+        else:
+            start = mid + 1
+
+    return answer
+
+T = int(input())
+
+for test_case in range(1, T + 1):
+    L = int(input())
+    N = int(input())
+
+    result = -1
+    arr = []        # arr[i] := i 번 광고의 시작, 끝 정보
+    total = []      # total[i] := 첫 i 개 광고들의 총 시간
+
+    for i in range(N):
+        s, e = map(int, input().split())
+        arr.append(Time(s, e))
+
+        if i == 0:
+            total.append(e - s)
+        else:
+            total.append(total[i - 1] + e - s)
+
+    for i in range(N):
+        target = arr[i].s + L       # i 번 광고 시작부터 L 시간 동안 틀면 (arr[i].s + L) 까지 광고
+        ub = upperBound(target)     # target보다 늦게 끝나는 첫 번째 광고 찾기
+        temp = total[ub - 1]        # 광고가 나가는 시간
+
+        if i != 0:
+            temp -= total[i - 1]
+
+        if ub != N and target > arr[ub].s:      # 마지막 광고가 나가는 시간 누적
+            temp += target - arr[ub].s
+
+        result = max(result, temp)
+
+    print(f'#{test_case} {result}')

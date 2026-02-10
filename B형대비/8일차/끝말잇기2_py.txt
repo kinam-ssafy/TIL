@@ -1,0 +1,67 @@
+import heapq
+
+class Cycle:
+    def __init__(self, n):
+        # n := 전체 사람의 수, cur := 현재 순서
+        self.n = n
+        self.cur = 1
+
+        # prv[i] := i 번 사람의 이전 순서, nxt[i] := i 번 사람의 다음 순서
+        self.prv = [i - 1 for i in range(n + 1)]
+        self.prv[1] = n
+        self.nxt = [i + 1 for i in range(n + 1)]
+        self.nxt[n] = 1
+
+    def setCur(self, id):
+        self.cur = id
+
+    def move(self):
+        self.cur = self.nxt[self.cur]
+
+    def pop(self):
+        self.nxt[self.prv[self.cur]] = self.nxt[self.cur]
+        self.prv[self.nxt[self.cur]] = self.prv[self.cur]
+        return self.cur
+
+def init(N, M, mWords):
+    global wordSet, usedWordSet, totalPlayer, cycle
+
+    totalPlayer = N
+    wordSet = [[] for _ in range(26)]   # wordSet[c]  := c 로 시작하는 사용 가능한 단어 집합
+    usedWordSet = set()    # usedWordSet := 사용한 적이 있는 단어 집합
+
+    for i in range(M):
+        heapq.heappush(wordSet[ord(mWords[i][0]) - ord('a')], mWords[i])
+
+    cycle = Cycle(totalPlayer)
+
+def playRound(mID, mCh):
+    cycle.setCur(mID)   # 시작하는 사람 지정해주기
+    newWords = []       # 이번 라운드에 의해 추가될 단어들
+
+    while len(wordSet[ord(mCh) - ord('a')]) > 0:
+        # mCh로 시작하는 사전순으로 앞선 단어 찾기, O(log M)
+        word = wordSet[ord(mCh) - ord('a')][0]
+        heapq.heappop(wordSet[ord(mCh) - ord('a')])
+
+        # 선택한 적이 있다는 기록 남기기, O(1)
+        usedWordSet.add(word)
+
+        # 뒤집은 단어 추가하기
+        reverseWord = word[::-1]
+        if reverseWord not in usedWordSet:
+            newWords.append(reverseWord)
+
+        # 다음 시작 알파벳 결정하기
+        mCh = reverseWord[0]
+
+        # 순서 넘기기, O(1)
+        cycle.move()
+
+    for newWord in newWords:
+        if newWord in usedWordSet:
+            continue
+
+        heapq.heappush(wordSet[ord(newWord[0]) - ord('a')], newWord)
+
+    return cycle.pop()

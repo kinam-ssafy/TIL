@@ -1,0 +1,65 @@
+def compare(s1, s2):
+    if len(s1) != len(s2):
+        return len(s1) > len(s2)
+
+    for i in range(max(len(s1), len(s2))):
+        c1 = s1[i] if i < len(s1) else '\0'
+        c2 = s2[i] if i < len(s2) else '\0'
+
+        if c1 != c2:
+            return c1 > c2
+
+    return True
+
+def merge(arr, start, center, end):
+    head = arr[start:center]
+    tail = arr[center:end]
+
+    headPtr = 0
+    tailPtr = 0
+    index = start
+
+    while index < end:
+        if headPtr == len(head):
+            arr[index] = tail[tailPtr]
+            tailPtr += 1
+        elif tailPtr == len(tail):
+            arr[index] = head[headPtr]
+            headPtr += 1
+        else:
+            if compare(head[headPtr], tail[tailPtr]):
+                arr[index] = tail[tailPtr]
+                tailPtr += 1
+            else:
+                arr[index] = head[headPtr]
+                headPtr += 1
+
+        index += 1
+
+def mergeSort(arr, start, end):
+    if end - start <= 1:
+        return
+
+    center = start + (end - start) // 2
+    mergeSort(arr, start, center)
+    mergeSort(arr, center, end)
+    merge(arr, start, center, end)
+
+T = int(input())
+
+for testCase in range(1, T + 1):
+    length = int(input())
+
+    words = []
+    for i in range(length):
+        words.append(input())
+
+    mergeSort(words, 0, length)
+
+    print(f'#{testCase}')
+    prev = ''
+    for word in words:
+        if word != prev:
+            print(word)
+
+        prev = word

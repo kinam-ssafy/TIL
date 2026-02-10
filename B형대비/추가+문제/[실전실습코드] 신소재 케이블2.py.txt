@@ -1,0 +1,96 @@
+MAX_DEVICE = 10005
+
+def init(mDevice):
+    global root, id, parent, distToParent, depth
+    global firstID, secondID, firstLatency, secondLatency
+    global idmap
+
+    parent = [0 for _ in range(MAX_DEVICE)]
+    distToParent = [0 for _ in range(MAX_DEVICE)]
+    depth = [0 for _ in range(MAX_DEVICE)]
+    firstID = [0 for _ in range(MAX_DEVICE)]
+    secondID = [0 for _ in range(MAX_DEVICE)]
+    firstLatency = [0 for _ in range(MAX_DEVICE)]
+    secondLatency = [0 for _ in range(MAX_DEVICE)]
+
+    root = id = 1
+    idmap = {}
+    idmap[mDevice] = id
+
+def update(pid, cid):
+    distSum = 0
+    while pid:
+        distSum += distToParent[cid]
+        if firstID[pid] == cid:
+            if firstLatency[pid] < distSum:
+                firstLatency[pid] = distSum
+            else:
+                break
+        elif firstLatency[pid] < distSum:
+            secondLatency[pid] = firstLatency[pid]
+            secondID[pid] = firstID[pid]
+            firstLatency[pid] = distSum
+            firstID[pid] = cid
+        elif secondLatency[pid] < distSum:
+            secondLatency[pid] = distSum
+            secondID[pid] = cid
+        else:
+            break
+
+        cid = pid
+        pid = parent[pid]
+
+def connect(mOldDevice, mNewDevice, mLatency):
+    global id
+
+    old_device_id = idmap[mOldDevice]
+    new_device_id = id + 1
+    id += 1
+
+    idmap[mNewDevice] = new_device_id
+
+    parent[new_device_id] = old_device_id
+    depth[new_device_id] = depth[old_device_id] + 1
+    distToParent[new_device_id] = mLatency
+
+    update(old_device_id, new_device_id)
+
+def measure(mDevice1, mDevice2):
+    sid = idmap[mDevice1]
+    eid = idmap[mDevice2]
+
+    if depth[sid] > depth[eid]:
+        sid, eid = eid, sid
+    diff = depth[eid] - depth[sid]
+    ret = 0
+    while diff > 0:
+        ret += distToParent[eid]
+        eid = parent[eid]
+        diff -= 1
+    while sid != eid:
+        ret += distToParent[sid] + distToParent[eid]
+        sid = parent[sid]
+        eid = parent[eid]
+
+    return ret
+
+def test(mDevice):
+    mid = idmap[mDevice]
+    pid = parent[mid]
+    ret = firstLatency[mid] + secondLatency[mid]
+
+    distSum = firstLatency[mid]
+    while pid:
+        distSum += distToParent[mid]
+        if secondLatency[pid]:
+            if firstID[pid] == mid:
+                ret = max(ret, distSum + secondLatency[pid])
+            else:
+                ret = max(ret, distSum + firstLatency[pid])
+        else:
+            ret = max(ret, distSum)
+
+        mid = pid
+        pid = parent[pid]
+
+    return ret

@@ -1,0 +1,36 @@
+import heapq
+
+MOD = 20171109
+
+T = int(input())
+
+for t in range(1, T + 1):
+    minH = []
+    maxH = []
+
+    N, A = map(int, input().split())
+
+    heapq.heappush(minH, A)
+    answer = 0
+
+    for i in range(N):
+        num1, num2 = map(int, input().split())
+
+        if num1 > num2:
+            heapq.heappush(minH, num1)
+            heapq.heappush(maxH, -num2)
+        else:
+            heapq.heappush(minH, num2)
+            heapq.heappush(maxH, -num1)
+
+        while len(minH) > 0 and len(maxH) > 0 and minH[0] < -maxH[0]:
+            minVal = minH[0]
+            maxVal = -maxH[0]
+            heapq.heappop(minH)
+            heapq.heappop(maxH)
+            heapq.heappush(minH, maxVal)
+            heapq.heappush(maxH, -minVal)
+
+        answer = (minH[0] + answer) % MOD
+
+    print(f'#{t} {answer}')

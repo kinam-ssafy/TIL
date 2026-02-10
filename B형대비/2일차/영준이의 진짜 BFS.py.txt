@@ -1,0 +1,76 @@
+from collections import deque
+
+def init():
+    global graph, d, visit
+
+    graph = [[] for i in range(100001)]
+    d = [0 for i in range(100001)]
+    visit = [False for i in range(100001)]
+
+def LCA(x, y, cnt):
+    if d[x] > d[y]:
+        x, y = y, x
+
+    if par[y][0] == x:
+        return 1
+
+    for i in range(19, -1, -1):
+        if d[y] - d[x] >= (1 << i):
+            y = par[y][i]
+            cnt += 1 << i
+
+    if par[y][0] != par[x][0]:
+        for i in range(19, -1, -1):
+            if par[x][i] != par[y][i]:
+                cnt += 2 * (1 << i)
+                x = par[x][i]
+                y = par[y][i]
+
+    if par[x][0] == par[y][0]:
+        cnt += 2
+
+    return cnt
+
+def bfs():
+    result = 0
+    q = deque()
+    pre = 1
+
+    q.append(1)
+    visit[1] = True
+    while len(q) > 0:
+        x = q[0]
+        q.popleft()
+        for y in graph[x]:
+            if visit[y]:
+                continue
+
+            q.append(y)
+            cur = y
+            visit[y] = True
+            result += LCA(pre, cur, 0)
+            pre = cur
+
+    return result
+
+T = int(input())
+for tc in range(1, T + 1):
+    init()
+    N = int(input())
+    par = [[0 for _ in range(20)] for _ in range(N + 1)]
+    lst = list(map(int, input().split()))
+
+    par[1][0] = 0
+    d[1] = 0
+    for i in range(2, N + 1):
+        k = lst[i - 2]
+
+        graph[k].append(i)
+        par[i][0] = k
+        d[i] = d[k] + 1
+
+    for y in range(1, 20):
+        for x in range(1, N + 1):
+            par[x][y] = par[par[x][y - 1]][y - 1]
+
+    print(f'#{tc} {bfs()}')

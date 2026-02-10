@@ -1,0 +1,71 @@
+def init(n, id, si):
+    global cmp, C, p, sub, deg, nGroup, is_dead
+
+    C = 0
+    is_dead = [0 for _ in range(18000)]
+    p = [0 for _ in range(18000)]
+    deg = [0 for _ in range(18000)]
+    sub = [0 for _ in range(18000)]
+    cmp = {}
+    nGroup = n
+    for i in range(n):
+        cmp[id[i]] = C
+        my = cmp[id[i]]
+        C += 1
+        p[my] = -1
+        sub[my] = si[i]
+        deg[my] = 0
+
+def add(id, si, par):
+    global C
+
+    par = cmp[par]
+    if deg[par] >= 3:
+        return -1
+
+    cmp[id] = C
+    id = cmp[id]
+    C += 1
+    deg[par] += 1
+    p[id] = par
+    sub[id] = 0
+    deg[id] = 0
+    while id != -1:
+        sub[id] += si
+        id = p[id]
+    return sub[par]
+
+def remove(id):
+    if id not in cmp:
+        return -1
+
+    id = cmp[id]
+    node = id
+    while node != -1:
+        if is_dead[node]:
+            return -1
+
+        node = p[node]
+
+    is_dead[id] = True
+    deg[p[id]] -= 1
+    si = sub[id]
+    while id != -1:
+        sub[id] -= si
+        id = p[id]
+
+    return si
+
+def distribute(K):
+    si = sub[:nGroup]
+    si.sort()
+    pref = sum(si)
+    if pref <= K:
+        return si[-1]
+    for i in range(nGroup - 1, -1, -1):
+        pref -= si[i]
+        L = (K - pref) // (nGroup - i)
+        if (si[i - 1] if i - 1 >= 0 else 0) <= L:
+            return L
+
+    return 0

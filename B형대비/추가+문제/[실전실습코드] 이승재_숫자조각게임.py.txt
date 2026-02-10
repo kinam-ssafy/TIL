@@ -1,0 +1,119 @@
+MAX_ROW = 40
+MAX_COL = 30
+INF = 1000000007
+
+class Result:
+    def __init__(self, row=0, col=0):
+        self.row = row
+        self.col = col
+
+class D:
+    def __init__(self, type=0, hash=0, p=[]):
+        self.type = type
+        self.hash = hash
+        self.p = p
+
+pattern = [
+    [[0, 0], [1, 0], [1, 1], [1, 2] ,[2, 2]],
+    [[0, 0], [0, 1], [1, 1], [1, 2]],
+    [[0, 0], [0, 1], [0, 2]],
+    [[0, 0], [1, 0], [2, 0]],
+    [[0, 0], [0, 1]]
+]
+
+def init(h, w, grid):
+    global H, W, ds, ps, pq, on
+
+    H = h
+    W = w
+    on = [0 for _ in range(40)]
+    ds = []
+    ps = []
+    pq = [[[] for _ in range(1 << 15)] for _ in range(5)]
+    for i in range(h):
+        for j in range(w):
+            for type in range(5):
+                mn = INF
+                good = True
+                for x in pattern[type]:
+                    di, dj = x[0], x[1]
+                    if i + di >= h or j + dj >= w:
+                        good = False
+                        break
+                    mn = min(mn, grid[i + di][j + dj])
+
+                if not good:
+                    continue
+
+                hash = 0
+                for x in pattern[type]:
+                    di, dj = x[0], x[1]
+                    delta = grid[i + di][j + dj] - mn
+                    hash <<= 3
+                    hash += delta
+                pq[type][hash].append([i, j])
+                ps.append([type, hash])
+
+    sorted_ps = sorted(ps)
+    ps = [sorted_ps[0]]
+    for i in range(1, len(sorted_ps)):
+        if sorted_ps[i] != sorted_ps[i - 1]:
+            ps.append(sorted_ps[i])
+
+    for x in ps:
+        u, v = x[0], x[1]
+        pq[u][v].sort(reverse=True)
+        ds.append(D(u, v, pq[u][v]))
+
+def putPuzzle(pz):
+    type = -1
+    for t in range(5):
+        good = True
+        for x in pattern[t]:
+            di, dj = x[0], x[1]
+            if pz[di][dj] == 0:
+                good = False
+                break
+        if good:
+            type = t
+            break
+
+    mn = INF
+    for x in pattern[type]:
+        di, dj = x[0], x[1]
+        mn = min(mn, pz[di][dj])
+
+    hash = 0
+    for x in pattern[type]:
+        di, dj = x[0], x[1]
+        delta = pz[di][dj] - mn
+        hash <<= 3
+        hash += delta
+
+    p = pq[type][hash]
+    res = Result(-1, -1)
+    while len(p) > 0:
+        r, c = p[-1][0], p[-1][1]
+        p.pop()
+        good = True
+        for x in pattern[type]:
+            di, dj = x[0], x[1]
+            if on[r + di] & (1 << (c + dj)):
+                good = False
+                break
+        if not good:
+            continue
+        res = Result(r, c)
+        for x in pattern[type]:
+            di, dj = x[0], x[1]
+            on[r + di] |= 1 << (c + dj)
+        break
+
+    return res
+
+def clearPuzzles():
+    for i in range(H):
+        on[i] = 0
+    for x in ds:
+        r, c, p = x.type, x.hash, x.p
+        pq[r][c] = p

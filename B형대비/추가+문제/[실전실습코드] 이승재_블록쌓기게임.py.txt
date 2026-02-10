@@ -1,0 +1,43 @@
+class Result:
+    def __init__(self, top=0, count=0):
+        self.top = top
+        self.count = count
+
+def init(C):
+    global base, add, min_value, max_value, col, tot
+
+    base = 1 << 20
+    add = [0 for _ in range(base << 1)]
+    min_value = [0 for _ in range(base << 1)]
+    max_value = [0 for _ in range(base << 1)]
+    col = C
+    tot = 0
+
+def range_update(qs, qe, qk, ns=0, ne=-1, nx=1):
+    if ne == -1:
+        ne = col - 1
+    if qe < ns or ne < qs:
+        return
+    if qs <= ns and ne <= qe:
+        add[nx] += qk
+        min_value[nx] += qk
+        max_value[nx] += qk
+    else:
+        mid = (ns + ne) // 2
+        range_update(qs, qe, qk, ns, mid, nx * 2)
+        range_update(qs, qe, qk, mid + 1, ne, nx * 2 + 1)
+        min_value[nx] = min(min_value[nx * 2], min_value[nx * 2 + 1]) + add[nx]
+        max_value[nx] = max(max_value[nx * 2], max_value[nx * 2 + 1]) + add[nx]
+
+def dropBlocks(mCol, mHeight, mLength):
+    global tot
+
+    ret = Result()
+    tot += mHeight * mLength
+
+    range_update(mCol, mCol + mLength - 1, mHeight)
+    mn = min_value[1]
+    mx = max_value[1]
+    ret.top = mx - mn
+    ret.count = (tot - 1 * mn * col) % 1000000
+    return ret
