@@ -23,4 +23,95 @@
 A+B*C-D/E = A+(B*C)-(D/E) = ABC*+DE/-
 """
 
-#
+# 먼저 연산하는 곳부터 괄호를 씌워줌
+# 괄호 씌워진곳의 연산자를 밖으로 꺼내준다
+# A * (B + C) = ABC+*  / 문자 리스트 따로, 연산자 리스트 따로?
+# ABC*+DE/- 는 어떻게?  / 한 리스트에서 관리한다면 
+
+# A+B*C-D/E = (A + (B * C) - (D / E)) = (A + (BC*) - (DE/)) = ABC*+DE/-
+# [A,B,C,D,E]  [+,*,-,/]  
+# 
+
+
+# A+B+C+D+E 면? ABCDE+++++
+# * / 연산자면 양옆을 괄호로 묶을 것
+
+############################################
+
+# import sys
+# input = sys.stdin.readline
+
+# calc = input().strip()
+# print(calc) # A+B*C-D/E 
+# stack = []
+# open = 0
+# close = 0
+
+# for i in range(len(calc)):
+#     if calc[i] == '(':
+#         open += 1
+
+#     elif calc[i] == ')':
+#         close += 1
+
+#     if calc[i] not in ['+', '-', '*', '/'] and calc[i] not in ['(', ')']:
+#         if ((i + 1) < len(calc)) and calc[i + 1] in ['*', '/']:
+#             stack.append('(')
+#             open += 1
+
+#         stack.append(calc[i])
+
+#         if ((i - 1) >= 0) and calc[i - 1] in ['*', '/']:
+#             stack.append(')')
+#             close += 1
+
+#     elif calc[i] in ['+', '-']:
+#         stack.append(calc[i])
+
+#     else:
+#         stack.append(calc[i])
+
+# if (open - close) > 0:
+#     for i in range(open - close):
+#         stack.append(')')
+
+# print(stack) # ['A', '+', '(', 'B', '*', 'C', ')', '-', '(', 'D', '/', 'E', ')']
+
+# # 괄호 씌우는게 더 복잡해지는 과정인듯
+
+
+import sys
+input = sys.stdin.readline
+
+calc = list(input().strip())
+# print(calc)
+stack = []
+result = []
+
+for char in calc:
+    if char.isalpha():
+        result.append(char)
+
+    elif char == '(':
+        stack.append(char)
+
+    elif char == '*' or char == '/':
+        while stack and stack[-1] in ['*', '/']:
+            result.append(stack.pop())
+        stack.append(char)
+
+    elif char in ['+', '-']:
+        while stack and stack[-1] != '(':
+            result.append(stack.pop())
+        stack.append(char)
+
+    elif char == ')':
+        while stack and stack[-1] != '(':
+            result.append(stack.pop())
+        stack.pop()
+
+while stack:
+    result.append(stack.pop())
+
+print(''.join(result))
+

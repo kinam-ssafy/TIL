@@ -2,17 +2,23 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "(gdb) 시작",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "gdb에 자동 서식 지정 사용",
