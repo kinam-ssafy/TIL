@@ -9,7 +9,14 @@
       "Bash(/c/mingw64/bin/g++.exe:*)",
       "Bash(./boj1712.exe)",
       "Bash(C:mingw64bing++.exe:*)",
-      "Bash(C:msys64ucrt64bing++.exe --version)"
+      "Bash(C:msys64ucrt64bing++.exe --version)",
+      "Bash(ls:*)",
+      "Bash(bash:*)",
+      "Bash(lspci:*)",
+      "Bash(chmod:*)",
+      "Bash(gsettings get:*)",
+      "Bash(xrandr:*)",
+      "Bash(gsettings set:*)"
     ],
     "deny": [],
     "ask": []
