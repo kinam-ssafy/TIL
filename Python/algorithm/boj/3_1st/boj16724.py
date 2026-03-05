@@ -20,9 +20,118 @@
 '''
 
 # 회원들이 어느 구역에 있더라도 Safe zone에 들어갈 수 있어야 함
+# case 1: 사람들이 마지막으로 모이는 장소는 그 전 방향과 반대방향이었음 ex) R L, U D 
+# case 2: 다음 방향이 갈 곳이 없으면 모이는 장소 ex) 방향이 R인데 range에서 벗어나는 경우
+
+# case 3: 순환이 되는 싸이클인 경우 ex) 상하좌우로 계속 순환 << 어떻게 확인하지
+# 그냥 싸이클만 확인해도 다 확인 가능할 것 같음 >> union find가 싸이클 확인하기 좋을 것 같다
+# 2차원 배열에서 union find 어떻게 구현하지?
+
+
+# N, M = map(int, input().split())
+
+# arr = [list(input()) for _ in range(N)]
+
+# di = [0, 1]
+# dj = [1, 0]
+
+# ans = 0
+
+# for i in range(N):
+#     for j in range(M):
+#         for d in range(2):
+#             ni, nj = i + di[d], j + dj[d]
+#             if 0 <= ni < N and 0 <= nj < M: 
+#                 if d == 0: # 좌우 case 1
+#                     if arr[i][j] == 'R': #현재 위치가 오른쪽으로 가라는 표식일 때 
+#                         if arr[ni][nj] == 'L':
+#                             ans += 1
+#                         elif nj >= M: # 오른쪽에 있는 좌표가 오른쪽에 갈 곳이 없는 경우(배열의 범위에서 벗어난 경우) case2
+#                             ans += 1
+#                     elif arr[i][j] == 'L': # 현재 위치가 왼쪽으로 가라는 표식일 때
+#                         if arr[ni][nj] == 'R':
+#                             ans += 1
+#                         elif nj < 0: # 왼쪽에 있는 좌표가 배열의 범위에서 벗어난 경우\
+#                             ans += 1
+#                 elif d == 1: # 상하 case 1           
+#                     if arr[i][j] == 'U': # 현재 위치가 위로 가라는 표식
+#                         if arr[ni][nj] == 'D':
+#                             ans += 1
+#                         elif ni < 0:
+#                             ans += 1
+#                     elif arr[i][j] == 'D': # 현재위치가 아래로 가라는 표식
+#                         if arr[ni][nj] == 'U':
+#                             ans += 1
+#                         elif ni >= N:
+#                             ans += 1
+
+# di = [0, 1, 0, -1]
+# dj = [1, 0, -1, 0]
+# visited = [[0] * M for _ in range(N)]    
+
+# def dfs(si, sj):
+#     visited[si][sj] = 1
+#     for d in range(4):
+#         ni, nj = si + di[d], sj + dj[d]
+#         if 0 <= ni < N and 0 <= nj < M:
+#             if arr[si][sj] == 'R' and visited[si][sj+1] == 0:
+#                 dfs(si, sj + 1)
+#             elif arr[si][sj] == 'L' and visited[si][sj-1] == 0:
+#                 dfs(si, sj - 1)
+#             elif arr[si][sj] == 'U' and visited[si-1][sj] == 0:
+#                 dfs(si - 1, sj)   
+#             elif arr[si][sj] == 'D' and visited[si+1][sj] == 0:
+#                 dfs(si + 1, sj)   
+
+
+            
+# dfs(0, 0)
+
+# print(ans)
+
 
 N, M = map(int, input().split())
-
 arr = [list(input()) for _ in range(N)]
 
-print(arr)
+# 2. 부모 배열 초기화 (2차원을 1차원으로 펼침)
+parent = [i for i in range(N * M)]
+
+# 3. Find 함수: 대표 노드 찾기
+def find(x):
+    if parent[x] == x:
+        return x
+    parent[x] = find(parent[x]) # 경로 압축
+    return parent[x]
+
+# 4. Union 함수: 두 노드를 하나의 그룹으로 합치기
+def union(a, b):
+    root_a = find(a)
+    root_b = find(b)
+    if root_a != root_b:
+        parent[root_a] = root_b
+
+
+for i in range(N):
+    for j in range(M):
+        curr = i * M + j # 현재 위치의 1차원 인덱스
+        
+        # 방향에 따른 다음 좌표 계산
+        if arr[i][j] == 'R':
+            ni, nj = i, j + 1
+        elif arr[i][j] == 'L':
+            ni, nj = i, j - 1
+        elif arr[i][j] == 'U':
+            ni, nj = i - 1, j
+        elif arr[i][j] == 'D':
+            ni, nj = i + 1, j
+            
+        next = ni * M + nj # 다음 위치의 1차원 인덱스
+        union(curr, next) # 현재 칸과 다음 칸을 한 그룹으로 묶음
+
+#자기 자신이 부모인 노드의 개수 = 그룹(사이클)의 개수
+ans = 0
+for i in range(N * M):
+    if parent[i] == i:
+        ans += 1
+
+print(ans)
