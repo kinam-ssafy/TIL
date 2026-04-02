@@ -19,13 +19,17 @@
 
 마지막 줄에는 길이가 100을 넘지않는 문자열이 주어지며, 종수가 움직이려고 하는 방향이다. 5는 그 자리에 그대로 있는 것을 나타내고, 나머지는 아래와 같은 방향을 나타낸다.
 """
+import sys
+input = sys.stdin.readline
+
+from collections import Counter
 
 R, C = map(int, input().split())
 
 arr = []
 crazy = [] # 미친 아두이노
 for i in range(R):
-    row = list(input())
+    row = list(input().strip())
     for j, ch in enumerate(row):
         if ch == 'I':
             my = (i, j)
@@ -33,11 +37,11 @@ for i in range(R):
             crazy.append((i,j))
     arr.append(row)
 
-dir = list(map(int, input()))
+dir = list(map(int, input().strip()))
 
 move = {
-    7: (-1, -1), 8: (-1, 0), 9: (-1, -1),
-    4: (1, 0), 5: (0, 0), 6:(0, 1),
+    7: (-1, -1), 8: (-1, 0), 9: (-1, 1),
+    4: (0, -1), 5: (0, 0), 6:(0, 1),
     1: (1, -1), 2: (1, 0), 3: (1, 1),
 }
 
@@ -65,8 +69,9 @@ def move_robot(r, c, my_r, my_c):
     
 
 ans = 0
+end = False
 dead = False
-while not dead:
+while ans < len(dir):
     dr, dc = move[dir[ans]]
     ans += 1
     #종수 아두이노 이동
@@ -89,13 +94,20 @@ while not dead:
         break
 
     #2개 또는 그 이상의 미친 아두이노가 같은 칸에 있는 경우 그 칸의 아두이노 파괴
-    for i, k in enumerate(new_crazy):
-        for j, q in new_crazy[i+1:]:
-            if k == new_crazy[j]:
-                new_crazy.pop(j)
-                new_crazy.pop(i)
+    # for i, k in enumerate(new_crazy):
+    #     for j, q in new_crazy[i+1:]:
+    #         if k == new_crazy[j]:
+    #             new_crazy.pop(j)
+    #             new_crazy.pop(i)
+    # 한번에 처리하지 않으면 인덱스 에러남
 
-    crazy = new_crazy
+    cnt = Counter(new_crazy)
+    crazy = [pos for pos in new_crazy if cnt[pos] == 1]
+        
+    
+    
+
+
 
 
 if not dead:
