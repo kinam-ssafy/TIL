@@ -103,12 +103,6 @@ while ans < len(dir):
 
     cnt = Counter(new_crazy)
     crazy = [pos for pos in new_crazy if cnt[pos] == 1]
-        
-    
-    
-
-
-
 
 if not dead:
     for i in range(R):
